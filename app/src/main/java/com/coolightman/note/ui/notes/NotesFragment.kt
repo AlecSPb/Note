@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.coolightman.note.databinding.FragmentNotesBinding
+import com.google.android.material.snackbar.Snackbar
 
 class NotesFragment : Fragment() {
 
@@ -30,6 +32,13 @@ class NotesFragment : Fragment() {
         viewModel = ViewModelProvider(this)[NotesViewModel::class.java]
 
         setObservers()
+        setListeners()
+    }
+
+    private fun setListeners() {
+        binding.btAddNotes.setOnClickListener {
+            Toast.makeText(requireContext(), "Add note", Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun setObservers() {

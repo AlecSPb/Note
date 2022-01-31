@@ -23,7 +23,8 @@
             android:layout_height="60dp"
             android:layout_gravity="center"
             android:src="@drawable/ic_baseline_check_circle_outline_24"
-            android:tint="@color/light_gray" />
+            android:tint="@color/light_gray"
+            tools:ignore="ImageContrastCheck" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tv_splash_tasks"
@@ -32,8 +33,21 @@
             android:layout_gravity="center"
             android:text="@string/tv_splash_tasks_text"
             android:textColor="@color/light_gray"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            tools:ignore="TextContrastCheck" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/bt_add_tasks"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="80dp"
+        android:contentDescription="@string/bt_add_description"
+        android:src="@drawable/ic_baseline_add_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:maxImageSize="30dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
