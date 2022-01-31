@@ -33,9 +33,7 @@ class TasksFragment : Fragment() {
     }
 
     private fun setObservers() {
-        viewModel.text.observe(viewLifecycleOwner) {
-            binding.textTasks.text = it
-        }
+
     }
 
     override fun onDestroyView() {

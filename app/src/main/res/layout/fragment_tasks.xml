@@ -6,15 +6,34 @@
     android:layout_height="match_parent"
     tools:context=".ui.tasks.TasksFragment">
 
-    <TextView
-        android:id="@+id/text_tasks"
-        android:layout_width="match_parent"
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/layout_splash_tasks"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
-        android:gravity="center"
-        android:textSize="20sp"
+        android:layout_marginBottom="?actionBarSize"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/img_splash_tasks"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_baseline_check_circle_outline_24"
+            android:tint="@color/light_gray" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_splash_tasks"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/tv_splash_tasks_text"
+            android:textColor="@color/light_gray"
+            android:textSize="14sp" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

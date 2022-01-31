@@ -33,9 +33,7 @@ class NotesFragment : Fragment() {
     }
 
     private fun setObservers() {
-        viewModel.text.observe(viewLifecycleOwner) {
-            binding.textNotes.text = it
-        }
+
     }
 
     override fun onDestroyView() {

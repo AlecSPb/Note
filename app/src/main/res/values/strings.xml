@@ -2,4 +2,6 @@
     <string name="app_name">Note</string>
     <string name="title_notes">Notes</string>
     <string name="title_tasks">Tasks</string>
+    <string name="tv_splash_notes_text">No notes</string>
+    <string name="tv_splash_tasks_text">No tasks</string>
 </resources>
