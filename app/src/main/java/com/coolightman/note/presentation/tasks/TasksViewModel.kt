@@ -1,13 +1,13 @@
-package com.coolightman.note.ui.notes
+package com.coolightman.note.presentation.tasks
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class NotesViewModel : ViewModel() {
+class TasksViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "This is notes Fragment"
+        value = "This is tasks Fragment"
     }
     val text: LiveData<String> = _text
 }

@@ -1,4 +1,4 @@
-package com.coolightman.note.ui.tasks
+package com.coolightman.note.presentation.tasks
 
 import android.os.Bundle
 import android.view.LayoutInflater

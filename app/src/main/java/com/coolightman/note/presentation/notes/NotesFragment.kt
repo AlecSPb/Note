@@ -1,4 +1,4 @@
-package com.coolightman.note.ui.notes
+package com.coolightman.note.presentation.notes
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,7 +8,6 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.coolightman.note.databinding.FragmentNotesBinding
-import com.google.android.material.snackbar.Snackbar
 
 class NotesFragment : Fragment() {
 

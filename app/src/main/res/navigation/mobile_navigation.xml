@@ -7,13 +7,13 @@
 
     <fragment
         android:id="@+id/navigation_notes"
-        android:name="com.coolightman.note.ui.notes.NotesFragment"
+        android:name="com.coolightman.note.presentation.notes.NotesFragment"
         android:label="@string/title_notes"
         tools:layout="@layout/fragment_notes" />
 
     <fragment
         android:id="@+id/navigation_tasks"
-        android:name="com.coolightman.note.ui.tasks.TasksFragment"
+        android:name="com.coolightman.note.presentation.tasks.TasksFragment"
         android:label="@string/title_tasks"
         tools:layout="@layout/fragment_tasks" />
 
