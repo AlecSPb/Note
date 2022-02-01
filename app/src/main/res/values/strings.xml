@@ -5,4 +5,8 @@
     <string name="tv_splash_notes_text">No notes</string>
     <string name="tv_splash_tasks_text">No tasks</string>
     <string name="bt_add_description" translatable="false">Add some</string>
+    <string name="cd_edit_note" translatable="false">Edit note</string>
+    <string name="et_note_title_hint">Title..</string>
+    <string name="bt_save_text">save</string>
+    <string name="et_note_description_hint">Note..</string>
 </resources>

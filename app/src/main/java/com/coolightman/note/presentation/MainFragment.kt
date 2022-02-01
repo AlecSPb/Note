@@ -30,6 +30,11 @@ class MainFragment : Fragment() {
         createBottomNavigation()
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
     private fun createBottomNavigation() {
         val navView: BottomNavigationView = binding.navView
         val navController = requireActivity().findNavController(R.id.nav_host_fragment)

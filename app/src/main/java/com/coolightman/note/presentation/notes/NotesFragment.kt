@@ -34,6 +34,11 @@ class NotesFragment : Fragment() {
         setListeners()
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
     private fun setListeners() {
         binding.btAddNotes.setOnClickListener {
             Toast.makeText(requireContext(), "Add note", Toast.LENGTH_SHORT).show()
@@ -42,10 +47,5 @@ class NotesFragment : Fragment() {
 
     private fun setObservers() {
 
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }

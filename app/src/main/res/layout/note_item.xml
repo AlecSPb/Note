@@ -2,6 +2,7 @@
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cv_note_item_root"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
@@ -17,24 +18,36 @@
             android:id="@+id/tv_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:maxHeight="40dp"
-            android:maxLength="18"
-            android:textSize="18sp"
-            tools:text="Title Title Title" />
+            android:maxLength="20"
+            android:paddingStart="16dp"
+            android:paddingTop="4dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="4dp"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            tools:text="Title Title Title Tit" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tv_description"
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cv_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="start"
-            android:minHeight="60dp"
-            android:paddingTop="8dp"
-            android:paddingBottom="12dp"
-            android:paddingStart="18dp"
-            android:paddingEnd="18dp"
-            android:textSize="18sp"
-            tools:text="Description Description Description Description Description Description Description Description" />
+            app:cardCornerRadius="20dp"
+            app:cardElevation="5dp">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:minHeight="60dp"
+                android:paddingStart="18dp"
+                android:paddingTop="8dp"
+                android:paddingEnd="18dp"
+                android:paddingBottom="12dp"
+                android:textSize="18sp"
+                tools:text="Description Description Description" />
+
+        </com.google.android.material.card.MaterialCardView>
 
     </LinearLayout>
 

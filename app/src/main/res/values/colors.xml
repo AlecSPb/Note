@@ -11,4 +11,11 @@
     <color name="floating_button_color">#1565C0</color>
     <color name="dark_gray">#141414</color>
     <color name="light_gray">#4B4B4B</color>
+    <color name="note_0">#80FF5722</color>
+    <color name="note_1">#80FF9800</color>
+    <color name="note_2">#80DABB30</color>
+    <color name="note_3">#804CAF50</color>
+    <color name="note_4">#8000BCD4</color>
+    <color name="note_5">#803F51B5</color>
+    <color name="note_6">#809C27B0</color>
 </resources>

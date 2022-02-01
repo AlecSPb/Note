@@ -5,4 +5,7 @@
     <string name="title_tasks">Задачи</string>
     <string name="tv_splash_notes_text">Нет заметок</string>
     <string name="tv_splash_tasks_text">Нет задач</string>
+    <string name="et_note_title_hint">Название..</string>
+    <string name="bt_save_text">сохранить</string>
+    <string name="et_note_description_hint">Заметка..</string>
 </resources>

@@ -34,6 +34,11 @@ class TasksFragment : Fragment() {
         setListeners()
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
     private fun setListeners() {
         binding.btAddTasks.setOnClickListener {
             Toast.makeText(requireContext(), "Add task", Toast.LENGTH_SHORT).show()
@@ -42,10 +47,5 @@ class TasksFragment : Fragment() {
 
     private fun setObservers() {
 
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }
