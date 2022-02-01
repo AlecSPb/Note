@@ -67,11 +67,11 @@
                     android:id="@+id/et_note_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
                     android:gravity="start"
                     android:hint="@string/et_note_title_hint"
                     android:maxLength="18"
-                    android:paddingStart="16dp"
-                    android:paddingEnd="16dp"
                     android:textSize="20sp"
                     android:textStyle="bold" />
 
@@ -79,11 +79,11 @@
                     android:id="@+id/et_note_description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
                     android:gravity="start|top"
                     android:hint="@string/et_note_description_hint"
                     android:minHeight="60dp"
-                    android:paddingStart="16dp"
-                    android:paddingEnd="16dp"
                     android:textSize="18sp"
                     tools:ignore="TextContrastCheck" />
 
@@ -102,14 +102,14 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="4dp"
+                android:layout_margin="2dp"
+                android:layout_weight="1"
                 app:cardCornerRadius="20dp">
 
                 <com.google.android.material.radiobutton.MaterialRadioButton
                     android:id="@+id/rb_color0"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:background="@color/note_0"
                     android:button="@null"
                     tools:ignore="DuplicateSpeakableTextCheck" />
@@ -119,14 +119,14 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="4dp"
+                android:layout_margin="2dp"
+                android:layout_weight="1"
                 app:cardCornerRadius="20dp">
 
                 <com.google.android.material.radiobutton.MaterialRadioButton
                     android:id="@+id/rb_color1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:background="@color/note_1"
                     android:button="@null" />
 
@@ -135,14 +135,14 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="4dp"
+                android:layout_margin="2dp"
+                android:layout_weight="1"
                 app:cardCornerRadius="20dp">
 
                 <com.google.android.material.radiobutton.MaterialRadioButton
                     android:id="@+id/rb_color2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:background="@color/note_2"
                     android:button="@null" />
 
@@ -151,14 +151,14 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="4dp"
+                android:layout_margin="2dp"
+                android:layout_weight="1"
                 app:cardCornerRadius="20dp">
 
                 <com.google.android.material.radiobutton.MaterialRadioButton
                     android:id="@+id/rb_color3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:background="@color/note_3"
                     android:button="@null" />
 
@@ -167,14 +167,14 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="4dp"
+                android:layout_margin="2dp"
+                android:layout_weight="1"
                 app:cardCornerRadius="20dp">
 
                 <com.google.android.material.radiobutton.MaterialRadioButton
                     android:id="@+id/rb_color4"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:background="@color/note_4"
                     android:button="@null" />
 
@@ -183,14 +183,14 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="4dp"
+                android:layout_margin="2dp"
+                android:layout_weight="1"
                 app:cardCornerRadius="20dp">
 
                 <com.google.android.material.radiobutton.MaterialRadioButton
                     android:id="@+id/rb_color5"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:background="@color/note_5"
                     android:button="@null" />
 
@@ -199,14 +199,15 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="4dp"
+                android:layout_margin="2dp"
+                android:layout_weight="1"
                 app:cardCornerRadius="20dp">
 
                 <com.google.android.material.radiobutton.MaterialRadioButton
                     android:id="@+id/rb_color6"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:background="@color/note_6"
                     android:button="@null" />
 
             </com.google.android.material.card.MaterialCardView>

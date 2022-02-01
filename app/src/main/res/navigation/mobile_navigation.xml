@@ -9,12 +9,23 @@
         android:id="@+id/navigation_notes"
         android:name="com.coolightman.note.presentation.notes.NotesFragment"
         android:label="@string/title_notes"
-        tools:layout="@layout/fragment_notes" />
+        tools:layout="@layout/fragment_notes" >
+        <action
+            android:id="@+id/action_navigation_notes_to_editNoteFragment"
+            app:destination="@id/editNoteFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_tasks"
         android:name="com.coolightman.note.presentation.tasks.TasksFragment"
         android:label="@string/title_tasks"
         tools:layout="@layout/fragment_tasks" />
+    <fragment
+        android:id="@+id/editNoteFragment"
+        android:name="com.coolightman.note.presentation.notes.EditNoteFragment"
+        android:label="fragment_edit_note"
+        tools:layout="@layout/fragment_edit_note" />
 
 </navigation>
