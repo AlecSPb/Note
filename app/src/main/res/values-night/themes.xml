@@ -6,7 +6,7 @@
         <item name="colorPrimaryVariant">@android:color/holo_blue_light</item>
         <item name="colorOnPrimary">@color/black</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">#1066BB</item>
+        <item name="colorSecondary">@color/app_color</item>
         <item name="colorSecondaryVariant">@android:color/holo_blue_light</item>
         <item name="colorOnSecondary">#FFFFFF</item>
         <!-- Status bar color. -->

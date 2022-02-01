@@ -4,5 +4,5 @@
     <string name="title_tasks">Tasks</string>
     <string name="tv_splash_notes_text">No notes</string>
     <string name="tv_splash_tasks_text">No tasks</string>
-    <string name="bt_add_description">Add some</string>
+    <string name="bt_add_description" translatable="false">Add some</string>
 </resources>

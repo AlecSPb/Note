@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Note</string>
+    <string name="title_notes">Заметки</string>
+    <string name="title_tasks">Задачи</string>
+    <string name="tv_splash_notes_text">Нет заметок</string>
+    <string name="tv_splash_tasks_text">Нет задач</string>
+</resources>
