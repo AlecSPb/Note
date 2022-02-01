@@ -35,8 +35,10 @@ class MainActivity : AppCompatActivity() {
         navController.addOnDestinationChangedListener { _, destination, _ ->
             if (destination.id == R.id.editNoteFragment) {
                 navBar.visibility = View.GONE
+                supportActionBar?.hide()
             } else {
                 navBar.visibility = View.VISIBLE
+                supportActionBar?.show()
             }
         }
     }
