@@ -11,7 +11,7 @@ import com.coolightman.note.R
 
 object ColorsUtil {
 
-    fun getColor(context: Context, color: Int): Int {
+    fun getNoteColor(context: Context, color: Int): Int {
         return when (color) {
             0 -> ContextCompat.getColor(context, R.color.note_0)
             1 -> ContextCompat.getColor(context, R.color.note_1)
