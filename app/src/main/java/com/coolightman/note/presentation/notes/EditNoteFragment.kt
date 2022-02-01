@@ -6,10 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.coolightman.note.databinding.FragmentEditNoteBinding
+import com.google.android.material.snackbar.Snackbar
 
 class EditNoteFragment : Fragment() {
 
@@ -48,9 +50,13 @@ class EditNoteFragment : Fragment() {
     }
 
     private fun setListeners() {
-        binding.btBack.setOnClickListener {
-            findNavController().popBackStack()
+        binding.btSaveBottom.setOnClickListener {
+            saveNote()
         }
+    }
+
+    private fun saveNote() {
+        Snackbar.make(binding.root, "Note saved", 800).show()
     }
 
 }

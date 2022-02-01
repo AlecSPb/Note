@@ -1,6 +1,7 @@
 package com.coolightman.note.presentation
 
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
@@ -21,8 +22,16 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
 
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         createBottomNavigation()
         hideBottomNavigation()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            android.R.id.home -> {onBackPressed()}
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     private fun createBottomNavigation() {
@@ -35,10 +44,10 @@ class MainActivity : AppCompatActivity() {
         navController.addOnDestinationChangedListener { _, destination, _ ->
             if (destination.id == R.id.editNoteFragment) {
                 navBar.visibility = View.GONE
-                supportActionBar?.hide()
+//                supportActionBar?.hide()
             } else {
                 navBar.visibility = View.VISIBLE
-                supportActionBar?.show()
+//                supportActionBar?.show()
             }
         }
     }

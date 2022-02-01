@@ -7,49 +7,6 @@
     android:contentDescription="@string/cd_edit_note"
     tools:context=".presentation.notes.EditNoteFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/layout_top"
-        android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
-        android:layout_marginBottom="8dp"
-        android:background="@color/dark_gray"
-        android:orientation="horizontal"
-        android:paddingStart="8dp"
-        android:paddingEnd="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/bt_back"
-            style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            app:icon="@drawable/ic_baseline_arrow_back_24"
-            app:iconGravity="textStart"
-            app:iconPadding="0dp"
-            app:iconSize="24dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="SpeakableTextPresentCheck" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/bt_save"
-            style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            app:icon="@drawable/ic_baseline_check_24"
-            app:iconGravity="textStart"
-            app:iconPadding="0dp"
-            app:iconSize="24dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="SpeakableTextPresentCheck" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
     <ScrollView
         android:id="@+id/scroll_edit_note"
         android:layout_width="match_parent"
@@ -57,7 +14,7 @@
         android:contentDescription="@string/cd_edit_note"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/layout_top">
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
