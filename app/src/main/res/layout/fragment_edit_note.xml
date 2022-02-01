@@ -66,25 +66,39 @@
                     android:id="@+id/et_note_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:gravity="start"
+                    android:minHeight="48dp"
+                    android:background="@null"
+                    android:gravity="start|center"
                     android:hint="@string/et_note_title_hint"
                     android:maxLength="18"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
                     android:textSize="20sp"
                     android:textStyle="bold" />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cv_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="5dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/et_note_description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginEnd="16dp"
+                    android:paddingStart="16dp"
+                    android:paddingTop="8dp"
+                    android:paddingEnd="16dp"
+                    android:paddingBottom="12dp"
+                    android:background="@null"
                     android:gravity="start|top"
                     android:hint="@string/et_note_description_hint"
                     android:minHeight="60dp"
                     android:textSize="18sp"
                     tools:ignore="TextContrastCheck" />
+
+                </com.google.android.material.card.MaterialCardView>
 
             </LinearLayout>
 
