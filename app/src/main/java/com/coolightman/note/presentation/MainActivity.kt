@@ -1,15 +1,21 @@
 package com.coolightman.note.presentation
 
+import android.content.Context
+import android.graphics.drawable.ColorDrawable
+import android.os.Build
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.coolightman.note.R
 import com.coolightman.note.databinding.ActivityMainBinding
+import com.coolightman.note.util.ColorsUtil.setActionBarColor
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -22,9 +28,14 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
 
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        settingActionBar()
         createBottomNavigation()
         hideBottomNavigation()
+    }
+
+    private fun settingActionBar() {
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        setActionBarColor(this, R.color.dark_gray)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -44,10 +55,8 @@ class MainActivity : AppCompatActivity() {
         navController.addOnDestinationChangedListener { _, destination, _ ->
             if (destination.id == R.id.editNoteFragment) {
                 navBar.visibility = View.GONE
-//                supportActionBar?.hide()
             } else {
                 navBar.visibility = View.VISIBLE
-//                supportActionBar?.show()
             }
         }
     }
