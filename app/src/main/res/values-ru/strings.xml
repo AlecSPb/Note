@@ -9,4 +9,5 @@
     <string name="bt_save_text">сохранить</string>
     <string name="et_note_description_hint">Заметка..</string>
     <string name="title_note">Заметка</string>
+    <string name="more">Ещё</string>
 </resources>

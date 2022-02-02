@@ -53,6 +53,9 @@ class EditNoteFragment : Fragment() {
         binding.btSaveBottom.setOnClickListener {
             saveNote()
         }
+        binding.toolbar.setNavigationOnClickListener {
+            findNavController().popBackStack()
+        }
     }
 
     private fun saveNote() {
