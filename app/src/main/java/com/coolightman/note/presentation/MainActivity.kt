@@ -26,15 +26,6 @@ class MainActivity : AppCompatActivity() {
         hideBottomNavigation()
     }
 
-//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        when (item.itemId) {
-//            android.R.id.home -> {
-//                onBackPressed()
-//            }
-//        }
-//        return super.onOptionsItemSelected(item)
-//    }
-
     private fun createBottomNavigation() {
         navController = findNavController(R.id.nav_host_fragment)
         binding.bottomNavBar.setupWithNavController(navController)
@@ -50,6 +41,4 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-
-
 }
