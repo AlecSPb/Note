@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:contentDescription="@string/cd_edit_note"
-    tools:context=".presentation.notes.fragment.EditNoteFragment">
+    tools:context=".presentation.fragment.EditNoteFragment">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"

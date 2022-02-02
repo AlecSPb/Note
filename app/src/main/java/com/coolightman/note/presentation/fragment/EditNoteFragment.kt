@@ -1,4 +1,4 @@
-package com.coolightman.note.presentation.notes.fragment
+package com.coolightman.note.presentation.fragment
 
 import android.content.Context
 import android.os.Bundle
@@ -15,7 +15,7 @@ import com.coolightman.note.R
 import com.coolightman.note.databinding.FragmentEditNoteBinding
 import com.coolightman.note.domain.entity.Note
 import com.coolightman.note.domain.entity.NoteColor
-import com.coolightman.note.presentation.notes.viewmodel.EditNoteViewModel
+import com.coolightman.note.presentation.viewmodel.EditNoteViewModel
 import com.google.android.material.snackbar.BaseTransientBottomBar.LENGTH_SHORT
 import com.google.android.material.snackbar.Snackbar
 

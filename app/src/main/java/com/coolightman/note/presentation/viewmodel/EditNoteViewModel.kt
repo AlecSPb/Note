@@ -1,4 +1,4 @@
-package com.coolightman.note.presentation.notes.viewmodel
+package com.coolightman.note.presentation.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -9,8 +9,9 @@ import com.coolightman.note.domain.entity.Note
 import com.coolightman.note.domain.repository.NoteRepository
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class EditNoteViewModel(
+class EditNoteViewModel @Inject constructor(
     private val repository: NoteRepository
 ) : ViewModel() {
 

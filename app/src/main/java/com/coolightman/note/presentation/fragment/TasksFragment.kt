@@ -1,4 +1,4 @@
-package com.coolightman.note.presentation.tasks
+package com.coolightman.note.presentation.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.coolightman.note.databinding.FragmentTasksBinding
+import com.coolightman.note.presentation.viewmodel.TasksViewModel
 
 class TasksFragment : Fragment() {
 

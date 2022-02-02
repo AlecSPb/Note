@@ -1,4 +1,4 @@
-package com.coolightman.note.presentation.notes.adapter
+package com.coolightman.note.presentation.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

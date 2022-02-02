@@ -7,8 +7,9 @@ import com.coolightman.note.data.mapper.toDb
 import com.coolightman.note.data.mapper.toEntity
 import com.coolightman.note.domain.entity.Note
 import com.coolightman.note.domain.repository.NoteRepository
+import javax.inject.Inject
 
-class NoteRepositoryImpl(
+class NoteRepositoryImpl @Inject constructor(
     private val database: NoteDao
 ) : NoteRepository {
 
