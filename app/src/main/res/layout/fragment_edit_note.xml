@@ -112,7 +112,7 @@
                         android:id="@+id/rb_color0"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@color/note_0"
+                        android:background="@color/note_red"
                         android:button="@null"
                         tools:ignore="DuplicateSpeakableTextCheck" />
 
@@ -129,7 +129,7 @@
                         android:id="@+id/rb_color1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@color/note_1"
+                        android:background="@color/note_orange"
                         android:button="@null" />
 
                 </com.google.android.material.card.MaterialCardView>
@@ -145,7 +145,7 @@
                         android:id="@+id/rb_color2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@color/note_2"
+                        android:background="@color/note_yellow"
                         android:button="@null" />
 
                 </com.google.android.material.card.MaterialCardView>
@@ -161,7 +161,7 @@
                         android:id="@+id/rb_color3"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@color/note_3"
+                        android:background="@color/note_green"
                         android:button="@null" />
 
                 </com.google.android.material.card.MaterialCardView>
@@ -177,7 +177,7 @@
                         android:id="@+id/rb_color4"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@color/note_4"
+                        android:background="@color/note_blue"
                         android:button="@null" />
 
                 </com.google.android.material.card.MaterialCardView>
@@ -193,7 +193,7 @@
                         android:id="@+id/rb_color5"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@color/note_5"
+                        android:background="@color/note_dark_blue"
                         android:button="@null" />
 
                 </com.google.android.material.card.MaterialCardView>
@@ -209,7 +209,7 @@
                         android:id="@+id/rb_color6"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@color/note_6"
+                        android:background="@color/note_gray"
                         android:button="@null" />
 
                 </com.google.android.material.card.MaterialCardView>
