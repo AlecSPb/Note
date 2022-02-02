@@ -6,11 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
-import android.widget.Toast
+import android.widget.RadioButton
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.coolightman.note.databinding.FragmentEditNoteBinding
+import com.coolightman.note.domain.entity.NoteColor
 import com.google.android.material.snackbar.Snackbar
 
 class EditNoteFragment : Fragment() {
@@ -32,8 +34,14 @@ class EditNoteFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this)[EditNoteViewModel::class.java]
 
+        setTitleColor()
         showKeyboard()
         setListeners()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     private fun showKeyboard() {
@@ -44,22 +52,37 @@ class EditNoteFragment : Fragment() {
         inputMethManager.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT)
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
-
     private fun setListeners() {
         binding.btSaveBottom.setOnClickListener {
             saveNote()
         }
+
         binding.toolbar.setNavigationOnClickListener {
             findNavController().popBackStack()
+        }
+
+        binding.rgColors.setOnCheckedChangeListener { group, checkedId ->
+            setTitleColor()
         }
     }
 
     private fun saveNote() {
         Snackbar.make(binding.root, "Note saved", 800).show()
+    }
+
+    private fun setTitleColor() {
+        val colorIndex = getIndexByRadioCheck()
+        val noteColor = NoteColor.values()[colorIndex]
+        binding.cvEditNote.setCardBackgroundColor(
+            ContextCompat.getColor(requireContext(), noteColor.colorResId)
+        )
+    }
+
+    private fun getIndexByRadioCheck(): Int {
+        val group = binding.rgColors
+        val checkedId = group.checkedRadioButtonId
+        val radioButton = group.findViewById<RadioButton>(checkedId)
+        return group.indexOfChild(radioButton)
     }
 
 }

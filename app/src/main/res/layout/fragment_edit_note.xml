@@ -13,12 +13,12 @@
         android:layout_height="wrap_content"
         android:background="@color/dark_gray"
         android:minHeight="?attr/actionBarSize"
-        app:title="@string/title_note"
-        app:menu="@menu/edit_note_menu"
-        app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:menu="@menu/edit_note_menu"
+        app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
+        app:title="@string/title_note">
 
     </com.google.android.material.appbar.MaterialToolbar>
 
@@ -101,118 +101,68 @@
                 android:checkedButton="@id/rb_color6"
                 android:orientation="horizontal">
 
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_width="wrap_content"
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/rb_color0"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="2dp"
                     android:layout_weight="1"
-                    app:cardCornerRadius="20dp">
+                    android:background="@drawable/rounded_red_color_radio"
+                    android:button="@null" />
 
-                    <com.google.android.material.radiobutton.MaterialRadioButton
-                        android:id="@+id/rb_color0"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@color/note_red"
-                        android:button="@null"
-                        tools:ignore="DuplicateSpeakableTextCheck" />
-
-                </com.google.android.material.card.MaterialCardView>
-
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_width="wrap_content"
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/rb_color1"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="2dp"
                     android:layout_weight="1"
-                    app:cardCornerRadius="20dp">
+                    android:background="@drawable/rounded_orange_color_radio"
+                    android:button="@null" />
 
-                    <com.google.android.material.radiobutton.MaterialRadioButton
-                        android:id="@+id/rb_color1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@color/note_orange"
-                        android:button="@null" />
-
-                </com.google.android.material.card.MaterialCardView>
-
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_width="wrap_content"
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/rb_color2"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="2dp"
                     android:layout_weight="1"
-                    app:cardCornerRadius="20dp">
+                    android:background="@drawable/rounded_yellow_color_radio"
+                    android:button="@null" />
 
-                    <com.google.android.material.radiobutton.MaterialRadioButton
-                        android:id="@+id/rb_color2"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@color/note_yellow"
-                        android:button="@null" />
-
-                </com.google.android.material.card.MaterialCardView>
-
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_width="wrap_content"
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/rb_color3"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="2dp"
                     android:layout_weight="1"
-                    app:cardCornerRadius="20dp">
+                    android:background="@drawable/rounded_green_color_radio"
+                    android:button="@null" />
 
-                    <com.google.android.material.radiobutton.MaterialRadioButton
-                        android:id="@+id/rb_color3"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@color/note_green"
-                        android:button="@null" />
-
-                </com.google.android.material.card.MaterialCardView>
-
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_width="wrap_content"
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/rb_color4"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="2dp"
                     android:layout_weight="1"
-                    app:cardCornerRadius="20dp">
+                    android:background="@drawable/rounded_blue_color_radio"
+                    android:button="@null" />
 
-                    <com.google.android.material.radiobutton.MaterialRadioButton
-                        android:id="@+id/rb_color4"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@color/note_blue"
-                        android:button="@null" />
-
-                </com.google.android.material.card.MaterialCardView>
-
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_width="wrap_content"
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/rb_color5"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="2dp"
                     android:layout_weight="1"
-                    app:cardCornerRadius="20dp">
+                    android:background="@drawable/rounded_dark_blue_color_radio"
+                    android:button="@null" />
 
-                    <com.google.android.material.radiobutton.MaterialRadioButton
-                        android:id="@+id/rb_color5"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@color/note_dark_blue"
-                        android:button="@null" />
-
-                </com.google.android.material.card.MaterialCardView>
-
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_width="wrap_content"
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/rb_color6"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="2dp"
                     android:layout_weight="1"
-                    app:cardCornerRadius="20dp">
-
-                    <com.google.android.material.radiobutton.MaterialRadioButton
-                        android:id="@+id/rb_color6"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@color/note_gray"
-                        android:button="@null" />
-
-                </com.google.android.material.card.MaterialCardView>
+                    android:background="@drawable/rounded_gray_color_radio"
+                    android:button="@null" />
 
             </RadioGroup>
 
