@@ -1,5 +1,6 @@
 package com.coolightman.note.presentation.fragment
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,19 +10,37 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.coolightman.note.NoteApp
 import com.coolightman.note.databinding.FragmentNotesBinding
 import com.coolightman.note.presentation.adapter.NotesAdapter
 import com.coolightman.note.presentation.viewmodel.NotesViewModel
+import com.coolightman.note.presentation.viewmodel.ViewModelFactory
 import com.google.android.material.snackbar.BaseTransientBottomBar.LENGTH_SHORT
 import com.google.android.material.snackbar.Snackbar
+import javax.inject.Inject
 
 class NotesFragment : Fragment() {
+
+    private val component by lazy {
+        (requireActivity().application as NoteApp).component
+    }
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
+
+    val viewModel by lazy {
+        ViewModelProvider(this, viewModelFactory)[NotesViewModel::class.java]
+    }
 
     private var _binding: FragmentNotesBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var viewModel: NotesViewModel
     private lateinit var notesAdapter: NotesAdapter
+
+    override fun onAttach(context: Context) {
+        component.inject(this)
+        super.onAttach(context)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,8 +53,6 @@ class NotesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        viewModel = ViewModelProvider(this)[NotesViewModel::class.java]
 
         createRecycler()
         setObservers()

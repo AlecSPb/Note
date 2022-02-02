@@ -10,7 +10,7 @@ import com.coolightman.note.data.database.dbModel.Converters
 import com.coolightman.note.data.database.dbModel.NoteDb
 
 @Database(
-    version = 1,
+    version = 2,
     entities = [
         NoteDb::class
     ]

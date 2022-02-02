@@ -11,22 +11,39 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.coolightman.note.NoteApp
 import com.coolightman.note.R
 import com.coolightman.note.databinding.FragmentEditNoteBinding
 import com.coolightman.note.domain.entity.Note
 import com.coolightman.note.domain.entity.NoteColor
 import com.coolightman.note.presentation.viewmodel.EditNoteViewModel
+import com.coolightman.note.presentation.viewmodel.ViewModelFactory
 import com.google.android.material.snackbar.BaseTransientBottomBar.LENGTH_SHORT
 import com.google.android.material.snackbar.Snackbar
+import javax.inject.Inject
 
 class EditNoteFragment : Fragment() {
 
-    private lateinit var viewModel: EditNoteViewModel
+    private val component by lazy {
+        (requireActivity().application as NoteApp).component
+    }
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
+
+    val viewModel by lazy {
+        ViewModelProvider(this, viewModelFactory)[EditNoteViewModel::class.java]
+    }
 
     private var _binding: FragmentEditNoteBinding? = null
     private val binding get() = _binding!!
 
     private var noteId: Long = 0
+
+    override fun onAttach(context: Context) {
+        component.inject(this)
+        super.onAttach(context)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,7 +55,6 @@ class EditNoteFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(this)[EditNoteViewModel::class.java]
 
         setTitleColor()
         showKeyboard()
@@ -73,12 +89,17 @@ class EditNoteFragment : Fragment() {
     }
 
     private fun saveNote() {
-        if (isNoteValid()){
+        if (isNoteValid()) {
             val note: Note = scanNoteDate()
             viewModel.saveNote(note)
-            Snackbar.make(binding.root, getString(R.string.snackbar_note_saved), LENGTH_SHORT).show()
-        }else{
-            Snackbar.make(binding.root, getString(R.string.snackbar_empty_description), LENGTH_SHORT).show()
+            Snackbar.make(binding.root, getString(R.string.snackbar_note_saved), LENGTH_SHORT)
+                .show()
+        } else {
+            Snackbar.make(
+                binding.root,
+                getString(R.string.snackbar_empty_description),
+                LENGTH_SHORT
+            ).show()
         }
     }
 
