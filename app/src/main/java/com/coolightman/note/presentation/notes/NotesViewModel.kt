@@ -1,13 +1,21 @@
 package com.coolightman.note.presentation.notes
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import android.util.Log
+import androidx.lifecycle.*
+import com.coolightman.note.domain.entity.Note
+import com.coolightman.note.domain.repository.NoteRepository
+import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.launch
 
-class NotesViewModel : ViewModel() {
+class NotesViewModel(
+    private val repository: NoteRepository
+) : ViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is notes Fragment"
+    private val handler = CoroutineExceptionHandler { _, throwable ->
+        Log.e("Coroutine_exception", throwable.stackTraceToString())
     }
-    val text: LiveData<String> = _text
+
+    val notes: LiveData<List<Note>> = liveData {
+        emitSource(repository.getAllNotes())
+    }
 }
