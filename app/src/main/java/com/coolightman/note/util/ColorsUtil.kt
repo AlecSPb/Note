@@ -6,13 +6,13 @@ import com.coolightman.note.R
 
 fun getNoteColor(context: Context, color: Int): Int {
     return when (color) {
-        0 -> ContextCompat.getColor(context, R.color.note_0)
-        1 -> ContextCompat.getColor(context, R.color.note_1)
-        2 -> ContextCompat.getColor(context, R.color.note_2)
-        3 -> ContextCompat.getColor(context, R.color.note_3)
-        4 -> ContextCompat.getColor(context, R.color.note_4)
-        5 -> ContextCompat.getColor(context, R.color.note_5)
-        else -> ContextCompat.getColor(context, R.color.note_6)
+        0 -> ContextCompat.getColor(context, R.color.note_red)
+        1 -> ContextCompat.getColor(context, R.color.note_orange)
+        2 -> ContextCompat.getColor(context, R.color.note_yellow)
+        3 -> ContextCompat.getColor(context, R.color.note_green)
+        4 -> ContextCompat.getColor(context, R.color.note_blue)
+        5 -> ContextCompat.getColor(context, R.color.note_dark_blue)
+        else -> ContextCompat.getColor(context, R.color.note_gray)
     }
 }
 
