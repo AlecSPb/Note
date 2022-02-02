@@ -1,20 +1,14 @@
 package com.coolightman.note.presentation
 
-import android.content.Context
-import android.graphics.drawable.ColorDrawable
-import android.os.Build
 import android.os.Bundle
-import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.coolightman.note.R
 import com.coolightman.note.databinding.ActivityMainBinding
-import com.coolightman.note.util.ColorsUtil.setActionBarColor
 
 
 class MainActivity : AppCompatActivity() {
@@ -28,22 +22,18 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
 
-        settingActionBar()
         createBottomNavigation()
         hideBottomNavigation()
     }
 
-    private fun settingActionBar() {
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        setActionBarColor(this, R.color.dark_gray)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId){
-            android.R.id.home -> {onBackPressed()}
-        }
-        return super.onOptionsItemSelected(item)
-    }
+//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+//        when (item.itemId) {
+//            android.R.id.home -> {
+//                onBackPressed()
+//            }
+//        }
+//        return super.onOptionsItemSelected(item)
+//    }
 
     private fun createBottomNavigation() {
         navController = findNavController(R.id.nav_host_fragment)

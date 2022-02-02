@@ -9,4 +9,5 @@
     <string name="et_note_title_hint">Title..</string>
     <string name="bt_save_text">save</string>
     <string name="et_note_description_hint">Note..</string>
+    <string name="title_note">Note</string>
 </resources>
