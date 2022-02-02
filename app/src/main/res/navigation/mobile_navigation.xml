@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/navigation_notes"
-        android:name="com.coolightman.note.presentation.notes.NotesFragment"
+        android:name="com.coolightman.note.presentation.notes.fragment.NotesFragment"
         android:label="@string/title_notes"
         tools:layout="@layout/fragment_notes" >
         <action
@@ -24,7 +24,7 @@
         tools:layout="@layout/fragment_tasks" />
     <fragment
         android:id="@+id/editNoteFragment"
-        android:name="com.coolightman.note.presentation.notes.EditNoteFragment"
+        android:name="com.coolightman.note.presentation.notes.fragment.EditNoteFragment"
         android:label="fragment_edit_note"
         tools:layout="@layout/fragment_edit_note" />
 

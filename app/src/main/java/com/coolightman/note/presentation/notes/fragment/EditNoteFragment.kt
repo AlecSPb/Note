@@ -1,4 +1,4 @@
-package com.coolightman.note.presentation.notes
+package com.coolightman.note.presentation.notes.fragment
 
 import android.content.Context
 import android.os.Bundle
@@ -11,8 +11,12 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.coolightman.note.R
 import com.coolightman.note.databinding.FragmentEditNoteBinding
+import com.coolightman.note.domain.entity.Note
 import com.coolightman.note.domain.entity.NoteColor
+import com.coolightman.note.presentation.notes.viewmodel.EditNoteViewModel
+import com.google.android.material.snackbar.BaseTransientBottomBar.LENGTH_SHORT
 import com.google.android.material.snackbar.Snackbar
 
 class EditNoteFragment : Fragment() {
@@ -21,6 +25,8 @@ class EditNoteFragment : Fragment() {
 
     private var _binding: FragmentEditNoteBinding? = null
     private val binding get() = _binding!!
+
+    private var noteId: Long = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -67,22 +73,39 @@ class EditNoteFragment : Fragment() {
     }
 
     private fun saveNote() {
-        Snackbar.make(binding.root, "Note saved", 800).show()
+        if (isNoteValid()){
+            val note: Note = scanNoteDate()
+            viewModel.saveNote(note)
+            Snackbar.make(binding.root, getString(R.string.snackbar_note_saved), LENGTH_SHORT).show()
+        }else{
+            Snackbar.make(binding.root, getString(R.string.snackbar_empty_description), LENGTH_SHORT).show()
+        }
+    }
+
+    private fun scanNoteDate() = Note(
+        noteId = noteId,
+        title = binding.etNoteTitle.text.toString().trim(),
+        description = binding.etNoteDescription.text.toString().trim(),
+        color = getNoteColor()
+    )
+
+    private fun isNoteValid(): Boolean {
+        return binding.etNoteDescription.text.toString().trim().isNotEmpty()
     }
 
     private fun setTitleColor() {
-        val colorIndex = getIndexByRadioCheck()
-        val noteColor = NoteColor.values()[colorIndex]
+        val noteColor = getNoteColor()
         binding.cvEditNote.setCardBackgroundColor(
             ContextCompat.getColor(requireContext(), noteColor.colorResId)
         )
     }
 
-    private fun getIndexByRadioCheck(): Int {
+    private fun getNoteColor(): NoteColor {
         val group = binding.rgColors
         val checkedId = group.checkedRadioButtonId
         val radioButton = group.findViewById<RadioButton>(checkedId)
-        return group.indexOfChild(radioButton)
+        val colorIndex = group.indexOfChild(radioButton)
+        return NoteColor.values()[colorIndex]
     }
 
 }

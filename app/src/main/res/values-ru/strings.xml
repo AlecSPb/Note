@@ -10,4 +10,6 @@
     <string name="et_note_description_hint">Заметка..</string>
     <string name="title_note">Заметка</string>
     <string name="more">Ещё</string>
+    <string name="snackbar_empty_description">Заметка пустая</string>
+    <string name="snackbar_note_saved">Заметка сохранена</string>
 </resources>

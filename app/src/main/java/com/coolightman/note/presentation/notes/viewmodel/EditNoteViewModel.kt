@@ -1,4 +1,4 @@
-package com.coolightman.note.presentation.notes
+package com.coolightman.note.presentation.notes.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.LiveData

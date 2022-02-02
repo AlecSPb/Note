@@ -13,5 +13,5 @@ data class NoteDb(
     val description: String?,
     val dateEdit: Date = Date(System.currentTimeMillis()),
     val color: NoteColor,
-    val isShowingDate: Boolean = false
+    val isShowingDate: Boolean
 )

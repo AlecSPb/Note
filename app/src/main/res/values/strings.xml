@@ -12,4 +12,6 @@
     <string name="title_note">Note</string>
     <string name="more">More</string>
     <string name="content_description_more" translatable="false">menu more</string>
+    <string name="snackbar_empty_description">Note is empty</string>
+    <string name="snackbar_note_saved">Note saved</string>
 </resources>
