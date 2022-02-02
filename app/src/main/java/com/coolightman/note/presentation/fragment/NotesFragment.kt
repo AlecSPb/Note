@@ -4,12 +4,15 @@ import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.coolightman.note.NoteApp
 import com.coolightman.note.databinding.FragmentNotesBinding
 import com.coolightman.note.presentation.adapter.NotesAdapter
@@ -67,8 +70,8 @@ class NotesFragment : Fragment() {
     private fun createRecycler() {
         val recycler = binding.rvNotesMain
         createNoteAdapter(recycler)
-        val layoutManager =
-            LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+        val layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+//            LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         recycler.layoutManager = layoutManager
     }
 
@@ -86,7 +89,18 @@ class NotesFragment : Fragment() {
     private fun setObservers() {
         viewModel.notes.observe(viewLifecycleOwner) {
             notesAdapter.submitList(it)
+
+            if (it.isEmpty()) showSplash()
+            else hideSplash()
         }
+    }
+
+    private fun hideSplash() {
+        binding.layoutSplashNotes.visibility = GONE
+    }
+
+    private fun showSplash() {
+        binding.layoutSplashNotes.visibility = VISIBLE
     }
 
     private fun setListeners() {
