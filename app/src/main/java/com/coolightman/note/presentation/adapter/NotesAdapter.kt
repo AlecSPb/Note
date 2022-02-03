@@ -24,6 +24,7 @@ class NotesAdapter(private val clickListener: (Long) -> Unit) :
             cvNoteItemRoot.setCardBackgroundColor(
                 ContextCompat.getColor(root.context, note.color.colorResId)
             )
+            tvDate.text = note.dateEdit
             root.setOnClickListener { clickListener(note.noteId) }
         }
     }

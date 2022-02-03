@@ -18,7 +18,9 @@ import com.coolightman.note.domain.entity.Note
 import com.coolightman.note.domain.entity.NoteColor
 import com.coolightman.note.presentation.viewmodel.EditNoteViewModel
 import com.coolightman.note.presentation.viewmodel.ViewModelFactory
+import com.coolightman.note.util.toFullDateString
 import com.google.android.material.snackbar.Snackbar
+import java.util.*
 import javax.inject.Inject
 
 class EditNoteFragment : Fragment() {
@@ -55,9 +57,19 @@ class EditNoteFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setTitleColor()
+        prepareNote()
         showKeyboard()
         setListeners()
+    }
+
+    private fun prepareNote() {
+        setTitleColor()
+        setDate()
+    }
+
+    private fun setDate() {
+        val currentDate = Date(System.currentTimeMillis()).toFullDateString()
+        binding.tvDate.text = currentDate
     }
 
     override fun onDestroyView() {

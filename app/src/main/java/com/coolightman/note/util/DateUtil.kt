@@ -10,7 +10,7 @@ fun Date?.toDateString(): String {
 }
 
 fun Date?.toFullDateString(): String {
-    val defPattern = "dd-MM-yyyy HH:mm:ss"
+    val defPattern = "dd-MM-yyyy HH:mm"
     val format = SimpleDateFormat(defPattern, Locale.getDefault())
     return this?.let { format.format(this) }.orEmpty()
 }
