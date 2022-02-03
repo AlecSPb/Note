@@ -52,4 +52,11 @@ class NoteRepositoryImpl @Inject constructor(
     override suspend fun deleteNote(noteId: Long) {
         database.delete(noteId)
     }
+
+    override suspend fun showDate(showDate: Boolean) {
+        val changedList = database.getAll().map { noteDb ->
+            noteDb.copy(isShowingDate = showDate)
+        }
+        database.insertList(changedList)
+    }
 }

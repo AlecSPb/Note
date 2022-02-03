@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.coolightman.note.NoteApp
 import com.coolightman.note.databinding.FragmentNotesBinding
+import com.coolightman.note.domain.entity.SortNoteBy
 import com.coolightman.note.presentation.adapter.NotesAdapter
 import com.coolightman.note.presentation.viewmodel.NotesViewModel
 import com.coolightman.note.presentation.viewmodel.ViewModelFactory
@@ -57,9 +58,17 @@ class NotesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        prepareView()
         createRecycler()
         setObservers()
         setListeners()
+    }
+
+    private fun prepareView() {
+        val sort = SortNoteBy.COLOR_DESC
+        val isShowingDate = true
+        viewModel.setSortBy(sort)
+        viewModel.showDate(isShowingDate)
     }
 
     override fun onDestroyView() {
@@ -68,16 +77,16 @@ class NotesFragment : Fragment() {
     }
 
     private fun createRecycler() {
-        val recycler = binding.rvNotesMain
-        createNoteAdapter(recycler)
-        val layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+        createNoteAdapter()
+        binding.rvNotesMain.apply {
+            layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
 //            StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
-        recycler.layoutManager = layoutManager
+            adapter = notesAdapter
+        }
     }
 
-    private fun createNoteAdapter(recycler: RecyclerView) {
+    private fun createNoteAdapter() {
         notesAdapter = NotesAdapter { noteId -> onItemClick(noteId) }
-        recycler.adapter = notesAdapter
         notesAdapter.stateRestorationPolicy =
             RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
     }

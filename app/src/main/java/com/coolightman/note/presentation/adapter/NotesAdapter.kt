@@ -1,6 +1,8 @@
 package com.coolightman.note.presentation.adapter
 
 import android.view.LayoutInflater
+import android.view.View.INVISIBLE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.ListAdapter
@@ -24,8 +26,16 @@ class NotesAdapter(private val clickListener: (Long) -> Unit) :
             cvNoteItemRoot.setCardBackgroundColor(
                 ContextCompat.getColor(root.context, note.color.colorResId)
             )
-            tvDate.text = note.dateEdit
+            setDate(note)
             root.setOnClickListener { clickListener(note.noteId) }
+        }
+    }
+
+    private fun NoteItemBinding.setDate(note: Note) {
+        tvDate.text = note.dateEdit
+        when {
+            note.isShowingDate -> tvDate.visibility = VISIBLE
+            !note.isShowingDate -> tvDate.visibility = INVISIBLE
         }
     }
 

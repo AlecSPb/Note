@@ -10,4 +10,5 @@ interface NoteRepository {
     fun getAllNotes(sortBy: SortNoteBy): LiveData<List<Note>>
     suspend fun getNote(noteId: Long): Note
     suspend fun deleteNote(noteId: Long)
+    suspend fun showDate(showDate: Boolean)
 }

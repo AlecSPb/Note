@@ -1,12 +1,10 @@
 package com.coolightman.note.presentation.viewmodel
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.liveData
+import androidx.lifecycle.*
 import com.coolightman.note.domain.entity.Note
 import com.coolightman.note.domain.entity.SortNoteBy
 import com.coolightman.note.domain.repository.NoteRepository
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class NotesViewModel @Inject constructor(
@@ -16,11 +14,20 @@ class NotesViewModel @Inject constructor(
     private val _sortNoteBy = MutableLiveData<SortNoteBy>()
 
     val notes: LiveData<List<Note>> = liveData {
-        val sort = _sortNoteBy.value ?: SortNoteBy.COLOR
-        emitSource(repository.getAllNotes(sort))
+        val sortedNotes = Transformations.switchMap(_sortNoteBy) {
+            repository.getAllNotes(it)
+        }
+        emitSource(sortedNotes)
     }
 
-    fun setSortBy(sortBy: SortNoteBy){
+    fun setSortBy(sortBy: SortNoteBy) {
         _sortNoteBy.postValue(sortBy)
+    }
+
+    fun showDate(showDate: Boolean) {
+        viewModelScope.launch {
+            repository.showDate(showDate)
+        }
+
     }
 }
