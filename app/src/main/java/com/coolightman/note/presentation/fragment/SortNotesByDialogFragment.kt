@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.RadioButton
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
+import com.coolightman.note.R
 import com.coolightman.note.databinding.FragmentDialogSortNotesBinding
 import com.coolightman.note.domain.entity.SortNoteBy
 
@@ -26,8 +27,12 @@ class SortNotesByDialogFragment(val resultListener: (SortNoteBy) -> Unit) : Dial
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        setTransparentBackground()
         setListeners()
+    }
+
+    private fun setTransparentBackground() {
+        dialog?.window?.setBackgroundDrawableResource(R.color.transparent)
     }
 
     private fun setListeners() {
@@ -49,16 +54,6 @@ class SortNotesByDialogFragment(val resultListener: (SortNoteBy) -> Unit) : Dial
                     .show()
             }
         }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        val scale = requireContext().resources.displayMetrics.density
-        val width = (300 * scale + 0.5f).toInt()
-        dialog?.window?.setLayout(
-            width,
-            ViewGroup.LayoutParams.WRAP_CONTENT
-        )
     }
 
     override fun onDestroy() {

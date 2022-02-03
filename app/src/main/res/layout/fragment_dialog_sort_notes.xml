@@ -2,12 +2,13 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/cv_dialog_root"
-    android:layout_width="300dp"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/dark_gray"
         app:cardCornerRadius="10dp">
 
         <LinearLayout
@@ -18,7 +19,7 @@
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tv_title"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:gravity="center"
                 android:paddingStart="16dp"
                 android:paddingTop="4dp"
@@ -81,6 +82,7 @@
                     android:id="@+id/bt_dialog_cancel"
                     style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
                     android:layout_width="0dp"
+                    android:minWidth="100dp"
                     android:layout_height="48dp"
                     android:layout_gravity="center"
                     android:layout_weight="1"
@@ -90,14 +92,16 @@
                     app:layout_constraintEnd_toEndOf="parent" />
 
                 <View
-                    android:layout_width="2dp"
-                    android:layout_height="match_parent"
-                    android:background="@color/dark_gray"/>
+                    android:layout_width="1dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@color/light_gray"/>
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/bt_dialog_submit"
                     style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
                     android:layout_width="0dp"
+                    android:minWidth="100dp"
                     android:layout_weight="1"
                     android:layout_height="48dp"
                     android:layout_gravity="center"
