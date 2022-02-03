@@ -7,10 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.RadioButton
+import android.widget.RadioGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.coolightman.note.NoteApp
 import com.coolightman.note.R
 import com.coolightman.note.databinding.FragmentEditNoteBinding
@@ -39,6 +41,7 @@ class EditNoteFragment : Fragment() {
     private var _binding: FragmentEditNoteBinding? = null
     private val binding get() = _binding!!
 
+    private val args by navArgs<EditNoteFragmentArgs>()
     private var noteId: Long = 0
 
     override fun onAttach(context: Context) {
@@ -56,10 +59,28 @@ class EditNoteFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        noteId = args.noteId
 
+        if (noteId != 0L) fetchNote()
         prepareNote()
         showKeyboard()
         setListeners()
+    }
+
+    private fun fetchNote() {
+        viewModel.fetchNote(noteId)
+        viewModel.note.observe(viewLifecycleOwner){
+            with(binding){
+                etNoteTitle.setText(it.title)
+                etNoteDescription.setText(it.description)
+                setColorToRadio(rgColors, it.color)
+            }
+        }
+    }
+
+    private fun setColorToRadio(rgColors: RadioGroup, color: NoteColor) {
+        val radio = rgColors.getChildAt(color.ordinal) as RadioButton
+        radio.isChecked = true
     }
 
     private fun prepareNote() {

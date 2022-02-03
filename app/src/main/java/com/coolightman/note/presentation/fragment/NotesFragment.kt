@@ -92,7 +92,9 @@ class NotesFragment : Fragment() {
     }
 
     private fun onItemClick(noteId: Long) {
-        Snackbar.make(binding.root, "Launch to note $noteId", 1000).show()
+        findNavController().navigate(
+            NotesFragmentDirections.actionNavigationNotesToEditNoteFragment(noteId)
+        )
     }
 
     private fun setObservers() {
