@@ -7,20 +7,19 @@ import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.coolightman.note.NoteApp
+import com.coolightman.note.R
 import com.coolightman.note.databinding.FragmentNotesBinding
 import com.coolightman.note.domain.entity.SortNoteBy
 import com.coolightman.note.presentation.adapter.NotesAdapter
 import com.coolightman.note.presentation.viewmodel.NotesViewModel
 import com.coolightman.note.presentation.viewmodel.ViewModelFactory
-import com.google.android.material.snackbar.BaseTransientBottomBar.LENGTH_SHORT
-import com.google.android.material.snackbar.Snackbar
 import javax.inject.Inject
 
 class NotesFragment : Fragment() {
@@ -66,7 +65,7 @@ class NotesFragment : Fragment() {
 
     private fun prepareView() {
         val sort = SortNoteBy.COLOR_DESC
-        val isShowingDate = true
+        val isShowingDate = false
         viewModel.setSortBy(sort)
         viewModel.showDate(isShowingDate)
     }
@@ -79,7 +78,8 @@ class NotesFragment : Fragment() {
     private fun createRecycler() {
         createNoteAdapter()
         binding.rvNotesMain.apply {
-            layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+            layoutManager =
+                LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
 //            StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
             adapter = notesAdapter
         }
@@ -120,5 +120,32 @@ class NotesFragment : Fragment() {
                 NotesFragmentDirections.actionNavigationNotesToEditNoteFragment()
             )
         }
+
+        binding.toolbar.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.menu_show_date -> {
+                    it.isChecked = !it.isChecked
+                    viewModel.showDate(it.isChecked)
+                    saveShowDateChoice(it.isChecked)
+                }
+                R.id.menu_sort_note -> {
+                    showSortDialog()
+                }
+            }
+            true
+        }
+    }
+
+    private fun showSortDialog() {
+        val dialog = SortNotesByDialogFragment { dialogResultListener(it) }
+        dialog.show(childFragmentManager, "SortNotesByDialog")
+    }
+
+    private fun dialogResultListener(sortNoteBy: SortNoteBy) {
+        Toast.makeText(requireContext(), "$sortNoteBy", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun saveShowDateChoice(checked: Boolean) {
+
     }
 }

@@ -12,4 +12,12 @@
     <string name="more">Ещё</string>
     <string name="snackbar_empty_description">Заметка пустая</string>
     <string name="snackbar_note_saved">Заметка сохранена</string>
+    <string name="menu_sort_note_title">Сортировка</string>
+    <string name="menu_show_date_title">Показывать дату</string>
+    <string name="radio_sort_by_color_text">По цвету</string>
+    <string name="radio_sort_by_color_desc_text">По цвету обр</string>
+    <string name="radio_sort_by_date_text">По дате</string>
+    <string name="radio_sort_by_date_desc_text">По дате обр</string>
+    <string name="cancel_text">Отмена</string>
+    <string name="submit_text">Подтвердить</string>
 </resources>
