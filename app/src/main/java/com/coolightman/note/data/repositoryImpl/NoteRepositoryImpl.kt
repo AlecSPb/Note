@@ -6,6 +6,7 @@ import com.coolightman.note.data.database.dao.NoteDao
 import com.coolightman.note.data.mapper.toDb
 import com.coolightman.note.data.mapper.toEntity
 import com.coolightman.note.domain.entity.Note
+import com.coolightman.note.domain.entity.SortNoteBy
 import com.coolightman.note.domain.repository.NoteRepository
 import javax.inject.Inject
 
@@ -18,10 +19,30 @@ class NoteRepositoryImpl @Inject constructor(
         database.insert(noteDb)
     }
 
-    override fun getAllNotes(): LiveData<List<Note>> {
-        return Transformations.map(database.getAll()){ list ->
-            list.map { it.toEntity() }
+    override fun getAllNotes(sortBy: SortNoteBy): LiveData<List<Note>> {
+        when (sortBy) {
+            SortNoteBy.COLOR -> {
+                return Transformations.map(database.getAllOrderByColor()) { list ->
+                    list.map { it.toEntity() }
+                }
+            }
+            SortNoteBy.COLOR_DESC -> {
+                return Transformations.map(database.getAllOrderByColorDesc()) { list ->
+                    list.map { it.toEntity() }
+                }
+            }
+            SortNoteBy.DATE -> {
+                return Transformations.map(database.getAllOrderByDate()) { list ->
+                    list.map { it.toEntity() }
+                }
+            }
+            SortNoteBy.DATE_DESC -> {
+                return Transformations.map(database.getAllOrderByDateDesc()) { list ->
+                    list.map { it.toEntity() }
+                }
+            }
         }
+
     }
 
     override suspend fun getNote(noteId: Long): Note {

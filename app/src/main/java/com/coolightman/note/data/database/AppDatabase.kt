@@ -6,11 +6,10 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.coolightman.note.data.database.dao.NoteDao
-import com.coolightman.note.data.database.dbModel.Converters
 import com.coolightman.note.data.database.dbModel.NoteDb
 
 @Database(
-    version = 2,
+    version = 3,
     entities = [
         NoteDb::class
     ]

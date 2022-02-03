@@ -1,4 +1,4 @@
-package com.coolightman.note.data.database.dbModel
+package com.coolightman.note.data.database
 
 import androidx.room.TypeConverter
 import com.coolightman.note.domain.entity.NoteColor
@@ -7,13 +7,13 @@ import java.util.*
 class Converters {
 
     @TypeConverter
-    fun toNoteColor(color: String): NoteColor {
-        return NoteColor.valueOf(color)
+    fun toNoteColor(color: Int): NoteColor {
+        return NoteColor.values()[color]
     }
 
     @TypeConverter
-    fun fromNoteColor(color: NoteColor): String {
-        return color.name
+    fun fromNoteColor(color: NoteColor): Int {
+        return color.ordinal
     }
 
     @TypeConverter

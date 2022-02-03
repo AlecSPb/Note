@@ -13,8 +13,17 @@ interface NoteDao {
     @Insert(onConflict = REPLACE)
     suspend fun insert(vararg note: NoteDb)
 
-    @Query("SELECT * FROM notedb")
-    fun getAll(): LiveData<List<NoteDb>>
+    @Query("SELECT * FROM notedb ORDER BY color")
+    fun getAllOrderByColor(): LiveData<List<NoteDb>>
+
+    @Query("SELECT * FROM notedb ORDER BY color DESC")
+    fun getAllOrderByColorDesc(): LiveData<List<NoteDb>>
+
+    @Query("SELECT * FROM notedb ORDER BY dateEdit")
+    fun getAllOrderByDate(): LiveData<List<NoteDb>>
+
+    @Query("SELECT * FROM notedb ORDER BY dateEdit desc")
+    fun getAllOrderByDateDesc(): LiveData<List<NoteDb>>
 
     @Query("SELECT * FROM notedb WHERE noteId = :noteId")
     suspend fun get(noteId: Long): NoteDb
