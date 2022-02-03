@@ -11,6 +11,7 @@ import android.widget.RadioGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.coolightman.note.NoteApp
@@ -22,6 +23,9 @@ import com.coolightman.note.presentation.viewmodel.EditNoteViewModel
 import com.coolightman.note.presentation.viewmodel.ViewModelFactory
 import com.coolightman.note.util.toFullDateString
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import java.time.Duration
 import java.util.*
 import javax.inject.Inject
 
@@ -89,8 +93,13 @@ class EditNoteFragment : Fragment() {
     }
 
     private fun setDate() {
-        val currentDate = Date(System.currentTimeMillis()).toFullDateString()
-        binding.tvDate.text = currentDate
+        lifecycleScope.launch {
+            repeat(DEFAULT_REPEAT){
+                val currentDate = Date(System.currentTimeMillis()).toFullDateString()
+                binding.tvDate.text = currentDate
+                delay(MINUTE_MILLIS)
+            }
+        }
     }
 
     override fun onDestroyView() {
@@ -158,6 +167,11 @@ class EditNoteFragment : Fragment() {
         val radioButton = group.findViewById<RadioButton>(checkedId)
         val colorIndex = group.indexOfChild(radioButton)
         return NoteColor.values()[colorIndex]
+    }
+
+    companion object{
+        private const val MINUTE_MILLIS = 10 * 1000L
+        private const val DEFAULT_REPEAT = 1000
     }
 
 }

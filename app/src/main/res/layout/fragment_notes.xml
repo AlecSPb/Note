@@ -48,7 +48,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         tools:listitem="note" />
 
-    <androidx.appcompat.widget.Toolbar
+    <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -58,6 +58,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:menu="@menu/notes_menu"
         app:title="@string/title_notes" />
 
     <androidx.recyclerview.widget.RecyclerView
