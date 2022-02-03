@@ -18,7 +18,6 @@ import com.coolightman.note.domain.entity.Note
 import com.coolightman.note.domain.entity.NoteColor
 import com.coolightman.note.presentation.viewmodel.EditNoteViewModel
 import com.coolightman.note.presentation.viewmodel.ViewModelFactory
-import com.google.android.material.snackbar.BaseTransientBottomBar.LENGTH_SHORT
 import com.google.android.material.snackbar.Snackbar
 import javax.inject.Inject
 
@@ -92,15 +91,14 @@ class EditNoteFragment : Fragment() {
         if (isNoteValid()) {
             val note: Note = scanNoteDate()
             viewModel.saveNote(note)
-            Snackbar.make(binding.root, getString(R.string.snackbar_note_saved), LENGTH_SHORT)
-                .show()
+            launchToMainNotes()
         } else {
-            Snackbar.make(
-                binding.root,
-                getString(R.string.snackbar_empty_description),
-                LENGTH_SHORT
-            ).show()
+            Snackbar.make(binding.root, getString(R.string.snackbar_empty_description), 1000).show()
         }
+    }
+
+    private fun launchToMainNotes() {
+        findNavController().popBackStack()
     }
 
     private fun scanNoteDate() = Note(

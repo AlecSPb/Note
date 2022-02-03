@@ -70,8 +70,8 @@ class NotesFragment : Fragment() {
     private fun createRecycler() {
         val recycler = binding.rvNotesMain
         createNoteAdapter(recycler)
-        val layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
-//            LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+        val layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+//            StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         recycler.layoutManager = layoutManager
     }
 
@@ -83,7 +83,7 @@ class NotesFragment : Fragment() {
     }
 
     private fun onItemClick(noteId: Long) {
-        Snackbar.make(binding.root, "Launch to note $noteId", LENGTH_SHORT).show()
+        Snackbar.make(binding.root, "Launch to note $noteId", 1000).show()
     }
 
     private fun setObservers() {

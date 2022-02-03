@@ -40,6 +40,6 @@ class NotesAdapter(private val clickListener: (Long) -> Unit) :
 
     companion object {
         private const val EMPTY_TITLE_MAX_HEIGHT = 20
-        private const val NOT_EMPTY_TITLE_MAX_HEIGHT = 100
+        private const val NOT_EMPTY_TITLE_MAX_HEIGHT = 80
     }
 }
