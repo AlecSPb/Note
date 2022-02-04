@@ -30,4 +30,10 @@ class NotesViewModel @Inject constructor(
         }
 
     }
+
+    fun sendToTrashBasket(noteId: Long) {
+        viewModelScope.launch {
+            repository.sendToTrashBasket(noteId)
+        }
+    }
 }

@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
@@ -23,6 +24,7 @@ import com.coolightman.note.presentation.MainActivity
 import com.coolightman.note.presentation.adapter.NotesAdapter
 import com.coolightman.note.presentation.viewmodel.NotesViewModel
 import com.coolightman.note.presentation.viewmodel.ViewModelFactory
+import com.google.android.material.snackbar.Snackbar
 import javax.inject.Inject
 
 class NotesFragment : Fragment() {
@@ -182,6 +184,32 @@ class NotesFragment : Fragment() {
             }
             true
         }
+        swipeNoteListener()
+    }
+
+    private fun swipeNoteListener() {
+        val callback = object :
+            ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.END) {
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder,
+            ): Boolean {
+                return false
+            }
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val position = viewHolder.bindingAdapterPosition
+                val note = notesAdapter.currentList[position]
+                viewModel.sendToTrashBasket(note.noteId)
+                showSnackBar(getString(R.string.sent_to_trash))
+            }
+        }
+        ItemTouchHelper(callback).attachToRecyclerView(binding.rvNotesMain)
+    }
+
+    private fun showSnackBar(message: String){
+        Snackbar.make(binding.root, message, 1000).show()
     }
 
     private fun changeLayout() {

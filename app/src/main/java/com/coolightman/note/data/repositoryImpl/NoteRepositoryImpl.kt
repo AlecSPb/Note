@@ -69,4 +69,10 @@ class NoteRepositoryImpl @Inject constructor(
         }
         database.insertList(changedList)
     }
+
+    override suspend fun sendToTrashBasket(noteId: Long) {
+        val note = database.get(noteId)
+        val trashedNote = note.copy(isDeleted = true)
+        database.insert(trashedNote)
+    }
 }

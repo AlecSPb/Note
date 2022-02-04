@@ -16,7 +16,7 @@ interface NoteDao {
     @Insert(onConflict = REPLACE)
     suspend fun insertList(list: List<NoteDb>)
 
-    @Query("SELECT * FROM notedb")
+    @Query("SELECT * FROM notedb WHERE isDeleted = 0")
     suspend fun getAll(): List<NoteDb>
 
     @Query("SELECT * FROM notedb WHERE isDeleted = 0 ORDER BY color")
