@@ -227,11 +227,6 @@ class NotesFragment : Fragment() {
                     return
                 }
 
-                val background =
-                    ColorDrawable(ContextCompat.getColor(requireContext(), R.color.dark_gray))
-                background.setBounds(0, itemView.top, itemView.left + dX.toInt(), itemView.bottom)
-                background.draw(c)
-
                 val icon = ContextCompat.getDrawable(
                     requireContext(),
                     R.drawable.ic_baseline_delete_sweep_24
