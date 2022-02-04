@@ -20,6 +20,8 @@ class NotesViewModel @Inject constructor(
         emitSource(sortedNotes)
     }
 
+    val trashCount: LiveData<Int> = repository.getTrashCount()
+
     fun setSortBy(sortBy: SortNoteBy) {
         _sortNoteBy.postValue(sortBy)
     }
@@ -28,7 +30,6 @@ class NotesViewModel @Inject constructor(
         viewModelScope.launch {
             repository.showDate(showDate)
         }
-
     }
 
     fun sendToTrashBasket(noteId: Long) {

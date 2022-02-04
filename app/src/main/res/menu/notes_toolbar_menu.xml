@@ -21,7 +21,7 @@
 
     <item
         android:id="@+id/menu_trash"
-        android:title="@string/menu_trash_text"
+        android:title="@string/menu_trash_title"
         android:icon="@drawable/ic_baseline_delete_24" />
 
 

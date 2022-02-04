@@ -40,6 +40,12 @@ interface NoteDao {
     @Query("SELECT * FROM notedb WHERE noteId = :noteId")
     suspend fun get(noteId: Long): NoteDb
 
+    @Query("SELECT COUNT(noteId) FROM notedb WHERE isDeleted = 1")
+    fun countTrash(): LiveData<Int>
+
+    @Query("SELECT COUNT(noteId) FROM notedb WHERE isDeleted = 0")
+    fun countNotes(): LiveData<Int>
+
     @Query("DELETE FROM notedb WHERE noteId = :noteId")
     suspend fun delete(noteId: Long)
 }

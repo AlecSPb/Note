@@ -75,4 +75,6 @@ class NoteRepositoryImpl @Inject constructor(
         val trashedNote = note.copy(isDeleted = true)
         database.insert(trashedNote)
     }
+
+    override fun getTrashCount(): LiveData<Int> = database.countTrash()
 }

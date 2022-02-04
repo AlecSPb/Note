@@ -152,6 +152,16 @@ class NotesFragment : Fragment() {
             if (it.isEmpty()) showSplash()
             else hideSplash()
         }
+
+        viewModel.trashCount.observe(viewLifecycleOwner) {
+            val counter = when {
+                it == 0 -> " (${getString(R.string.empty)})"
+                it != 0 -> " ($it)"
+                else -> throw RuntimeException("Wrong trash notes counter")
+            }
+            val trashTitle = getString(R.string.menu_trash_title) + counter
+            binding.toolbar.menu.findItem(R.id.menu_trash).title = trashTitle
+        }
     }
 
     private fun hideSplash() {
@@ -182,7 +192,7 @@ class NotesFragment : Fragment() {
                 R.id.menu_change_layout -> {
                     changeLayout()
                 }
-                R.id.menu_trash ->{
+                R.id.menu_trash -> {
                     showSnackBar("Go to trash")
                 }
             }
@@ -238,7 +248,8 @@ class NotesFragment : Fragment() {
                 val itemHeight = itemView.bottom - itemView.top
 
                 // Calculate position of icon
-                val iconMargin = (itemHeight - iconHeight) / 6
+                val scale = requireContext().resources.displayMetrics.density
+                val iconMargin = (ICON_MARGIN_DP * scale + 0.5f).toInt()
                 val iconTop = itemView.top + (itemHeight - iconHeight) / 2
                 val iconLeft = itemView.left + iconMargin
                 val iconRight = iconLeft + iconWidth
@@ -248,7 +259,13 @@ class NotesFragment : Fragment() {
                 icon.draw(c)
 
                 super.onChildDraw(
-                    c, recyclerView, viewHolder, dX/2, dY, actionState, isCurrentlyActive
+                    c,
+                    recyclerView,
+                    viewHolder,
+                    dX / RATIO_SHORTENING_SWIPE,
+                    dY,
+                    actionState,
+                    isCurrentlyActive
                 )
             }
         }
@@ -303,5 +320,7 @@ class NotesFragment : Fragment() {
         private const val PREF_SORT_NOTES = "SortNoteByPreference"
         private const val PREF_IS_SHOW_DATE = "isShowDatePreference"
         private const val PREF_LAYOUT_TYPE = "layoutTypePreference"
+        private const val ICON_MARGIN_DP = 12
+        private const val RATIO_SHORTENING_SWIPE = 2
     }
 }
