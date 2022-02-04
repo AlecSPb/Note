@@ -30,7 +30,6 @@
             android:id="@+id/cv_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minHeight="52dp"
             app:cardCornerRadius="10dp"
             app:cardElevation="5dp">
 
@@ -44,6 +43,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="start"
+                    android:minHeight="48dp"
                     android:paddingStart="12dp"
                     android:paddingTop="8dp"
                     android:paddingEnd="12dp"
@@ -56,10 +56,11 @@
                     android:layout_height="wrap_content"
                     android:gravity="end"
                     android:paddingStart="16dp"
-                    android:paddingEnd="4dp"
-                    android:paddingBottom="2dp"
+                    android:paddingEnd="5dp"
+                    android:paddingBottom="3dp"
                     android:textColor="@color/light_gray"
-                    android:textSize="12sp"
+                    android:textSize="10sp"
+                    tools:ignore="SmallSp"
                     tools:text="03.02.22 11:20" />
 
             </LinearLayout>
