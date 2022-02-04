@@ -69,6 +69,18 @@
                         android:layout_height="wrap_content"
                         android:text="@string/radio_sort_by_date_desc_text" />
 
+                    <com.google.android.material.radiobutton.MaterialRadioButton
+                        android:id="@+id/radio_sort_by_edit_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/radio_sort_by_edit_date_text" />
+
+                    <com.google.android.material.radiobutton.MaterialRadioButton
+                        android:id="@+id/radio_sort_by_edit_date_desc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/radio_sort_by_edit_date_desc_text" />
+
                 </RadioGroup>
 
             </com.google.android.material.card.MaterialCardView>

@@ -41,6 +41,16 @@ class NoteRepositoryImpl @Inject constructor(
                     list.map { it.toEntity() }
                 }
             }
+            SortNoteBy.DATE_EDIT -> {
+                return Transformations.map(database.getAllOrderByEditDate()) { list ->
+                    list.map { it.toEntity() }
+                }
+            }
+            SortNoteBy.DATE_EDIT_DESC -> {
+                return Transformations.map(database.getAllOrderByEditDateDesc()) { list ->
+                    list.map { it.toEntity() }
+                }
+            }
         }
 
     }

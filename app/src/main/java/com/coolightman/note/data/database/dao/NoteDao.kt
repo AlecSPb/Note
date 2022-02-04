@@ -19,16 +19,22 @@ interface NoteDao {
     @Query("SELECT * FROM notedb")
     suspend fun getAll(): List<NoteDb>
 
-    @Query("SELECT * FROM notedb ORDER BY color")
+    @Query("SELECT * FROM notedb WHERE isDeleted = 0 ORDER BY color")
     fun getAllOrderByColor(): LiveData<List<NoteDb>>
 
-    @Query("SELECT * FROM notedb ORDER BY color DESC")
+    @Query("SELECT * FROM notedb WHERE isDeleted = 0 ORDER BY color DESC")
     fun getAllOrderByColorDesc(): LiveData<List<NoteDb>>
 
-    @Query("SELECT * FROM notedb ORDER BY dateEdit")
+    @Query("SELECT * FROM notedb WHERE isDeleted = 0 ORDER BY dateEdit")
+    fun getAllOrderByEditDate(): LiveData<List<NoteDb>>
+
+    @Query("SELECT * FROM notedb WHERE isDeleted = 0 ORDER BY dateEdit desc")
+    fun getAllOrderByEditDateDesc(): LiveData<List<NoteDb>>
+
+    @Query("SELECT * FROM notedb WHERE isDeleted = 0 ORDER BY noteId")
     fun getAllOrderByDate(): LiveData<List<NoteDb>>
 
-    @Query("SELECT * FROM notedb ORDER BY dateEdit desc")
+    @Query("SELECT * FROM notedb WHERE isDeleted = 0 ORDER BY noteId desc")
     fun getAllOrderByDateDesc(): LiveData<List<NoteDb>>
 
     @Query("SELECT * FROM notedb WHERE noteId = :noteId")

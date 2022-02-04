@@ -11,8 +11,8 @@ import com.coolightman.note.databinding.FragmentDialogSortNotesBinding
 import com.coolightman.note.domain.entity.SortNoteBy
 
 class SortNotesByDialogFragment(
-    val checkedRadio: Int,
-    val resultListener: (SortNoteBy) -> Unit
+    private val checkedRadio: Int,
+    private val resultListener: (SortNoteBy) -> Unit
 ) : DialogFragment() {
 
     private var _binding: FragmentDialogSortNotesBinding? = null
@@ -40,6 +40,8 @@ class SortNotesByDialogFragment(
             1 -> binding.radioSortByColorDesc
             2 -> binding.radioSortByDate
             3 -> binding.radioSortByDateDesc
+            4 -> binding.radioSortByEditDate
+            5 -> binding.radioSortByEditDateDesc
             else -> throw RuntimeException("Wrong radio index in dialog")
         }
         radio.isChecked = true

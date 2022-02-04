@@ -18,8 +18,10 @@
     <string name="menu_show_date_title">Show date</string>
     <string name="radio_sort_by_color_text">By color</string>
     <string name="radio_sort_by_color_desc_text">By color desc</string>
-    <string name="radio_sort_by_date_text">By date</string>
-    <string name="radio_sort_by_date_desc_text">By date desc</string>
+    <string name="radio_sort_by_date_text">By create date old</string>
+    <string name="radio_sort_by_date_desc_text">By create date new</string>
+    <string name="radio_sort_by_edit_date_text">By edit date old</string>
+    <string name="radio_sort_by_edit_date_desc_text">By edit date new</string>
     <string name="cancel_text">Cancel</string>
     <string name="submit_text">Submit</string>
     <string name="layout_menu_title" translatable="false">Layout</string>
