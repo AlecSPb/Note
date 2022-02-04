@@ -20,4 +20,5 @@
     <string name="radio_sort_by_date_desc_text">По дате обр</string>
     <string name="cancel_text">Отмена</string>
     <string name="submit_text">Выбрать</string>
+    <string name="edited_text">ред.</string>
 </resources>

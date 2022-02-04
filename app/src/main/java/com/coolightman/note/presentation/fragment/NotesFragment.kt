@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.coolightman.note.NoteApp
 import com.coolightman.note.R
 import com.coolightman.note.databinding.FragmentNotesBinding
+import com.coolightman.note.domain.entity.LayoutType
 import com.coolightman.note.domain.entity.SortNoteBy
 import com.coolightman.note.presentation.MainActivity
 import com.coolightman.note.presentation.adapter.NotesAdapter
@@ -41,7 +42,7 @@ class NotesFragment : Fragment() {
         (requireActivity() as MainActivity).preferences
     }
 
-    private var layoutTypeNumber = -1
+    private lateinit var layoutType: LayoutType
 
     private var _binding: FragmentNotesBinding? = null
     private val binding get() = _binding!!
@@ -78,11 +79,10 @@ class NotesFragment : Fragment() {
     }
 
     private fun setLayout() {
-        if (layoutTypeNumber == -1) getPrefLayout()
-        when (layoutTypeNumber) {
-            0 -> setLinearLayout()
-            1 -> setGridLayout()
-            else -> throw RuntimeException("Wrong layout type number")
+        getPrefLayout()
+        when (layoutType) {
+            LayoutType.LINE -> setLinearLayout()
+            LayoutType.GRID -> setGridLayout()
         }
     }
 
@@ -107,7 +107,8 @@ class NotesFragment : Fragment() {
     }
 
     private fun getPrefLayout() {
-        layoutTypeNumber = preferences.getInt(PREF_LAYOUT_TYPE, 0)
+        val layoutTypeNumber = preferences.getInt(PREF_LAYOUT_TYPE, 0)
+        layoutType = LayoutType.values()[layoutTypeNumber]
     }
 
     private fun setIsShowingDate() {
@@ -184,16 +185,16 @@ class NotesFragment : Fragment() {
     }
 
     private fun changeLayout() {
-        when (layoutTypeNumber) {
-            0 -> {
-                layoutTypeNumber = 1
+        when (layoutType) {
+            LayoutType.LINE -> {
+                layoutType = LayoutType.GRID
+                saveLayoutChoice()
                 setLayout()
-                saveLayoutChoice(layoutTypeNumber)
             }
-            1 -> {
-                layoutTypeNumber = 0
+            LayoutType.GRID -> {
+                layoutType = LayoutType.LINE
+                saveLayoutChoice()
                 setLayout()
-                saveLayoutChoice(layoutTypeNumber)
             }
         }
     }
@@ -219,8 +220,8 @@ class NotesFragment : Fragment() {
         preferences.edit().putBoolean(PREF_IS_SHOW_DATE, checked).apply()
     }
 
-    private fun saveLayoutChoice(layoutTypeNumber: Int) {
-        preferences.edit().putInt(PREF_LAYOUT_TYPE, layoutTypeNumber).apply()
+    private fun saveLayoutChoice() {
+        preferences.edit().putInt(PREF_LAYOUT_TYPE, layoutType.ordinal).apply()
     }
 
     companion object {

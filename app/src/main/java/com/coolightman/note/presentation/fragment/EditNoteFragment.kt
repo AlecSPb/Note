@@ -25,7 +25,6 @@ import com.coolightman.note.util.toFullDateString
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import java.time.Duration
 import java.util.*
 import javax.inject.Inject
 
@@ -73,8 +72,8 @@ class EditNoteFragment : Fragment() {
 
     private fun fetchNote() {
         viewModel.fetchNote(noteId)
-        viewModel.note.observe(viewLifecycleOwner){
-            with(binding){
+        viewModel.note.observe(viewLifecycleOwner) {
+            with(binding) {
                 etNoteTitle.setText(it.title)
                 etNoteDescription.setText(it.description)
                 setColorToRadio(rgColors, it.color)
@@ -94,7 +93,7 @@ class EditNoteFragment : Fragment() {
 
     private fun setDate() {
         lifecycleScope.launch {
-            repeat(DEFAULT_REPEAT){
+            repeat(DEFAULT_REPEAT) {
                 val currentDate = Date(System.currentTimeMillis()).toFullDateString()
                 binding.tvDate.text = currentDate
                 delay(MINUTE_MILLIS)
@@ -147,8 +146,14 @@ class EditNoteFragment : Fragment() {
         noteId = noteId,
         title = binding.etNoteTitle.text.toString().trim(),
         description = binding.etNoteDescription.text.toString().trim(),
-        color = getNoteColor()
+        color = getNoteColor(),
+        isEdited = getIsEdited()
     )
+
+    private fun getIsEdited() = when (noteId) {
+        0L -> false
+        else -> true
+    }
 
     private fun isNoteValid(): Boolean {
         return binding.etNoteDescription.text.toString().trim().isNotEmpty()
@@ -169,7 +174,7 @@ class EditNoteFragment : Fragment() {
         return NoteColor.values()[colorIndex]
     }
 
-    companion object{
+    companion object {
         private const val MINUTE_MILLIS = 10 * 1000L
         private const val DEFAULT_REPEAT = 1000
     }

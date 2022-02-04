@@ -9,7 +9,7 @@ import com.coolightman.note.data.database.dao.NoteDao
 import com.coolightman.note.data.database.dbModel.NoteDb
 
 @Database(
-    version = 3,
+    version = 4,
     entities = [
         NoteDb::class
     ]

@@ -11,7 +11,9 @@ fun NoteDb.toEntity(): Note = Note(
     description = this.description.orEmpty(),
     dateEdit = this.dateEdit.toFullDateString(),
     color = this.color,
-    isShowingDate = this.isShowingDate
+    isShowingDate = this.isShowingDate,
+    isEdited = this.isEdited,
+    isDeleted = this.isDeleted
 )
 
 fun Note.toDb(): NoteDb = NoteDb(
@@ -19,5 +21,7 @@ fun Note.toDb(): NoteDb = NoteDb(
     title = this.title,
     description = this.description,
     color = this.color,
-    isShowingDate = this.isShowingDate
+    isShowingDate = this.isShowingDate,
+    isEdited = this.isEdited,
+    isDeleted = this.isDeleted
 )
