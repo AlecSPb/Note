@@ -43,7 +43,7 @@ class NotesAdapter(private val clickListener: (Long) -> Unit) :
     }
 
     private fun getDateText(note: Note, context: Context): String {
-        return if (note.isEdited) context.getString(R.string.edited_text) + note.dateEdit
+        return if (note.isEdited) context.getString(R.string.edited_text) + " ${note.dateEdit}"
         else note.dateEdit
     }
 

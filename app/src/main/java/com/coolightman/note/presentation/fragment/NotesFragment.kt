@@ -1,13 +1,15 @@
 package com.coolightman.note.presentation.fragment
 
 import android.content.Context
+import android.graphics.Canvas
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.Menu
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -204,11 +206,59 @@ class NotesFragment : Fragment() {
                 viewModel.sendToTrashBasket(note.noteId)
                 showSnackBar(getString(R.string.sent_to_trash))
             }
+
+            override fun onChildDraw(
+                c: Canvas,
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                dX: Float,
+                dY: Float,
+                actionState: Int,
+                isCurrentlyActive: Boolean
+            ) {
+                val itemView = viewHolder.itemView
+                val itemHeight = itemView.bottom - itemView.top
+                val isCanceled = dX == 0f && !isCurrentlyActive
+
+                if (isCanceled) {
+                    super.onChildDraw(
+                        c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive
+                    )
+                    return
+                }
+
+                val background =
+                    ColorDrawable(ContextCompat.getColor(requireContext(), R.color.dark_gray))
+                background.setBounds(0, itemView.top, itemView.left + dX.toInt(), itemView.bottom)
+                background.draw(c)
+
+                val icon = ContextCompat.getDrawable(
+                    requireContext(),
+                    R.drawable.ic_baseline_delete_sweep_24
+                )!!
+
+                val intrinsicWidth = icon.intrinsicWidth
+                val intrinsicHeight = icon.intrinsicHeight
+
+                // Calculate position of delete icon
+                val deleteIconMargin = (itemHeight - intrinsicHeight) / 6
+                val deleteIconTop = itemView.top + (itemHeight - intrinsicHeight) / 2
+                val deleteIconLeft = itemView.left + deleteIconMargin
+                val deleteIconRight = deleteIconLeft + intrinsicWidth
+                val deleteIconBottom = deleteIconTop + intrinsicHeight
+
+                icon.setBounds(deleteIconLeft, deleteIconTop, deleteIconRight, deleteIconBottom)
+                icon.draw(c)
+
+                super.onChildDraw(
+                    c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive
+                )
+            }
         }
         ItemTouchHelper(callback).attachToRecyclerView(binding.rvNotesMain)
     }
 
-    private fun showSnackBar(message: String){
+    private fun showSnackBar(message: String) {
         Snackbar.make(binding.root, message, 1000).show()
     }
 

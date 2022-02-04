@@ -25,6 +25,6 @@
     <string name="cancel_text">Cancel</string>
     <string name="submit_text">Submit</string>
     <string name="layout_menu_title" translatable="false">Layout</string>
-    <string name="edited_text">"edit. "</string>
+    <string name="edited_text">edit.</string>
     <string name="sent_to_trash">Note sent to trash</string>
 </resources>
