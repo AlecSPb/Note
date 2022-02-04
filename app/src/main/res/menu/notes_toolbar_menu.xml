@@ -19,6 +19,11 @@
         android:title="@string/menu_show_date_title"
         app:actionViewClass="android.widget.CheckBox" />
 
+    <item
+        android:id="@+id/menu_trash"
+        android:title="@string/menu_trash_text"
+        android:icon="@drawable/ic_baseline_delete_24" />
+
 
 
 </menu>

@@ -24,4 +24,5 @@
     <string name="radio_sort_by_edit_date_text">По дате изм. старые</string>
     <string name="radio_sort_by_edit_date_desc_text">По дате изм. новые</string>
     <string name="sent_to_trash">заметка отправлена в корзину</string>
+    <string name="menu_trash_text">Корзина</string>
 </resources>

@@ -2,7 +2,6 @@ package com.coolightman.note.presentation.fragment
 
 import android.content.Context
 import android.graphics.Canvas
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -183,6 +182,9 @@ class NotesFragment : Fragment() {
                 R.id.menu_change_layout -> {
                     changeLayout()
                 }
+                R.id.menu_trash ->{
+                    showSnackBar("Go to trash")
+                }
             }
             true
         }
@@ -217,9 +219,8 @@ class NotesFragment : Fragment() {
                 isCurrentlyActive: Boolean
             ) {
                 val itemView = viewHolder.itemView
-                val itemHeight = itemView.bottom - itemView.top
-                val isCanceled = dX == 0f && !isCurrentlyActive
 
+                val isCanceled = dX == 0f && !isCurrentlyActive
                 if (isCanceled) {
                     super.onChildDraw(
                         c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive
@@ -232,21 +233,22 @@ class NotesFragment : Fragment() {
                     R.drawable.ic_baseline_delete_sweep_24
                 )!!
 
-                val intrinsicWidth = icon.intrinsicWidth
-                val intrinsicHeight = icon.intrinsicHeight
+                val iconWidth = icon.intrinsicWidth
+                val iconHeight = icon.intrinsicHeight
+                val itemHeight = itemView.bottom - itemView.top
 
-                // Calculate position of delete icon
-                val deleteIconMargin = (itemHeight - intrinsicHeight) / 6
-                val deleteIconTop = itemView.top + (itemHeight - intrinsicHeight) / 2
-                val deleteIconLeft = itemView.left + deleteIconMargin
-                val deleteIconRight = deleteIconLeft + intrinsicWidth
-                val deleteIconBottom = deleteIconTop + intrinsicHeight
+                // Calculate position of icon
+                val iconMargin = (itemHeight - iconHeight) / 6
+                val iconTop = itemView.top + (itemHeight - iconHeight) / 2
+                val iconLeft = itemView.left + iconMargin
+                val iconRight = iconLeft + iconWidth
+                val iconBottom = iconTop + iconHeight
 
-                icon.setBounds(deleteIconLeft, deleteIconTop, deleteIconRight, deleteIconBottom)
+                icon.setBounds(iconLeft, iconTop, iconRight, iconBottom)
                 icon.draw(c)
 
                 super.onChildDraw(
-                    c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive
+                    c, recyclerView, viewHolder, dX/2, dY, actionState, isCurrentlyActive
                 )
             }
         }

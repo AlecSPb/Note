@@ -27,4 +27,5 @@
     <string name="layout_menu_title" translatable="false">Layout</string>
     <string name="edited_text">edit.</string>
     <string name="sent_to_trash">Note sent to trash</string>
+    <string name="menu_trash_text">Trash</string>
 </resources>
