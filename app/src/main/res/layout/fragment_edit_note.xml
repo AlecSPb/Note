@@ -89,7 +89,6 @@
                                 android:paddingStart="12dp"
                                 android:paddingTop="8dp"
                                 android:paddingEnd="12dp"
-                                android:paddingBottom="12dp"
                                 android:textSize="18sp"
                                 tools:ignore="TextContrastCheck" />
 

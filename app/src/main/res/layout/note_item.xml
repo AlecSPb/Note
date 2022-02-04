@@ -30,7 +30,7 @@
             android:id="@+id/cv_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minHeight="60dp"
+            android:minHeight="52dp"
             app:cardCornerRadius="10dp"
             app:cardElevation="5dp">
 
@@ -47,7 +47,6 @@
                     android:paddingStart="12dp"
                     android:paddingTop="8dp"
                     android:paddingEnd="12dp"
-                    android:paddingBottom="8dp"
                     android:textSize="18sp"
                     tools:text="Description Description Description" />
 

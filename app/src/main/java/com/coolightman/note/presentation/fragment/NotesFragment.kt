@@ -3,6 +3,7 @@ package com.coolightman.note.presentation.fragment
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.Menu
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
@@ -78,23 +79,31 @@ class NotesFragment : Fragment() {
 
     private fun setLayout() {
         if (layoutTypeNumber == -1) getPrefLayout()
-        val recycler = binding.rvNotesMain
-        val menu = binding.toolbar.menu
         when (layoutTypeNumber) {
-            0 -> {
-                recycler.layoutManager =
-                    LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-                menu.findItem(R.id.menu_change_layout)
-                    .setIcon(R.drawable.ic_baseline_grid_24)
-            }
-            1 -> {
-                recycler.layoutManager =
-                    StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
-                menu.findItem(R.id.menu_change_layout)
-                    .setIcon(R.drawable.ic_baseline_view_linear_24)
-            }
+            0 -> setLinearLayout()
+            1 -> setGridLayout()
             else -> throw RuntimeException("Wrong layout type number")
         }
+    }
+
+    private fun setGridLayout() {
+        val recycler = binding.rvNotesMain
+        recycler.layoutManager =
+            StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+
+        val menu = binding.toolbar.menu
+        menu.findItem(R.id.menu_change_layout)
+            .setIcon(R.drawable.ic_baseline_view_linear_24)
+    }
+
+    private fun setLinearLayout() {
+        val recycler = binding.rvNotesMain
+        recycler.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+
+        val menu = binding.toolbar.menu
+        menu.findItem(R.id.menu_change_layout)
+            .setIcon(R.drawable.ic_baseline_grid_24)
     }
 
     private fun getPrefLayout() {
