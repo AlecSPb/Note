@@ -73,7 +73,7 @@
                     android:layout_weight="1"
                     android:minWidth="100dp"
                     android:text="@string/yes"
-                    android:textColor="@color/note_red"
+                    android:textColor="@color/warning_red"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent" />
 
