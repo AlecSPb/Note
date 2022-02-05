@@ -169,10 +169,20 @@ class NotesFragment : Fragment() {
 
     private fun hideSplash() {
         binding.layoutSplashNotes.visibility = GONE
+        enableButtons(true)
     }
 
     private fun showSplash() {
         binding.layoutSplashNotes.visibility = VISIBLE
+        enableButtons(false)
+    }
+
+    private fun enableButtons(isEnabled: Boolean) {
+        binding.toolbar.menu.apply {
+            findItem(R.id.menu_show_date).isEnabled = isEnabled
+            findItem(R.id.menu_sort_note).isEnabled = isEnabled
+            findItem(R.id.menu_change_layout).isEnabled = isEnabled
+        }
     }
 
     private fun setListeners() {

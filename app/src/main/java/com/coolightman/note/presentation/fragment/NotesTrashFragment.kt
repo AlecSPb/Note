@@ -61,6 +61,11 @@ class NotesTrashFragment : Fragment() {
         setListeners()
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
     private fun createRecycler() {
         notesTrashAdapter = NotesTrashAdapter()
         notesTrashAdapter.stateRestorationPolicy =
@@ -124,12 +129,12 @@ class NotesTrashFragment : Fragment() {
 
     private fun deleteAll() {
         viewModel.deleteAllPermanent()
-        showSnackBar("All notes deleted permanently")
+        showSnackBar(getString(R.string.snack_permanent_deleted_all))
     }
 
     private fun restoreAll() {
         viewModel.restoreAll()
-        showSnackBar("All notes restored")
+        showSnackBar(getString(R.string.snack_all_restored))
     }
 
     private fun showSnackBar(message: String) {
@@ -175,7 +180,7 @@ class NotesTrashFragment : Fragment() {
 
                 val icon = ContextCompat.getDrawable(
                     requireContext(),
-                    R.drawable.ic_baseline_delete_forever_24
+                    R.drawable.ic_baseline_delete_forever_36
                 )!!
 
                 val iconWidth = icon.intrinsicWidth
@@ -246,7 +251,7 @@ class NotesTrashFragment : Fragment() {
 
                 val icon = ContextCompat.getDrawable(
                     requireContext(),
-                    R.drawable.ic_baseline_restore_from_trash_24
+                    R.drawable.ic_baseline_restore_from_trash_36
                 )!!
 
                 val iconWidth = icon.intrinsicWidth

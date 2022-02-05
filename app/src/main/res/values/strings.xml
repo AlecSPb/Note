@@ -35,4 +35,6 @@
     <string name="tv_splash_notes_trash_text">Trash is empty</string>
     <string name="snack_permanent_deleted_note">Note deleted permanently</string>
     <string name="snack_note_restored">Note restored</string>
+    <string name="snack_permanent_deleted_all">All notes deleted permanently</string>
+    <string name="snack_all_restored">All notes restored</string>
 </resources>
