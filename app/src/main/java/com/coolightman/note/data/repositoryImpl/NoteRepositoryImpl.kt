@@ -55,6 +55,12 @@ class NoteRepositoryImpl @Inject constructor(
 
     }
 
+    override fun getTrashNotes(): LiveData<List<Note>> {
+        return Transformations.map(database.getTrash()) { list ->
+            list.map { it.toEntity() }
+        }
+    }
+
     override suspend fun getNote(noteId: Long): Note {
         return database.get(noteId).toEntity()
     }

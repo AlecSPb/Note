@@ -1,13 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".presentation.fragment.NotesTrashFragment">
 
-    <TextView
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/dark_gray"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:menu="@menu/notes_trash_toolbar_menu"
+        app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
+        app:title="@string/notes_trash_title" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_notes_trash"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:text="Hello" />
+        android:paddingStart="4dp"
+        android:paddingEnd="4dp"
+        tools:listitem="@layout/note_item" />
 
-</FrameLayout>
+</LinearLayout>

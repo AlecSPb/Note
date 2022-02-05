@@ -196,12 +196,18 @@ class NotesFragment : Fragment() {
                     changeLayout()
                 }
                 R.id.menu_trash -> {
-                    showSnackBar("Go to trash")
+                    launchToNotesTrash()
                 }
             }
             true
         }
         swipeNoteListener()
+    }
+
+    private fun launchToNotesTrash() {
+        findNavController().navigate(
+            NotesFragmentDirections.actionNavigationNotesToNotesTrashFragment()
+        )
     }
 
     private fun swipeNoteListener() {

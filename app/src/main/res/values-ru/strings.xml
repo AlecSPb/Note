@@ -26,4 +26,5 @@
     <string name="sent_to_trash">Заметка отправлена в корзину</string>
     <string name="menu_trash_title">Корзина</string>
     <string name="empty">пусто</string>
+    <string name="notes_trash_title">Корзина заметок</string>
 </resources>

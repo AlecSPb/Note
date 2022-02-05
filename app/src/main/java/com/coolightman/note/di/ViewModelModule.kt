@@ -2,6 +2,7 @@ package com.coolightman.note.di
 
 import androidx.lifecycle.ViewModel
 import com.coolightman.note.presentation.viewmodel.EditNoteViewModel
+import com.coolightman.note.presentation.viewmodel.NotesTrashViewModel
 import com.coolightman.note.presentation.viewmodel.NotesViewModel
 import com.coolightman.note.presentation.viewmodel.TasksViewModel
 import dagger.Binds
@@ -25,4 +26,9 @@ interface ViewModelModule {
     @ViewModelKey(EditNoteViewModel::class)
     @Binds
     fun bindEditNoteViewModel(viewModel: EditNoteViewModel): ViewModel
+
+    @IntoMap
+    @ViewModelKey(NotesTrashViewModel::class)
+    @Binds
+    fun bindNotesTrashViewModel(viewModel: NotesTrashViewModel): ViewModel
 }

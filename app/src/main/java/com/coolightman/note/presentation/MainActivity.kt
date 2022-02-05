@@ -1,6 +1,7 @@
 package com.coolightman.note.presentation
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -18,7 +19,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
 
-    val preferences by lazy {
+    val preferences: SharedPreferences by lazy {
         getSharedPreferences(PREF_ROOT_NAME, Context.MODE_PRIVATE)
     }
 
@@ -40,10 +41,10 @@ class MainActivity : AppCompatActivity() {
     private fun hideBottomNavigation() {
         val navBar = binding.bottomNavBar
         navController.addOnDestinationChangedListener { _, destination, _ ->
-            if (destination.id == R.id.editNoteFragment) {
-                navBar.visibility = View.GONE
-            } else {
-                navBar.visibility = View.VISIBLE
+            when(destination.id){
+                R.id.editNoteFragment -> navBar.visibility = View.GONE
+                R.id.notesTrashFragment -> navBar.visibility = View.GONE
+                else -> navBar.visibility = View.VISIBLE
             }
         }
     }

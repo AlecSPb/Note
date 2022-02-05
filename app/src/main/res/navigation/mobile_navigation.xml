@@ -15,6 +15,11 @@
             app:destination="@id/editNoteFragment"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim" />
+        <action
+            android:id="@+id/action_navigation_notes_to_notesTrashFragment"
+            app:destination="@id/notesTrashFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
     </fragment>
 
     <fragment
@@ -32,5 +37,10 @@
             app:argType="long"
             android:defaultValue="0L" />
     </fragment>
+    <fragment
+        android:id="@+id/notesTrashFragment"
+        android:name="com.coolightman.note.presentation.fragment.NotesTrashFragment"
+        android:label="fragment_notes_trash"
+        tools:layout="@layout/fragment_notes_trash" />
 
 </navigation>

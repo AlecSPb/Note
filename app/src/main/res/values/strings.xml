@@ -29,4 +29,7 @@
     <string name="sent_to_trash">Note sent to trash</string>
     <string name="menu_trash_title">Trash</string>
     <string name="empty">empty</string>
+    <string name="notes_trash_title">Notes Trash</string>
+    <string name="menu_restore_all_title" translatable="false">Restore all</string>
+    <string name="menu_delete_all_title" translatable="false">Delete all</string>
 </resources>

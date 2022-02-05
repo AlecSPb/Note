@@ -37,6 +37,9 @@ interface NoteDao {
     @Query("SELECT * FROM notedb WHERE isDeleted = 0 ORDER BY noteId desc")
     fun getAllOrderByDateDesc(): LiveData<List<NoteDb>>
 
+    @Query("SELECT * FROM notedb WHERE isDeleted = 1 ORDER BY dateEdit desc")
+    fun getTrash(): LiveData<List<NoteDb>>
+
     @Query("SELECT * FROM notedb WHERE noteId = :noteId")
     suspend fun get(noteId: Long): NoteDb
 

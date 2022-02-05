@@ -23,7 +23,7 @@ class TasksFragment : Fragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
 
-    val viewModel by lazy {
+    private val viewModel by lazy {
         ViewModelProvider(this, viewModelFactory)[TasksViewModel::class.java]
     }
 
