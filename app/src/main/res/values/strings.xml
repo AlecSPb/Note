@@ -32,4 +32,5 @@
     <string name="notes_trash_title">Notes Trash</string>
     <string name="menu_restore_all_title" translatable="false">Restore all</string>
     <string name="menu_delete_all_title" translatable="false">Delete all</string>
+    <string name="tv_splash_notes_trash_text">Trash is empty</string>
 </resources>

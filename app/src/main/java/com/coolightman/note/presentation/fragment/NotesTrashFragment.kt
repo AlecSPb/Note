@@ -7,13 +7,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.coolightman.note.NoteApp
+import com.coolightman.note.R
 import com.coolightman.note.databinding.FragmentNotesTrashBinding
 import com.coolightman.note.presentation.adapter.NotesTrashAdapter
 import com.coolightman.note.presentation.viewmodel.NotesTrashViewModel
 import com.coolightman.note.presentation.viewmodel.ViewModelFactory
+import com.google.android.material.snackbar.Snackbar
 import javax.inject.Inject
 
 class NotesTrashFragment : Fragment() {
@@ -71,12 +74,59 @@ class NotesTrashFragment : Fragment() {
         viewModel.trash.observe(viewLifecycleOwner) {
             notesTrashAdapter.submitList(it)
 
-//            if (it.isEmpty()) showSplash()
-//            else hideSplash()
+            if (it.isEmpty()) showSplash()
+            else hideSplash()
+        }
+    }
+
+    private fun hideSplash() {
+        binding.layoutSplashNotesTrash.visibility = View.GONE
+        enableButtons(true)
+    }
+
+    private fun showSplash() {
+        binding.layoutSplashNotesTrash.visibility = View.VISIBLE
+        enableButtons(false)
+    }
+
+    private fun enableButtons(isEnabled: Boolean) {
+        binding.toolbar.menu.apply {
+            findItem(R.id.menu_delete_all).isEnabled = isEnabled
+            findItem(R.id.menu_restore_all).isEnabled = isEnabled
         }
     }
 
     private fun setListeners() {
+        binding.apply {
+            toolbar.setNavigationOnClickListener {
+                findNavController().popBackStack()
+            }
 
+            toolbar.setOnMenuItemClickListener {
+                when(it.itemId){
+                    R.id.menu_restore_all -> {
+                        restoreAll()
+                    }
+                    R.id.menu_delete_all -> {
+                        deleteAll()
+                    }
+                }
+                true
+            }
+        }
+    }
+
+    private fun deleteAll(){
+        viewModel.deleteAllPermanent()
+        showSnackBar("All notes deleted permanently")
+    }
+
+    private fun restoreAll() {
+        viewModel.restoreAll()
+        showSnackBar("All notes restored")
+    }
+
+    private fun showSnackBar(message: String) {
+        Snackbar.make(binding.root, message, 1000).show()
     }
 }

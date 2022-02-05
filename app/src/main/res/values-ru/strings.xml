@@ -27,4 +27,5 @@
     <string name="menu_trash_title">Корзина</string>
     <string name="empty">пусто</string>
     <string name="notes_trash_title">Корзина заметок</string>
+    <string name="tv_splash_notes_trash_text">Корзина пуста</string>
 </resources>

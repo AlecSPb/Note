@@ -16,6 +16,9 @@ interface NoteDao {
     @Insert(onConflict = REPLACE)
     suspend fun insertList(list: List<NoteDb>)
 
+    @Query("SELECT * FROM notedb WHERE noteId = :noteId")
+    suspend fun get(noteId: Long): NoteDb
+
     @Query("SELECT * FROM notedb WHERE isDeleted = 0")
     suspend fun getAll(): List<NoteDb>
 
@@ -40,8 +43,8 @@ interface NoteDao {
     @Query("SELECT * FROM notedb WHERE isDeleted = 1 ORDER BY dateEdit desc")
     fun getTrash(): LiveData<List<NoteDb>>
 
-    @Query("SELECT * FROM notedb WHERE noteId = :noteId")
-    suspend fun get(noteId: Long): NoteDb
+    @Query("SELECT * FROM notedb WHERE isDeleted = 1")
+    fun getTrashList(): List<NoteDb>
 
     @Query("SELECT COUNT(noteId) FROM notedb WHERE isDeleted = 1")
     fun countTrash(): LiveData<Int>
@@ -51,4 +54,7 @@ interface NoteDao {
 
     @Query("DELETE FROM notedb WHERE noteId = :noteId")
     suspend fun delete(noteId: Long)
+
+    @Query("DELETE FROM notedb WHERE isDeleted = 1")
+    suspend fun deleteTrashPermanent()
 }

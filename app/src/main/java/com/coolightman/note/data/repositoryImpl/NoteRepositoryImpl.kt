@@ -8,6 +8,8 @@ import com.coolightman.note.data.mapper.toEntity
 import com.coolightman.note.domain.entity.Note
 import com.coolightman.note.domain.entity.SortNoteBy
 import com.coolightman.note.domain.repository.NoteRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class NoteRepositoryImpl @Inject constructor(
@@ -83,4 +85,18 @@ class NoteRepositoryImpl @Inject constructor(
     }
 
     override fun getTrashCount(): LiveData<Int> = database.countTrash()
+
+    override suspend fun deleteAllTrash() {
+        database.deleteTrashPermanent()
+    }
+
+    override suspend fun restoreAllFromTrash() {
+        withContext(Dispatchers.IO){
+            val listOfTrash = database.getTrashList()
+            val restoredList = listOfTrash.map { noteDb ->
+                noteDb.copy(isDeleted = false)
+            }
+            database.insertList(restoredList)
+        }
+    }
 }
