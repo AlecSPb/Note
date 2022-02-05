@@ -2,8 +2,7 @@ package com.coolightman.note.presentation.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View.INVISIBLE
-import android.view.View.VISIBLE
+import android.view.View.*
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.ListAdapter
@@ -38,7 +37,7 @@ class NotesAdapter(private val clickListener: (Long) -> Unit) :
         tvDate.text = dateText
         when {
             note.isShowingDate -> tvDate.visibility = VISIBLE
-            !note.isShowingDate -> tvDate.visibility = INVISIBLE
+            !note.isShowingDate -> tvDate.visibility = GONE
         }
     }
 

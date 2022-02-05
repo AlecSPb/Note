@@ -3,7 +3,7 @@
 
     <item
         android:id="@+id/menu_change_layout"
-        android:icon="@drawable/ic_baseline_grid_24"
+        android:icon="@drawable/ic_baseline_staggered_24"
         app:showAsAction="ifRoom"
         android:title="@string/layout_menu_title" />
 

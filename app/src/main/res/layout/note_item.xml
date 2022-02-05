@@ -44,8 +44,9 @@
                     android:gravity="start"
                     android:minHeight="48dp"
                     android:paddingStart="12dp"
-                    android:paddingTop="8dp"
+                    android:paddingTop="6dp"
                     android:paddingEnd="12dp"
+                    android:paddingBottom="6dp"
                     android:textSize="18sp"
                     tools:text="Description Description Description" />
 

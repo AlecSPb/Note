@@ -37,7 +37,7 @@ class EditNoteFragment : Fragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
 
-    val viewModel by lazy {
+    private val viewModel by lazy {
         ViewModelProvider(this, viewModelFactory)[EditNoteViewModel::class.java]
     }
 
