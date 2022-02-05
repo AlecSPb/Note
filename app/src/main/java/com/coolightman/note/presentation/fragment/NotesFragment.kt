@@ -37,7 +37,7 @@ class NotesFragment : Fragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
 
-    val viewModel by lazy {
+    private val viewModel by lazy {
         ViewModelProvider(this, viewModelFactory)[NotesViewModel::class.java]
     }
 
@@ -69,7 +69,7 @@ class NotesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        createRecycler()
+        createAdapter()
         prepareView()
         setObservers()
         setListeners()
@@ -94,9 +94,11 @@ class NotesFragment : Fragment() {
         recycler.layoutManager =
             StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
 
+        binding.rvNotesMain.adapter = notesAdapter
+
         val menu = binding.toolbar.menu
         menu.findItem(R.id.menu_change_layout)
-            .setIcon(R.drawable.ic_baseline_view_linear_24)
+            .setIcon(R.drawable.ic_baseline_view_list_24)
     }
 
     private fun setLinearLayout() {
@@ -104,9 +106,11 @@ class NotesFragment : Fragment() {
         recycler.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
 
+        binding.rvNotesMain.adapter = notesAdapter
+
         val menu = binding.toolbar.menu
         menu.findItem(R.id.menu_change_layout)
-            .setIcon(R.drawable.ic_baseline_grid_24)
+            .setIcon(R.drawable.ic_baseline_staggered_24)
     }
 
     private fun getPrefLayout() {
@@ -132,9 +136,8 @@ class NotesFragment : Fragment() {
         _binding = null
     }
 
-    private fun createRecycler() {
+    private fun createAdapter() {
         notesAdapter = NotesAdapter { noteId -> onItemClick(noteId) }
-        binding.rvNotesMain.adapter = notesAdapter
         notesAdapter.stateRestorationPolicy =
             RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
     }
