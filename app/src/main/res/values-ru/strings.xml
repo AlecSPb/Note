@@ -32,4 +32,6 @@
     <string name="snack_note_restored">Заметка восстановлена</string>
     <string name="snack_permanent_deleted_all">Корзина очищена</string>
     <string name="snack_all_restored">Все заметки восстановлены</string>
+    <string name="yes">Да</string>
+    <string name="delete_all_note_earning_text">Удалить все заметки окончательно?</string>
 </resources>

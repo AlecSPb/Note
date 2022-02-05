@@ -119,7 +119,7 @@ class NotesTrashFragment : Fragment() {
                         restoreAll()
                     }
                     R.id.menu_delete_all -> {
-                        deleteAll()
+                        showDeleteAllWarning()
                     }
                 }
                 true
@@ -127,9 +127,17 @@ class NotesTrashFragment : Fragment() {
         }
     }
 
-    private fun deleteAll() {
-        viewModel.deleteAllPermanent()
-        showSnackBar(getString(R.string.snack_permanent_deleted_all))
+    private fun deleteAll(isConfirmed: Boolean) {
+        if (isConfirmed) {
+            viewModel.deleteAllPermanent()
+            showSnackBar(getString(R.string.snack_permanent_deleted_all))
+        }
+    }
+
+    private fun showDeleteAllWarning() {
+        val dialog =
+            WarningDialogFragment(getString(R.string.delete_all_note_earning_text)) { deleteAll(it) }
+        dialog.show(childFragmentManager, "AllNotesDeleteWarningDialog")
     }
 
     private fun restoreAll() {

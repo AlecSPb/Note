@@ -37,4 +37,6 @@
     <string name="snack_note_restored">Note restored</string>
     <string name="snack_permanent_deleted_all">All notes deleted permanently</string>
     <string name="snack_all_restored">All notes restored</string>
+    <string name="yes">Yes</string>
+    <string name="delete_all_note_earning_text">Do you want to permanently delete notes?</string>
 </resources>
