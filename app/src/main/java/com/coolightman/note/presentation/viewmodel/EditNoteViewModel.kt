@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.coolightman.note.domain.entity.Note
 import com.coolightman.note.domain.repository.NoteRepository
 import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -23,13 +24,13 @@ class EditNoteViewModel @Inject constructor(
     val note: LiveData<Note> = _note
 
     fun fetchNote(noteId: Long) {
-        viewModelScope.launch(handler) {
+        viewModelScope.launch(Dispatchers.IO + handler) {
             _note.postValue(repository.getNote(noteId))
         }
     }
 
     fun saveNote(note: Note) {
-        viewModelScope.launch(handler) {
+        viewModelScope.launch(Dispatchers.IO + handler) {
             repository.insertNote(note)
         }
     }

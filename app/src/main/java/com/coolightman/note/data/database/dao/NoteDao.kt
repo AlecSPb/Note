@@ -56,5 +56,8 @@ interface NoteDao {
     suspend fun delete(noteId: Long)
 
     @Query("DELETE FROM notedb WHERE isDeleted = 1")
-    suspend fun deleteTrashPermanent()
+    suspend fun deleteAllTrashPermanent()
+
+    @Query("DELETE FROM notedb WHERE noteId = :noteId")
+    suspend fun deletePermanent(noteId: Long)
 }

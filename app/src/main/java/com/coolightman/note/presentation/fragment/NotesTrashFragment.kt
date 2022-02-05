@@ -1,13 +1,16 @@
 package com.coolightman.note.presentation.fragment
 
 import android.content.Context
+import android.graphics.Canvas
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.coolightman.note.NoteApp
@@ -97,13 +100,16 @@ class NotesTrashFragment : Fragment() {
     }
 
     private fun setListeners() {
+        swipeNoteRightListener()
+        swipeNoteLeftListener()
+
         binding.apply {
             toolbar.setNavigationOnClickListener {
                 findNavController().popBackStack()
             }
 
             toolbar.setOnMenuItemClickListener {
-                when(it.itemId){
+                when (it.itemId) {
                     R.id.menu_restore_all -> {
                         restoreAll()
                     }
@@ -116,7 +122,7 @@ class NotesTrashFragment : Fragment() {
         }
     }
 
-    private fun deleteAll(){
+    private fun deleteAll() {
         viewModel.deleteAllPermanent()
         showSnackBar("All notes deleted permanently")
     }
@@ -128,5 +134,152 @@ class NotesTrashFragment : Fragment() {
 
     private fun showSnackBar(message: String) {
         Snackbar.make(binding.root, message, 1000).show()
+    }
+
+    private fun swipeNoteRightListener() {
+        val callback = object :
+            ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.END) {
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder,
+            ): Boolean {
+                return false
+            }
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val position = viewHolder.bindingAdapterPosition
+                val note = notesTrashAdapter.currentList[position]
+                viewModel.deletePermanent(note.noteId)
+                showSnackBar(getString(R.string.snack_permanent_deleted_note))
+            }
+
+            override fun onChildDraw(
+                c: Canvas,
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                dX: Float,
+                dY: Float,
+                actionState: Int,
+                isCurrentlyActive: Boolean
+            ) {
+                val itemView = viewHolder.itemView
+
+                val isCanceled = dX == 0f && !isCurrentlyActive
+                if (isCanceled) {
+                    super.onChildDraw(
+                        c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive
+                    )
+                    return
+                }
+
+                val icon = ContextCompat.getDrawable(
+                    requireContext(),
+                    R.drawable.ic_baseline_delete_forever_24
+                )!!
+
+                val iconWidth = icon.intrinsicWidth
+                val iconHeight = icon.intrinsicHeight
+                val itemHeight = itemView.bottom - itemView.top
+
+                // Calculate position of icon
+                val scale = requireContext().resources.displayMetrics.density
+                val iconMargin = (ICON_MARGIN_DP * scale + 0.5f).toInt()
+                val iconTop = itemView.top + (itemHeight - iconHeight) / 2
+                val iconLeft = itemView.left + iconMargin
+                val iconRight = iconLeft + iconWidth
+                val iconBottom = iconTop + iconHeight
+
+                icon.setBounds(iconLeft, iconTop, iconRight, iconBottom)
+                icon.draw(c)
+
+                super.onChildDraw(
+                    c,
+                    recyclerView,
+                    viewHolder,
+                    dX / RATIO_SHORTENING_SWIPE,
+                    dY,
+                    actionState,
+                    isCurrentlyActive
+                )
+            }
+        }
+        ItemTouchHelper(callback).attachToRecyclerView(binding.rvNotesTrash)
+    }
+
+    private fun swipeNoteLeftListener() {
+        val callback = object :
+            ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.START) {
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder,
+            ): Boolean {
+                return false
+            }
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val position = viewHolder.bindingAdapterPosition
+                val note = notesTrashAdapter.currentList[position]
+                viewModel.restoreFromTrash(note.noteId)
+                showSnackBar(getString(R.string.snack_note_restored))
+            }
+
+            override fun onChildDraw(
+                c: Canvas,
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                dX: Float,
+                dY: Float,
+                actionState: Int,
+                isCurrentlyActive: Boolean
+            ) {
+                val itemView = viewHolder.itemView
+
+                val isCanceled = dX == 0f && !isCurrentlyActive
+                if (isCanceled) {
+                    super.onChildDraw(
+                        c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive
+                    )
+                    return
+                }
+
+                val icon = ContextCompat.getDrawable(
+                    requireContext(),
+                    R.drawable.ic_baseline_restore_from_trash_24
+                )!!
+
+                val iconWidth = icon.intrinsicWidth
+                val iconHeight = icon.intrinsicHeight
+                val itemHeight = itemView.bottom - itemView.top
+
+                // Calculate position of icon
+                val scale = requireContext().resources.displayMetrics.density
+                val iconMargin = (ICON_MARGIN_DP * scale + 0.5f).toInt()
+                val iconTop = itemView.top + (itemHeight - iconHeight) / 2
+                val iconRight = itemView.right - iconMargin
+                val iconLeft = iconRight - iconWidth
+                val iconBottom = iconTop + iconHeight
+
+                icon.setBounds(iconLeft, iconTop, iconRight, iconBottom)
+                icon.draw(c)
+
+                super.onChildDraw(
+                    c,
+                    recyclerView,
+                    viewHolder,
+                    dX / RATIO_SHORTENING_SWIPE,
+                    dY,
+                    actionState,
+                    isCurrentlyActive
+                )
+            }
+        }
+        ItemTouchHelper(callback).attachToRecyclerView(binding.rvNotesTrash)
+    }
+
+    companion object {
+        private const val ICON_MARGIN_DP = 12
+        private const val RATIO_SHORTENING_SWIPE = 2
     }
 }

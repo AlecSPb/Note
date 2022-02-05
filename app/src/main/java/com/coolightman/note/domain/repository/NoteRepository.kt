@@ -14,6 +14,8 @@ interface NoteRepository {
     suspend fun showDate(showDate: Boolean)
     suspend fun sendToTrashBasket(noteId: Long)
     fun getTrashCount(): LiveData<Int>
-    suspend fun deleteAllTrash()
+    suspend fun deleteAllPermanent()
     suspend fun restoreAllFromTrash()
+    suspend fun deletePermanent(noteId: Long)
+    suspend fun restoreFromTrash(noteId: Long)
 }

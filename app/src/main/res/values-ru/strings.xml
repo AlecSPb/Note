@@ -28,4 +28,6 @@
     <string name="empty">пусто</string>
     <string name="notes_trash_title">Корзина заметок</string>
     <string name="tv_splash_notes_trash_text">Корзина пуста</string>
+    <string name="snack_permanent_deleted_note">Заметка удалена полностью</string>
+    <string name="snack_note_restored">Заметка восстановлена</string>
 </resources>
