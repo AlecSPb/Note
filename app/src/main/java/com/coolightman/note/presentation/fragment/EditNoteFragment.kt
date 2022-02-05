@@ -73,7 +73,7 @@ class EditNoteFragment : Fragment() {
     private fun fetchNote() {
         viewModel.fetchNote(noteId)
         viewModel.note.observe(viewLifecycleOwner) {
-            with(binding) {
+            binding.apply {
                 etNoteTitle.setText(it.title)
                 etNoteDescription.setText(it.description)
                 setColorToRadio(rgColors, it.color)

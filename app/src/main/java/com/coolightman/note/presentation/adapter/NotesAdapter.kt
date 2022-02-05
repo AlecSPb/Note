@@ -22,7 +22,7 @@ class NotesAdapter(private val clickListener: (Long) -> Unit) :
 
     override fun onBindViewHolder(holder: NoteViewHolder, position: Int) {
         val note = getItem(position)
-        with(holder.binding) {
+        holder.binding.apply {
             setTitle(this, note.title)
             tvDescription.text = note.description
             cvNoteItemRoot.setCardBackgroundColor(
