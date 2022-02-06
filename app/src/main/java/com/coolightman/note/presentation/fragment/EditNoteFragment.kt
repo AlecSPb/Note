@@ -6,8 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
-import android.widget.RadioButton
-import android.widget.RadioGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -21,6 +19,8 @@ import com.coolightman.note.domain.entity.Note
 import com.coolightman.note.domain.entity.NoteColor
 import com.coolightman.note.presentation.viewmodel.EditNoteViewModel
 import com.coolightman.note.presentation.viewmodel.ViewModelFactory
+import com.coolightman.note.util.getCheckedIndex
+import com.coolightman.note.util.setCheckedByIndex
 import com.coolightman.note.util.toFullDateString
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.delay
@@ -76,14 +76,9 @@ class EditNoteFragment : Fragment() {
             binding.apply {
                 etNoteTitle.setText(it.title)
                 etNoteDescription.setText(it.description)
-                setColorToRadio(rgColors, it.color)
+                rgColors.setCheckedByIndex(it.color.ordinal)
             }
         }
-    }
-
-    private fun setColorToRadio(rgColors: RadioGroup, color: NoteColor) {
-        val radio = rgColors.getChildAt(color.ordinal) as RadioButton
-        radio.isChecked = true
     }
 
     private fun prepareNote() {
@@ -167,10 +162,7 @@ class EditNoteFragment : Fragment() {
     }
 
     private fun getNoteColor(): NoteColor {
-        val group = binding.rgColors
-        val checkedId = group.checkedRadioButtonId
-        val radioButton = group.findViewById<RadioButton>(checkedId)
-        val colorIndex = group.indexOfChild(radioButton)
+        val colorIndex = binding.rgColors.getCheckedIndex()
         return NoteColor.values()[colorIndex]
     }
 

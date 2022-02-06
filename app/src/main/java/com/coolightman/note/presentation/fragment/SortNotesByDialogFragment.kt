@@ -4,14 +4,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.RadioButton
 import androidx.fragment.app.DialogFragment
 import com.coolightman.note.R
 import com.coolightman.note.databinding.FragmentDialogSortNotesBinding
 import com.coolightman.note.domain.entity.SortNoteBy
+import com.coolightman.note.util.getCheckedIndex
+import com.coolightman.note.util.setCheckedByIndex
 
 class SortNotesByDialogFragment(
-    private val checkedRadio: Int,
+    private val sortNumber: Int,
     private val resultListener: (SortNoteBy) -> Unit
 ) : DialogFragment() {
 
@@ -35,16 +36,7 @@ class SortNotesByDialogFragment(
     }
 
     private fun setCurrentCheck() {
-        val radio = when (checkedRadio) {
-            0 -> binding.radioSortByColor
-            1 -> binding.radioSortByColorDesc
-            2 -> binding.radioSortByDate
-            3 -> binding.radioSortByDateDesc
-            4 -> binding.radioSortByEditDate
-            5 -> binding.radioSortByEditDateDesc
-            else -> throw RuntimeException("Wrong radio index in dialog")
-        }
-        radio.isChecked = true
+        binding.rgSortNotes.setCheckedByIndex(sortNumber)
     }
 
     private fun setTransparentBackground() {
@@ -57,10 +49,7 @@ class SortNotesByDialogFragment(
         }
 
         binding.btDialogSubmit.setOnClickListener {
-            val group = binding.rgSortNotes
-            val selectedId = group.checkedRadioButtonId
-            val radio = group.findViewById<RadioButton>(selectedId)
-            val selectIndex = group.indexOfChild(radio)
+            val selectIndex = binding.rgSortNotes.getCheckedIndex()
             val sortNoteBy = SortNoteBy.values()[selectIndex]
             resultListener(sortNoteBy)
             dismiss()
