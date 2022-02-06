@@ -99,8 +99,8 @@ class NotesTrashFragment : Fragment() {
 
     private fun enableButtons(isEnabled: Boolean) {
         binding.toolbar.menu.apply {
-            findItem(R.id.menu_delete_all).isEnabled = isEnabled
-            findItem(R.id.menu_restore_all).isEnabled = isEnabled
+            findItem(R.id.menu_delete_all).isVisible = isEnabled
+            findItem(R.id.menu_restore_all).isVisible = isEnabled
         }
     }
 
@@ -116,7 +116,7 @@ class NotesTrashFragment : Fragment() {
             toolbar.setOnMenuItemClickListener {
                 when (it.itemId) {
                     R.id.menu_restore_all -> {
-                        restoreAll()
+                        showRestoreAllWarning()
                     }
                     R.id.menu_delete_all -> {
                         showDeleteAllWarning()
@@ -125,6 +125,12 @@ class NotesTrashFragment : Fragment() {
                 true
             }
         }
+    }
+
+    private fun showRestoreAllWarning() {
+        val dialog =
+            WarningDialogFragment(getString(R.string.restore_all_note_earning_text)) { restoreAll(it) }
+        dialog.show(childFragmentManager, "AllNotesDeleteWarningDialog")
     }
 
     private fun deleteAll(isConfirmed: Boolean) {
@@ -140,9 +146,11 @@ class NotesTrashFragment : Fragment() {
         dialog.show(childFragmentManager, "AllNotesDeleteWarningDialog")
     }
 
-    private fun restoreAll() {
-        viewModel.restoreAll()
-        showSnackBar(getString(R.string.snack_all_restored))
+    private fun restoreAll(isConfirmed: Boolean) {
+        if (isConfirmed) {
+            viewModel.restoreAll()
+            showSnackBar(getString(R.string.snack_all_restored))
+        }
     }
 
     private fun showSnackBar(message: String) {

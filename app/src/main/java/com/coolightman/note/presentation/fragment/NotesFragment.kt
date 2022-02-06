@@ -179,9 +179,9 @@ class NotesFragment : Fragment() {
 
     private fun enableButtons(isEnabled: Boolean) {
         binding.toolbar.menu.apply {
-            findItem(R.id.menu_show_date).isEnabled = isEnabled
-            findItem(R.id.menu_sort_note).isEnabled = isEnabled
-            findItem(R.id.menu_change_layout).isEnabled = isEnabled
+            findItem(R.id.menu_show_date).isVisible = isEnabled
+            findItem(R.id.menu_sort_note).isVisible = isEnabled
+            findItem(R.id.menu_change_layout).isVisible = isEnabled
         }
     }
 

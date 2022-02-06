@@ -8,7 +8,6 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/dark_gray"
         app:cardCornerRadius="10dp">
 
         <LinearLayout
@@ -19,7 +18,7 @@
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tv_title"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_height="36dp"
                 android:gravity="center"
                 android:paddingStart="16dp"
                 android:paddingTop="4dp"
@@ -29,61 +28,52 @@
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/cv_description"
-                android:layout_width="match_parent"
+            <RadioGroup
+                android:id="@+id/rg_sort_notes"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                app:cardCornerRadius="10dp"
-                app:cardElevation="5dp">
+                android:layout_gravity="center"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:orientation="vertical">
 
-                <RadioGroup
-                    android:id="@+id/rg_sort_notes"
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/radio_sort_by_color"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/radio_sort_by_color_text" />
+
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/radio_sort_by_color_desc"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:orientation="vertical">
+                    android:text="@string/radio_sort_by_color_desc_text" />
 
-                    <com.google.android.material.radiobutton.MaterialRadioButton
-                        android:id="@+id/radio_sort_by_color"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/radio_sort_by_color_text" />
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/radio_sort_by_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/radio_sort_by_date_text" />
 
-                    <com.google.android.material.radiobutton.MaterialRadioButton
-                        android:id="@+id/radio_sort_by_color_desc"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/radio_sort_by_color_desc_text" />
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/radio_sort_by_date_desc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/radio_sort_by_date_desc_text" />
 
-                    <com.google.android.material.radiobutton.MaterialRadioButton
-                        android:id="@+id/radio_sort_by_date"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/radio_sort_by_date_text" />
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/radio_sort_by_edit_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/radio_sort_by_edit_date_text" />
 
-                    <com.google.android.material.radiobutton.MaterialRadioButton
-                        android:id="@+id/radio_sort_by_date_desc"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/radio_sort_by_date_desc_text" />
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/radio_sort_by_edit_date_desc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/radio_sort_by_edit_date_desc_text" />
 
-                    <com.google.android.material.radiobutton.MaterialRadioButton
-                        android:id="@+id/radio_sort_by_edit_date"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/radio_sort_by_edit_date_text" />
-
-                    <com.google.android.material.radiobutton.MaterialRadioButton
-                        android:id="@+id/radio_sort_by_edit_date_desc"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/radio_sort_by_edit_date_desc_text" />
-
-                </RadioGroup>
-
-            </com.google.android.material.card.MaterialCardView>
+            </RadioGroup>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -94,12 +84,11 @@
                     android:id="@+id/bt_dialog_cancel"
                     style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
                     android:layout_width="0dp"
-                    android:minWidth="100dp"
                     android:layout_height="48dp"
                     android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:textColor="@color/light_gray"
                     android:text="@string/cancel_text"
+                    android:textColor="@color/cancel_gray"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent" />
 
@@ -107,16 +96,15 @@
                     android:layout_width="1dp"
                     android:layout_height="20dp"
                     android:layout_gravity="center_vertical"
-                    android:background="@color/light_gray"/>
+                    android:background="@color/light_gray" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/bt_dialog_submit"
                     style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
                     android:layout_width="0dp"
-                    android:minWidth="100dp"
-                    android:layout_weight="1"
                     android:layout_height="48dp"
                     android:layout_gravity="center"
+                    android:layout_weight="1"
                     android:text="@string/submit_text"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent" />

@@ -28,10 +28,11 @@
     <string name="empty">пусто</string>
     <string name="notes_trash_title">Корзина заметок</string>
     <string name="tv_splash_notes_trash_text">Корзина пуста</string>
-    <string name="snack_permanent_deleted_note">Заметка удалена полностью</string>
+    <string name="snack_permanent_deleted_note">Заметка удалена навсегда</string>
     <string name="snack_note_restored">Заметка восстановлена</string>
     <string name="snack_permanent_deleted_all">Корзина очищена</string>
     <string name="snack_all_restored">Все заметки восстановлены</string>
     <string name="yes">Да</string>
-    <string name="delete_all_note_earning_text">Удалить все заметки окончательно?</string>
+    <string name="delete_all_note_earning_text">Вы хотите очистить корзину?</string>
+    <string name="restore_all_note_earning_text">Выхотите восстановить все заметки?</string>
 </resources>
