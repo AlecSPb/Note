@@ -10,7 +10,7 @@
     <string name="et_note_description_hint">Заметка..</string>
     <string name="title_note">Заметка</string>
     <string name="more">Ещё</string>
-    <string name="snackbar_empty_description">Заметка пустая</string>
+    <string name="snackbar_empty_description">Заметка пуста</string>
     <string name="snackbar_note_saved">Заметка сохранена</string>
     <string name="menu_sort_note_title">Сортировка</string>
     <string name="menu_show_date_title">Показывать дату</string>
@@ -34,6 +34,6 @@
     <string name="snack_all_restored">Все заметки восстановлены</string>
     <string name="yes">Да</string>
     <string name="delete_all_note_earning_text">Вы хотите очистить корзину?</string>
-    <string name="restore_all_note_earning_text">Выхотите восстановить все заметки?</string>
+    <string name="restore_all_note_earning_text">Вы хотите восстановить все заметки?</string>
     <string name="menu_settings_title">Настройки</string>
 </resources>
