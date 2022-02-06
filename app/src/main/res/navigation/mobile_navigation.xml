@@ -20,13 +20,22 @@
             app:destination="@id/notesTrashFragment"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim" />
+        <action
+            android:id="@+id/action_navigation_notes_to_settingsFragment"
+            app:destination="@id/settingsFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
     </fragment>
 
     <fragment
         android:id="@+id/navigation_tasks"
         android:name="com.coolightman.note.presentation.fragment.TasksFragment"
         android:label="@string/title_tasks"
-        tools:layout="@layout/fragment_tasks" />
+        tools:layout="@layout/fragment_tasks" >
+        <action
+            android:id="@+id/action_navigation_tasks_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/editNoteFragment"
         android:name="com.coolightman.note.presentation.fragment.EditNoteFragment"
@@ -42,5 +51,10 @@
         android:name="com.coolightman.note.presentation.fragment.NotesTrashFragment"
         android:label="fragment_notes_trash"
         tools:layout="@layout/fragment_notes_trash" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.coolightman.note.presentation.fragment.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" />
 
 </navigation>

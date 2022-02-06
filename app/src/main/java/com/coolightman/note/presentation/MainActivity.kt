@@ -52,6 +52,7 @@ class MainActivity : AppCompatActivity() {
             when (destination.id) {
                 R.id.editNoteFragment -> navBar.visibility = View.GONE
                 R.id.notesTrashFragment -> navBar.visibility = View.GONE
+                R.id.settingsFragment -> navBar.visibility = View.GONE
                 else -> navBar.visibility = View.VISIBLE
             }
         }
@@ -59,6 +60,6 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         private const val PREF_ROOT_NAME = "NoteAppSharedPref"
-        private const val PREF_START_DESTINATION = "startDestinationPreference"
+        const val PREF_START_DESTINATION = "startDestinationPreference"
     }
 }

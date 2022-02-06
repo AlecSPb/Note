@@ -214,6 +214,9 @@ class NotesFragment : Fragment() {
                 R.id.menu_change_layout -> {
                     changeLayout()
                 }
+                R.id.menu_settings -> {
+                    launchToSettings()
+                }
                 R.id.menu_trash -> {
                     launchToNotesTrash()
                 }
@@ -221,6 +224,12 @@ class NotesFragment : Fragment() {
             true
         }
         swipeNoteListener()
+    }
+
+    private fun launchToSettings() {
+        findNavController().navigate(
+            NotesFragmentDirections.actionNavigationNotesToSettingsFragment()
+        )
     }
 
     private fun changeDateShow(it: MenuItem) {

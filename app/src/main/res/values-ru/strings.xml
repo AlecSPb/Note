@@ -36,4 +36,5 @@
     <string name="delete_all_note_earning_text">Вы хотите очистить корзину?</string>
     <string name="restore_all_note_earning_text">Вы хотите восстановить все заметки?</string>
     <string name="menu_settings_title">Настройки</string>
+    <string name="tv_start_page_setting_title">Выберите стартовую страницу:</string>
 </resources>
