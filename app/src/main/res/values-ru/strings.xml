@@ -35,4 +35,5 @@
     <string name="yes">Да</string>
     <string name="delete_all_note_earning_text">Вы хотите очистить корзину?</string>
     <string name="restore_all_note_earning_text">Выхотите восстановить все заметки?</string>
+    <string name="menu_settings_title">Настройки</string>
 </resources>

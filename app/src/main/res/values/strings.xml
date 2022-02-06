@@ -40,4 +40,5 @@
     <string name="yes">Yes</string>
     <string name="delete_all_note_earning_text">Do you want to empty the trash?</string>
     <string name="restore_all_note_earning_text">Do you want to restore all notes?</string>
+    <string name="menu_settings_title">Settings</string>
 </resources>

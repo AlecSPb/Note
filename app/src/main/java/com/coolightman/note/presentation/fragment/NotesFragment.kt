@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Canvas
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
@@ -157,13 +158,16 @@ class NotesFragment : Fragment() {
         }
 
         viewModel.trashCount.observe(viewLifecycleOwner) {
-            val counter = when {
-                it == 0 -> " (${getString(R.string.empty)})"
-                it != 0 -> " ($it)"
+            val trashResult: Pair<String, Int> = when {
+                it == 0 -> " (${getString(R.string.empty)})" to R.drawable.ic_baseline_delete_outline_24
+                it != 0 -> " ($it)" to R.drawable.ic_baseline_delete_24
                 else -> throw RuntimeException("Wrong trash notes counter")
             }
-            val trashTitle = getString(R.string.menu_trash_title) + counter
-            binding.toolbar.menu.findItem(R.id.menu_trash).title = trashTitle
+            val trashTitle = getString(R.string.menu_trash_title) + trashResult.first
+            binding.toolbar.menu.findItem(R.id.menu_trash).apply {
+                title = trashTitle
+                setIcon(trashResult.second)
+            }
         }
     }
 
@@ -195,9 +199,7 @@ class NotesFragment : Fragment() {
         binding.toolbar.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.menu_show_date -> {
-                    it.isChecked = !it.isChecked
-                    viewModel.showDate(it.isChecked)
-                    saveShowDateChoice(it.isChecked)
+                    changeDateShow(it)
                 }
                 R.id.menu_sort_note -> {
                     showSortDialog()
@@ -212,6 +214,12 @@ class NotesFragment : Fragment() {
             true
         }
         swipeNoteListener()
+    }
+
+    private fun changeDateShow(it: MenuItem) {
+        it.isChecked = !it.isChecked
+        viewModel.showDate(it.isChecked)
+        saveShowDateChoice(it.isChecked)
     }
 
     private fun launchToNotesTrash() {
@@ -336,7 +344,7 @@ class NotesFragment : Fragment() {
     }
 
     companion object {
-        private const val PREF_SORT_NOTES = "SortNoteByPreference"
+        private const val PREF_SORT_NOTES = "sortNoteByPreference"
         private const val PREF_IS_SHOW_DATE = "isShowDatePreference"
         private const val PREF_LAYOUT_TYPE = "layoutTypePreference"
         private const val ICON_MARGIN_DP = 12
