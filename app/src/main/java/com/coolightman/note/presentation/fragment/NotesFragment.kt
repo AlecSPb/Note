@@ -21,6 +21,7 @@ import com.coolightman.note.NoteApp
 import com.coolightman.note.R
 import com.coolightman.note.databinding.FragmentNotesBinding
 import com.coolightman.note.domain.entity.LayoutType
+import com.coolightman.note.domain.entity.Note
 import com.coolightman.note.domain.entity.SortNoteBy
 import com.coolightman.note.presentation.MainActivity
 import com.coolightman.note.presentation.adapter.NotesAdapter
@@ -152,9 +153,7 @@ class NotesFragment : Fragment() {
     private fun setObservers() {
         viewModel.notes.observe(viewLifecycleOwner) {
             notesAdapter.submitList(it)
-
-            if (it.isEmpty()) showSplash()
-            else hideSplash()
+            editUi(it)
         }
 
         viewModel.trashCount.observe(viewLifecycleOwner) {
@@ -171,14 +170,22 @@ class NotesFragment : Fragment() {
         }
     }
 
+    private fun editUi(it: List<Note>) {
+        if (it.isEmpty()) {
+            showSplash()
+            enableButtons(false)
+        } else {
+            hideSplash()
+            enableButtons(true)
+        }
+    }
+
     private fun hideSplash() {
         binding.layoutSplashNotes.visibility = GONE
-        enableButtons(true)
     }
 
     private fun showSplash() {
         binding.layoutSplashNotes.visibility = VISIBLE
-        enableButtons(false)
     }
 
     private fun enableButtons(isEnabled: Boolean) {
@@ -320,15 +327,16 @@ class NotesFragment : Fragment() {
 
     private fun showSortDialog() {
         val sortNumber = getPrefSortNumber()
-        val dialog = SortNotesByDialogFragment(sortNumber) { dialogResultListener(it) }
+        val dialog =
+            SortNotesByDialogFragment(sortNumber) { answerSort -> dialogResultListener(answerSort) }
         dialog.show(childFragmentManager, "SortNotesByDialog")
     }
 
     private fun getPrefSortNumber() = preferences.getInt(PREF_SORT_NOTES, 0)
 
-    private fun dialogResultListener(sortNoteBy: SortNoteBy) {
-        viewModel.setSortBy(sortNoteBy)
-        saveSortChoice(sortNoteBy)
+    private fun dialogResultListener(answerSort: SortNoteBy) {
+        viewModel.setSortBy(answerSort)
+        saveSortChoice(answerSort)
     }
 
     private fun saveSortChoice(sortNoteBy: SortNoteBy) {

@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.coolightman.note.NoteApp
 import com.coolightman.note.R
 import com.coolightman.note.databinding.FragmentNotesTrashBinding
+import com.coolightman.note.domain.entity.Note
 import com.coolightman.note.presentation.adapter.NotesTrashAdapter
 import com.coolightman.note.presentation.viewmodel.NotesTrashViewModel
 import com.coolightman.note.presentation.viewmodel.ViewModelFactory
@@ -81,20 +82,26 @@ class NotesTrashFragment : Fragment() {
     private fun setObservers() {
         viewModel.trash.observe(viewLifecycleOwner) {
             notesTrashAdapter.submitList(it)
+            editUi(it)
+        }
+    }
 
-            if (it.isEmpty()) showSplash()
-            else hideSplash()
+    private fun editUi(it: List<Note>) {
+        if (it.isEmpty()) {
+            showSplash()
+            enableButtons(false)
+        } else {
+            hideSplash()
+            enableButtons(true)
         }
     }
 
     private fun hideSplash() {
         binding.layoutSplashNotesTrash.visibility = View.GONE
-        enableButtons(true)
     }
 
     private fun showSplash() {
         binding.layoutSplashNotesTrash.visibility = View.VISIBLE
-        enableButtons(false)
     }
 
     private fun enableButtons(isEnabled: Boolean) {
@@ -129,7 +136,9 @@ class NotesTrashFragment : Fragment() {
 
     private fun showRestoreAllWarning() {
         val dialog =
-            WarningDialogFragment(getString(R.string.restore_all_note_earning_text)) { restoreAll(it) }
+            WarningDialogFragment(getString(R.string.restore_all_note_earning_text)) { answer ->
+                restoreAll(answer)
+            }
         dialog.show(childFragmentManager, "AllNotesDeleteWarningDialog")
     }
 
@@ -142,7 +151,9 @@ class NotesTrashFragment : Fragment() {
 
     private fun showDeleteAllWarning() {
         val dialog =
-            WarningDialogFragment(getString(R.string.delete_all_note_earning_text)) { deleteAll(it) }
+            WarningDialogFragment(getString(R.string.delete_all_note_earning_text)) { answer ->
+                deleteAll(answer)
+            }
         dialog.show(childFragmentManager, "AllNotesDeleteWarningDialog")
     }
 
