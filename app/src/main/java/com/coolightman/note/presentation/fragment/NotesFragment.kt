@@ -26,7 +26,7 @@ import com.coolightman.note.domain.entity.SortNoteBy
 import com.coolightman.note.presentation.MainActivity
 import com.coolightman.note.presentation.adapter.NotesAdapter
 import com.coolightman.note.presentation.viewmodel.NotesViewModel
-import com.coolightman.note.presentation.viewmodel.ViewModelFactory
+import com.coolightman.note.di.ViewModelFactory
 import com.google.android.material.snackbar.Snackbar
 import javax.inject.Inject
 

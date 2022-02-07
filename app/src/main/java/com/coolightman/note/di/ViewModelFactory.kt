@@ -1,12 +1,12 @@
-package com.coolightman.note.presentation.viewmodel
+package com.coolightman.note.di
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.coolightman.note.di.ApplicationScope
 import javax.inject.Inject
 import javax.inject.Provider
+import javax.inject.Singleton
 
-@ApplicationScope
+@Singleton
 class ViewModelFactory @Inject constructor(
     private val viewModelProviders: @JvmSuppressWildcards Map<Class<out ViewModel>, Provider<ViewModel>>
 ) : ViewModelProvider.Factory {

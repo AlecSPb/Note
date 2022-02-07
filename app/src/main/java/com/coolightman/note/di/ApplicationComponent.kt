@@ -7,6 +7,7 @@ import com.coolightman.note.presentation.fragment.NotesTrashFragment
 import com.coolightman.note.presentation.fragment.TasksFragment
 import dagger.BindsInstance
 import dagger.Component
+import javax.inject.Singleton
 
 
 @Component(
@@ -16,7 +17,7 @@ import dagger.Component
         DatabaseModule::class
     ]
 )
-@ApplicationScope
+@Singleton
 interface ApplicationComponent {
 
     fun inject(notesFragment: NotesFragment)

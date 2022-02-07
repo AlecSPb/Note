@@ -19,7 +19,7 @@ import com.coolightman.note.databinding.FragmentNotesTrashBinding
 import com.coolightman.note.domain.entity.Note
 import com.coolightman.note.presentation.adapter.NotesTrashAdapter
 import com.coolightman.note.presentation.viewmodel.NotesTrashViewModel
-import com.coolightman.note.presentation.viewmodel.ViewModelFactory
+import com.coolightman.note.di.ViewModelFactory
 import com.google.android.material.snackbar.Snackbar
 import javax.inject.Inject
 

@@ -11,7 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.coolightman.note.NoteApp
 import com.coolightman.note.databinding.FragmentTasksBinding
 import com.coolightman.note.presentation.viewmodel.TasksViewModel
-import com.coolightman.note.presentation.viewmodel.ViewModelFactory
+import com.coolightman.note.di.ViewModelFactory
 import javax.inject.Inject
 
 class TasksFragment : Fragment() {

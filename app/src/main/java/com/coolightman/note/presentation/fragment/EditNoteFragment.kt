@@ -18,7 +18,7 @@ import com.coolightman.note.databinding.FragmentEditNoteBinding
 import com.coolightman.note.domain.entity.Note
 import com.coolightman.note.domain.entity.NoteColor
 import com.coolightman.note.presentation.viewmodel.EditNoteViewModel
-import com.coolightman.note.presentation.viewmodel.ViewModelFactory
+import com.coolightman.note.di.ViewModelFactory
 import com.coolightman.note.util.getCheckedIndex
 import com.coolightman.note.util.setCheckedByIndex
 import com.coolightman.note.util.toFullDateString
