@@ -70,8 +70,8 @@ class EditNoteFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         noteId = args.noteId
 
-        if (noteId != 0L) fetchNote()
         prepareNote()
+        if (noteId != 0L) fetchNote()
         showKeyboard()
         setListeners()
     }
@@ -88,8 +88,15 @@ class EditNoteFragment : Fragment() {
     }
 
     private fun prepareNote() {
+        getDefaultNoteColor()
         setTitleColor()
         setDate()
+    }
+
+    private fun getDefaultNoteColor() {
+        val colorIndex = preferences.getInt(SettingsFragment.PREF_NOTE_DEFAULT_COLOR, 6)
+        val noteColor = NoteColor.values()[colorIndex]
+        binding.rgColors.setCheckedByIndex(noteColor.ordinal)
     }
 
     private fun setDate() {

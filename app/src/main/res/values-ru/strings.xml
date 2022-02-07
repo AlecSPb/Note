@@ -39,4 +39,6 @@
     <string name="tv_start_page_setting_title">Выберите стартовую страницу:</string>
     <string name="bt_agree_restore_all_text">Восстановить</string>
     <string name="bt_agree_delete_all_text">Очистить</string>
+    <string name="tv_default_note_color_text">Выберите цвет заметки по-умолчанию:</string>
+    <string name="settings_saved_text">Настройки сохранены</string>
 </resources>

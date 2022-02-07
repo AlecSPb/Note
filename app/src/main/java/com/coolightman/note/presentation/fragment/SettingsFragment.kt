@@ -4,14 +4,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.coolightman.note.R
 import com.coolightman.note.databinding.FragmentSettingsBinding
+import com.coolightman.note.domain.entity.NoteColor
 import com.coolightman.note.domain.entity.StartDestination
 import com.coolightman.note.presentation.MainActivity
 import com.coolightman.note.presentation.MainActivity.Companion.PREF_START_DESTINATION
 import com.coolightman.note.util.getCheckedIndex
 import com.coolightman.note.util.setCheckedByIndex
+import com.google.android.material.snackbar.Snackbar
 
 class SettingsFragment : Fragment() {
 
@@ -41,13 +45,35 @@ class SettingsFragment : Fragment() {
         binding.apply {
             btSettingsSave.setOnClickListener {
                 saveSettings()
-                launchPreviousFragment()
+                showSnackBar(getString(R.string.settings_saved_text))
             }
 
             toolbar.setNavigationOnClickListener {
-                findNavController().popBackStack()
+                launchPreviousFragment()
+            }
+
+            rgDefaultNoteColor.setOnCheckedChangeListener { radioGroup, i ->
+                setTitleColor()
             }
         }
+    }
+
+    private fun showSnackBar(message: String) {
+        Snackbar.make(binding.root, message, 2000)
+            .setAnchorView(binding.btSettingsSave)
+            .show()
+    }
+
+    private fun setTitleColor() {
+        val color = getTitleColor()
+        binding.tvDefaultNoteColor.setBackgroundColor(
+            ContextCompat.getColor(requireContext(), color.colorResId)
+        )
+    }
+
+    private fun getTitleColor(): NoteColor {
+        val colorIndex = binding.rgDefaultNoteColor.getCheckedIndex()
+        return NoteColor.values()[colorIndex]
     }
 
     private fun launchPreviousFragment() {
@@ -56,6 +82,13 @@ class SettingsFragment : Fragment() {
 
     private fun saveSettings() {
         saveStartDestination()
+        saveNoteDefaultColor()
+    }
+
+    private fun saveNoteDefaultColor() {
+        val checkedIndex = binding.rgDefaultNoteColor.getCheckedIndex()
+        val color = NoteColor.values()[checkedIndex]
+        preferences.edit().putInt(PREF_NOTE_DEFAULT_COLOR, color.ordinal).apply()
     }
 
     private fun saveStartDestination() {
@@ -66,6 +99,14 @@ class SettingsFragment : Fragment() {
 
     private fun prepareView() {
         setStartDestination()
+        setNoteDefaultColor()
+    }
+
+    private fun setNoteDefaultColor() {
+        val colorIndex = preferences.getInt(PREF_NOTE_DEFAULT_COLOR, 6)
+        val color = NoteColor.values()[colorIndex]
+        binding.rgDefaultNoteColor.setCheckedByIndex(color.ordinal)
+        setTitleColor()
     }
 
     private fun setStartDestination() {
@@ -77,5 +118,9 @@ class SettingsFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    companion object {
+        const val PREF_NOTE_DEFAULT_COLOR = "noteDefaultColorPreference"
     }
 }

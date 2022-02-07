@@ -44,4 +44,6 @@
     <string name="tv_start_page_setting_title">Choose start page:</string>
     <string name="bt_agree_restore_all_text">Restore</string>
     <string name="bt_agree_delete_all_text">Empty</string>
+    <string name="tv_default_note_color_text">Choose note color by default:</string>
+    <string name="settings_saved_text">Settings saved</string>
 </resources>
