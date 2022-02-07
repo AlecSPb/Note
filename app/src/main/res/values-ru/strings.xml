@@ -37,4 +37,6 @@
     <string name="restore_all_note_earning_text">Вы хотите восстановить все заметки?</string>
     <string name="menu_settings_title">Настройки</string>
     <string name="tv_start_page_setting_title">Выберите стартовую страницу:</string>
+    <string name="bt_agree_restore_all_text">Восстановить</string>
+    <string name="bt_agree_delete_all_text">Очистить</string>
 </resources>

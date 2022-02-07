@@ -129,7 +129,7 @@ class EditNoteFragment : Fragment() {
             viewModel.saveNote(note)
             launchToMainNotes()
         } else {
-            Snackbar.make(binding.root, getString(R.string.snackbar_empty_description), 1000).show()
+            Snackbar.make(binding.root, getString(R.string.snackbar_empty_description), 2000).show()
         }
     }
 

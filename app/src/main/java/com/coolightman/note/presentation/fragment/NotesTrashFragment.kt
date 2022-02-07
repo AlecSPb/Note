@@ -124,22 +124,25 @@ class NotesTrashFragment : Fragment() {
                 when (it.itemId) {
                     R.id.menu_restore_all -> {
                         showRestoreAllWarning()
+                        true
                     }
                     R.id.menu_delete_all -> {
                         showDeleteAllWarning()
+                        true
                     }
+                    else -> false
                 }
-                true
             }
         }
     }
 
     private fun showRestoreAllWarning() {
         val dialog =
-            WarningDialogFragment(getString(R.string.restore_all_note_earning_text)) { answer ->
-                restoreAll(answer)
-            }
-        dialog.show(childFragmentManager, "AllNotesDeleteWarningDialog")
+            WarningDialogFragment(
+                getString(R.string.restore_all_note_earning_text),
+                getString(R.string.bt_agree_restore_all_text)
+            ) { answer -> restoreAll(answer) }
+        dialog.show(childFragmentManager, "AllNotesRestoreWarningDialog")
     }
 
     private fun deleteAll(isConfirmed: Boolean) {
@@ -151,9 +154,10 @@ class NotesTrashFragment : Fragment() {
 
     private fun showDeleteAllWarning() {
         val dialog =
-            WarningDialogFragment(getString(R.string.delete_all_note_earning_text)) { answer ->
-                deleteAll(answer)
-            }
+            WarningDialogFragment(
+                getString(R.string.delete_all_note_earning_text),
+                getString(R.string.bt_agree_delete_all_text)
+            ) { answer -> deleteAll(answer) }
         dialog.show(childFragmentManager, "AllNotesDeleteWarningDialog")
     }
 
@@ -165,7 +169,7 @@ class NotesTrashFragment : Fragment() {
     }
 
     private fun showSnackBar(message: String) {
-        Snackbar.make(binding.root, message, 1000).show()
+        Snackbar.make(binding.root, message, 2000).show()
     }
 
     private fun swipeNoteRightListener() {

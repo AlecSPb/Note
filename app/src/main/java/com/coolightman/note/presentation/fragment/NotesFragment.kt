@@ -207,21 +207,26 @@ class NotesFragment : Fragment() {
             when (it.itemId) {
                 R.id.menu_show_date -> {
                     changeDateShow(it)
+                    true
                 }
                 R.id.menu_sort_note -> {
                     showSortDialog()
+                    true
                 }
                 R.id.menu_change_layout -> {
                     changeLayout()
+                    true
                 }
                 R.id.menu_settings -> {
                     launchToSettings()
+                    true
                 }
                 R.id.menu_trash -> {
                     launchToNotesTrash()
+                    true
                 }
+                else -> false
             }
-            true
         }
         swipeNoteListener()
     }
@@ -316,7 +321,7 @@ class NotesFragment : Fragment() {
     }
 
     private fun showSnackBar(message: String) {
-        Snackbar.make(binding.root, message, 1000).show()
+        Snackbar.make(binding.root, message, 2000).show()
     }
 
     private fun changeLayout() {

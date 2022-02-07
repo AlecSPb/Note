@@ -52,7 +52,7 @@
                     android:background="@color/light_gray" />
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/bt_dialog_yes"
+                    android:id="@+id/bt_dialog_agree"
                     style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
                     android:layout_width="0dp"
                     android:layout_height="48dp"

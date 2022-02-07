@@ -11,6 +11,7 @@ import com.coolightman.note.databinding.FragmentDialogWarningBinding
 
 class WarningDialogFragment(
     private val warningText: String,
+    private val agreeButtonText: String,
     private val result: (Boolean) -> Unit
 ) : DialogFragment() {
 
@@ -30,7 +31,12 @@ class WarningDialogFragment(
         super.onViewCreated(view, savedInstanceState)
         setTransparentBackground()
         setText()
+        setAgreeButtonText()
         setListeners()
+    }
+
+    private fun setAgreeButtonText() {
+        binding.btDialogAgree.text = agreeButtonText
     }
 
     private fun setText() {
@@ -52,7 +58,7 @@ class WarningDialogFragment(
             dismiss()
         }
 
-        binding.btDialogYes.setOnClickListener {
+        binding.btDialogAgree.setOnClickListener {
             result(true)
             dismiss()
         }

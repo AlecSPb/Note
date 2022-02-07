@@ -2,15 +2,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/menu_restore_all"
-        android:icon="@drawable/ic_baseline_restore_from_trash_24"
-        android:title="@string/menu_restore_all_title"
-        app:showAsAction="ifRoom" />
-
-    <item
         android:id="@+id/menu_delete_all"
         android:icon="@drawable/ic_baseline_delete_forever_24"
         android:title="@string/menu_delete_all_title"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/menu_restore_all"
+        android:icon="@drawable/ic_baseline_restore_from_trash_24"
+        android:title="@string/menu_restore_all_title"
         app:showAsAction="ifRoom" />
 
 </menu>
