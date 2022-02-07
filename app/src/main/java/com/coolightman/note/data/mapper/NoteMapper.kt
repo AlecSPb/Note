@@ -4,6 +4,7 @@ import com.coolightman.note.data.database.dbModel.NoteDb
 import com.coolightman.note.domain.entity.Note
 import com.coolightman.note.util.toDateString
 import com.coolightman.note.util.toFullDateString
+import java.util.*
 
 fun NoteDb.toEntity(): Note = Note(
     noteId = this.noteId,
@@ -20,6 +21,7 @@ fun Note.toDb(): NoteDb = NoteDb(
     noteId = this.noteId,
     title = this.title,
     description = this.description,
+    dateEdit = Date(System.currentTimeMillis()),
     color = this.color,
     isShowingDate = this.isShowingDate,
     isEdited = this.isEdited,

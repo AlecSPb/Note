@@ -15,10 +15,12 @@ import androidx.navigation.fragment.navArgs
 import com.coolightman.note.NoteApp
 import com.coolightman.note.R
 import com.coolightman.note.databinding.FragmentEditNoteBinding
+import com.coolightman.note.di.ViewModelFactory
 import com.coolightman.note.domain.entity.Note
 import com.coolightman.note.domain.entity.NoteColor
+import com.coolightman.note.presentation.MainActivity
+import com.coolightman.note.presentation.fragment.NotesFragment.Companion.PREF_IS_SHOW_DATE
 import com.coolightman.note.presentation.viewmodel.EditNoteViewModel
-import com.coolightman.note.di.ViewModelFactory
 import com.coolightman.note.util.getCheckedIndex
 import com.coolightman.note.util.setCheckedByIndex
 import com.coolightman.note.util.toFullDateString
@@ -39,6 +41,10 @@ class EditNoteFragment : Fragment() {
 
     private val viewModel by lazy {
         ViewModelProvider(this, viewModelFactory)[EditNoteViewModel::class.java]
+    }
+
+    private val preferences by lazy {
+        (requireActivity() as MainActivity).preferences
     }
 
     private var _binding: FragmentEditNoteBinding? = null
@@ -142,8 +148,13 @@ class EditNoteFragment : Fragment() {
         title = binding.etNoteTitle.text.toString().trim(),
         description = binding.etNoteDescription.text.toString().trim(),
         color = getNoteColor(),
-        isEdited = getIsEdited()
+        isEdited = getIsEdited(),
+        isShowingDate = getPrefIsShowingDate()
     )
+
+    private fun getPrefIsShowingDate(): Boolean {
+        return preferences.getBoolean(PREF_IS_SHOW_DATE, false)
+    }
 
     private fun getIsEdited() = when (noteId) {
         0L -> false

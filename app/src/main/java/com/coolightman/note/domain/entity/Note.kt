@@ -8,7 +8,7 @@ data class Note(
     val description: String,
     val dateEdit: String = "",
     val color: NoteColor,
-    val isShowingDate: Boolean = false,
+    val isShowingDate: Boolean,
     val isEdited: Boolean,
     val isDeleted: Boolean = false
 ) {

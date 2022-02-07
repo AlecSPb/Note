@@ -367,7 +367,7 @@ class NotesFragment : Fragment() {
 
     companion object {
         private const val PREF_SORT_NOTES = "sortNoteByPreference"
-        private const val PREF_IS_SHOW_DATE = "isShowDatePreference"
+        const val PREF_IS_SHOW_DATE = "isShowDatePreference"
         private const val PREF_LAYOUT_TYPE = "layoutTypePreference"
         private const val ICON_MARGIN_DP = 12
         private const val RATIO_SHORTENING_SWIPE = 2
