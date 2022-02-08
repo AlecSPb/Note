@@ -2,6 +2,7 @@ package com.coolightman.note.data.database
 
 import androidx.room.TypeConverter
 import com.coolightman.note.domain.entity.NoteColor
+import com.coolightman.note.domain.entity.TaskColor
 import java.util.*
 
 class Converters {
@@ -13,6 +14,16 @@ class Converters {
 
     @TypeConverter
     fun fromNoteColor(color: NoteColor): Int {
+        return color.ordinal
+    }
+
+    @TypeConverter
+    fun toTaskColor(color: Int): TaskColor {
+        return TaskColor.values()[color]
+    }
+
+    @TypeConverter
+    fun fromTaskColor(color: TaskColor): Int {
         return color.ordinal
     }
 
