@@ -14,8 +14,8 @@ import com.coolightman.note.domain.entity.StartDestination
 import com.coolightman.note.presentation.MainActivity
 import com.coolightman.note.presentation.MainActivity.Companion.PREF_START_DESTINATION
 import com.coolightman.note.util.getCheckedIndex
+import com.coolightman.note.util.makeSnackbarWithAnchor
 import com.coolightman.note.util.setCheckedByIndex
-import com.google.android.material.snackbar.Snackbar
 
 class SettingsFragment : Fragment() {
 
@@ -59,9 +59,9 @@ class SettingsFragment : Fragment() {
     }
 
     private fun showSnackBar(message: String) {
-        Snackbar.make(binding.root, message, 2000)
-            .setAnchorView(binding.btSettingsSave)
-            .show()
+        binding.apply {
+            makeSnackbarWithAnchor(root, message, btSettingsSave)
+        }
     }
 
     private fun setTitleColor() {

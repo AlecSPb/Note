@@ -22,9 +22,9 @@ import com.coolightman.note.presentation.MainActivity
 import com.coolightman.note.presentation.fragment.NotesFragment.Companion.PREF_IS_SHOW_DATE
 import com.coolightman.note.presentation.viewmodel.EditNoteViewModel
 import com.coolightman.note.util.getCheckedIndex
+import com.coolightman.note.util.makeSnackbarWithAnchor
 import com.coolightman.note.util.setCheckedByIndex
 import com.coolightman.note.util.toFullDateString
-import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.util.*
@@ -142,7 +142,11 @@ class EditNoteFragment : Fragment() {
             viewModel.saveNote(note)
             launchToMainNotes()
         } else {
-            Snackbar.make(binding.root, getString(R.string.snackbar_empty_description), 2000).show()
+            binding.apply {
+                makeSnackbarWithAnchor(
+                    root, getString(R.string.snackbar_empty_description), btSaveBottom
+                )
+            }
         }
     }
 

@@ -12,6 +12,7 @@ import com.coolightman.note.NoteApp
 import com.coolightman.note.databinding.FragmentTasksBinding
 import com.coolightman.note.presentation.viewmodel.TasksViewModel
 import com.coolightman.note.di.ViewModelFactory
+import com.coolightman.note.util.makeSnackbarWithAnchor
 import javax.inject.Inject
 
 class TasksFragment : Fragment() {
@@ -64,5 +65,11 @@ class TasksFragment : Fragment() {
 
     private fun setObservers() {
 
+    }
+
+    private fun showSnackBar(message: String) {
+        binding.apply {
+            makeSnackbarWithAnchor(root, message, btAddTasks)
+        }
     }
 }

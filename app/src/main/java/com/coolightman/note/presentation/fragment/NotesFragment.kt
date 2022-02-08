@@ -27,6 +27,7 @@ import com.coolightman.note.presentation.MainActivity
 import com.coolightman.note.presentation.adapter.NotesAdapter
 import com.coolightman.note.presentation.viewmodel.NotesViewModel
 import com.coolightman.note.di.ViewModelFactory
+import com.coolightman.note.util.makeSnackbarWithAnchor
 import com.google.android.material.snackbar.Snackbar
 import javax.inject.Inject
 
@@ -321,7 +322,9 @@ class NotesFragment : Fragment() {
     }
 
     private fun showSnackBar(message: String) {
-        Snackbar.make(binding.root, message, 2000).show()
+        binding.apply {
+            makeSnackbarWithAnchor(root, message, btAddNotes)
+        }
     }
 
     private fun changeLayout() {

@@ -20,6 +20,7 @@ import com.coolightman.note.domain.entity.Note
 import com.coolightman.note.presentation.adapter.NotesTrashAdapter
 import com.coolightman.note.presentation.viewmodel.NotesTrashViewModel
 import com.coolightman.note.di.ViewModelFactory
+import com.coolightman.note.util.makeSnackbar
 import com.google.android.material.snackbar.Snackbar
 import javax.inject.Inject
 
@@ -169,7 +170,7 @@ class NotesTrashFragment : Fragment() {
     }
 
     private fun showSnackBar(message: String) {
-        Snackbar.make(binding.root, message, 2000).show()
+        makeSnackbar(binding.root, message)
     }
 
     private fun swipeNoteRightListener() {

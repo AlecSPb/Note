@@ -21,4 +21,6 @@
     <color name="transparent">#002A2A2A</color>
     <color name="warning_red">#E53935</color>
     <color name="cancel_gray">#787878</color>
+    <color name="snackbar_background">#2a2a2a</color>
+    <color name="snackbar_text">#787878</color>
 </resources>
