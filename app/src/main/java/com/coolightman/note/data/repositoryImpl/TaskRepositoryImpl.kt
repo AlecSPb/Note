@@ -28,4 +28,9 @@ class TaskRepositoryImpl @Inject constructor(
         database.delete(taskId)
     }
 
+    override suspend fun switchActive(taskId: Long) {
+        val task = database.get(taskId)
+        val editedTask = task.copy(isActive = !task.isActive)
+        database.insert(editedTask)
+    }
 }

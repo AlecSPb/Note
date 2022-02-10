@@ -8,4 +8,5 @@ interface TaskRepository {
     suspend fun insertTask(task: Task)
     fun getAllTasks(): LiveData<List<Task>>
     suspend fun deleteTask(taskId: Long)
+    suspend fun switchActive(taskId: Long)
 }

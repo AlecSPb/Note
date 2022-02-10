@@ -103,7 +103,10 @@ class TasksFragment : Fragment() {
     private fun createRecycler() {
         val recycler = binding.rvTasksMain
 
-        tasksAdapter = TasksAdapter { taskId -> onItemClick(taskId) }
+        tasksAdapter = TasksAdapter (
+            { taskId -> onItemClick(taskId) },
+            { taskId -> onCheckClick(taskId) }
+        )
         tasksAdapter.stateRestorationPolicy =
             RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
 
@@ -111,6 +114,10 @@ class TasksFragment : Fragment() {
             adapter = tasksAdapter
             layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         }
+    }
+
+    private fun onCheckClick(taskId: Long) {
+        viewModel.switchActive(taskId)
     }
 
     private fun onItemClick(taskId: Long) {
