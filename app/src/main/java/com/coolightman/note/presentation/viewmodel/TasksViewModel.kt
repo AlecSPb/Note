@@ -1,16 +1,23 @@
 package com.coolightman.note.presentation.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.liveData
+import com.coolightman.note.domain.entity.Task
+import com.coolightman.note.domain.repository.TaskRepository
+import kotlinx.coroutines.CoroutineExceptionHandler
 import javax.inject.Inject
 
 class TasksViewModel @Inject constructor(
-
+    private val repository: TaskRepository
 ) : ViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is tasks Fragment"
+    private val handler = CoroutineExceptionHandler { _, throwable ->
+        Log.e("Coroutine_exception", throwable.stackTraceToString())
     }
-    val text: LiveData<String> = _text
+
+    val tasks: LiveData<List<Task>> = liveData {
+        emitSource(repository.getAllTasks())
+    }
 }
