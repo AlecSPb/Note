@@ -17,9 +17,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
-        app:title="@string/title_note">
-
-    </com.google.android.material.appbar.MaterialToolbar>
+        app:title="@string/title_note"/>
 
     <ScrollView
         android:id="@+id/scroll_edit_note"

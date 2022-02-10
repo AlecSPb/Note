@@ -53,6 +53,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.editNoteFragment -> navBar.visibility = View.GONE
                 R.id.notesTrashFragment -> navBar.visibility = View.GONE
                 R.id.settingsFragment -> navBar.visibility = View.GONE
+                R.id.editTaskFragment -> navBar.visibility = View.GONE
                 else -> navBar.visibility = View.VISIBLE
             }
         }

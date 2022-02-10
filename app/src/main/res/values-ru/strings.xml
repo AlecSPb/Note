@@ -42,4 +42,13 @@
     <string name="tv_default_note_color_text">Выберите цвет заметки по-умолчанию:</string>
     <string name="settings_saved_text">Настройки сохранены</string>
     <string name="tv_note_date_setting_title">Показывать дату заметок</string>
+    <string name="title_task">Задача</string>
+    <string name="et_task_description_hint">Задача..</string>
+    <string name="tv_important_task">Важная задача</string>
+    <string name="tv_add_notification">Добавить напоминание</string>
+    <string name="date_picker_text">Выберите дату</string>
+    <string name="time_picker_text">Выберите время</string>
+    <string name="et_task_date_hint">Сегодня</string>
+    <string name="et_task_time_hint">Время..</string>
+    <string name="snackbar_empty_description_t">Задача пуста</string>
 </resources>

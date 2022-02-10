@@ -18,7 +18,7 @@ interface TaskDao {
     suspend fun insertList(list: List<TaskDb>)
 
     @Query("SELECT * FROM taskdb WHERE taskId = :taskId")
-    suspend fun get(taskId: Long): TaskDb
+    suspend fun getTask(taskId: Long): TaskDb
 
     @Query("SELECT * FROM taskdb")
     fun getAllOrderByDate(): LiveData<List<TaskDb>>

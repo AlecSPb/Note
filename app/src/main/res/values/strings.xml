@@ -13,6 +13,7 @@
     <string name="more">More</string>
     <string name="content_description_more" translatable="false">menu more</string>
     <string name="snackbar_empty_description">Note is empty</string>
+    <string name="snackbar_empty_description_t">Task is empty</string>
     <string name="snackbar_note_saved">Note saved</string>
     <string name="menu_sort_note_title">Sort</string>
     <string name="menu_show_date_title">Show date</string>
@@ -47,4 +48,12 @@
     <string name="tv_default_note_color_text">Choose note color by default:</string>
     <string name="settings_saved_text">Settings saved</string>
     <string name="tv_note_date_setting_title">Show notes date</string>
+    <string name="title_task">Task</string>
+    <string name="et_task_description_hint">Task..</string>
+    <string name="tv_important_task">Important task</string>
+    <string name="tv_add_notification">Add notification</string>
+    <string name="date_picker_text">Select date</string>
+    <string name="time_picker_text">Select time</string>
+    <string name="et_task_date_hint">Today</string>
+    <string name="et_task_time_hint">Time..</string>
 </resources>

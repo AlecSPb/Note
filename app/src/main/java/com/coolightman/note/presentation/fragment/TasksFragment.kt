@@ -69,7 +69,7 @@ class TasksFragment : Fragment() {
     private fun setListeners() {
         binding.apply {
             btAddTasks.setOnClickListener {
-                Toast.makeText(requireContext(), "Add task", Toast.LENGTH_SHORT).show()
+                launchToEditTask()
             }
 
             binding.toolbar.setOnMenuItemClickListener {
@@ -82,6 +82,12 @@ class TasksFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun launchToEditTask() {
+        findNavController().navigate(
+            TasksFragmentDirections.actionNavigationTasksToEditTaskFragment()
+        )
     }
 
     private fun setObservers() {

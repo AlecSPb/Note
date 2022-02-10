@@ -30,14 +30,14 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:paddingStart="-6dp"
-            android:paddingEnd="-6dp"
             android:src="@drawable/ic_baseline_importance_high_24"
             android:tint="@color/warning_red"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@id/img_check"
             app:layout_constraintStart_toEndOf="@id/img_check"
             app:layout_constraintTop_toTopOf="@id/img_check"
-            tools:visibility="visible" />
+            tools:visibility="visible"
+            tools:ignore="RtlSymmetry" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tv_description"
@@ -45,13 +45,14 @@
             android:layout_height="wrap_content"
             android:gravity="start|center"
             android:minHeight="48dp"
-            android:padding="6dp"
+            android:paddingEnd="24dp"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="@id/img_check"
-            app:layout_constraintEnd_toStartOf="@+id/img_notification"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/img_importance"
             app:layout_constraintTop_toTopOf="@id/img_check"
-            tools:text="Some task description" />
+            tools:text="Some task description"
+            tools:ignore="RtlSymmetry" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/img_notification"

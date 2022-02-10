@@ -29,8 +29,12 @@ class TaskRepositoryImpl @Inject constructor(
     }
 
     override suspend fun switchActive(taskId: Long) {
-        val task = database.get(taskId)
+        val task = database.getTask(taskId)
         val editedTask = task.copy(isActive = !task.isActive)
         database.insert(editedTask)
+    }
+
+    override suspend fun getTask(taskId: Long): Task {
+        return database.getTask(taskId).toEntity()
     }
 }

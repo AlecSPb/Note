@@ -44,10 +44,10 @@ class TasksAdapter(
         val view = binding.tvDescription
         val image = binding.imgCheck
         view.paintFlags = if (active) {
-            image.setBackgroundResource(R.drawable.ic_baseline_check_empty_circle_24)
+            image.setImageResource(R.drawable.ic_baseline_check_empty_circle_24)
             view.paintFlags and STRIKE_THRU_TEXT_FLAG.inv()
         } else {
-            image.setBackgroundResource(R.drawable.ic_baseline_task_alt_24)
+            image.setImageResource(R.drawable.ic_baseline_task_alt_24)
             view.paintFlags or STRIKE_THRU_TEXT_FLAG
         }
     }

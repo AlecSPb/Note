@@ -20,7 +20,6 @@ import com.coolightman.note.domain.entity.Note
 import com.coolightman.note.domain.entity.NoteColor
 import com.coolightman.note.presentation.MainActivity
 import com.coolightman.note.presentation.viewmodel.EditNoteViewModel
-import com.coolightman.note.util.PrefConstants.PREF_IS_SHOW_NOTE_DATE
 import com.coolightman.note.util.PrefConstants.PREF_NOTE_DEFAULT_COLOR
 import com.coolightman.note.util.getCheckedIndex
 import com.coolightman.note.util.makeSnackbarWithAnchor
@@ -89,15 +88,15 @@ class EditNoteFragment : Fragment() {
     }
 
     private fun prepareNote() {
-        getDefaultNoteColor()
-        setTitleColor()
+        setDefaultNoteColor()
         setDate()
     }
 
-    private fun getDefaultNoteColor() {
+    private fun setDefaultNoteColor() {
         val colorIndex = preferences.getInt(PREF_NOTE_DEFAULT_COLOR, 6)
         val noteColor = NoteColor.values()[colorIndex]
         binding.rgColors.setCheckedByIndex(noteColor.ordinal)
+        setTitleColor()
     }
 
     private fun setDate() {
@@ -160,13 +159,8 @@ class EditNoteFragment : Fragment() {
         title = binding.etNoteTitle.text.toString().trim(),
         description = binding.etNoteDescription.text.toString().trim(),
         color = getNoteColor(),
-        isEdited = getIsEdited(),
-        isShowingDate = getPrefIsShowingDate()
+        isEdited = getIsEdited()
     )
-
-    private fun getPrefIsShowingDate(): Boolean {
-        return preferences.getBoolean(PREF_IS_SHOW_NOTE_DATE, false)
-    }
 
     private fun getIsEdited() = when (noteId) {
         0L -> false
