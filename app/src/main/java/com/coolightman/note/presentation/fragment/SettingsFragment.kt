@@ -7,14 +7,14 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.coolightman.note.R
 import com.coolightman.note.databinding.FragmentSettingsBinding
 import com.coolightman.note.domain.entity.NoteColor
 import com.coolightman.note.domain.entity.StartDestination
 import com.coolightman.note.presentation.MainActivity
 import com.coolightman.note.presentation.MainActivity.Companion.PREF_START_DESTINATION
+import com.coolightman.note.util.PrefConstants.PREF_IS_SHOW_NOTE_DATE
+import com.coolightman.note.util.PrefConstants.PREF_NOTE_DEFAULT_COLOR
 import com.coolightman.note.util.getCheckedIndex
-import com.coolightman.note.util.makeSnackbarWithAnchor
 import com.coolightman.note.util.setCheckedByIndex
 
 class SettingsFragment : Fragment() {
@@ -43,24 +43,22 @@ class SettingsFragment : Fragment() {
 
     private fun setListeners() {
         binding.apply {
-            btSettingsSave.setOnClickListener {
-                saveSettings()
-                showSnackBar(getString(R.string.settings_saved_text))
-            }
-
             toolbar.setNavigationOnClickListener {
                 launchPreviousFragment()
             }
 
             rgDefaultNoteColor.setOnCheckedChangeListener { radioGroup, i ->
                 setTitleColor()
+                saveNoteDefaultColor()
             }
-        }
-    }
 
-    private fun showSnackBar(message: String) {
-        binding.apply {
-            makeSnackbarWithAnchor(root, message, btSettingsSave)
+            rgSettingsStart.setOnCheckedChangeListener { radioGroup, i ->
+                saveStartDestination()
+            }
+
+            switchShowNoteDate.setOnCheckedChangeListener { compoundButton, b ->
+                saveIsShowNoteDate()
+            }
         }
     }
 
@@ -80,9 +78,9 @@ class SettingsFragment : Fragment() {
         findNavController().popBackStack()
     }
 
-    private fun saveSettings() {
-        saveStartDestination()
-        saveNoteDefaultColor()
+    private fun saveIsShowNoteDate() {
+        val isShow = binding.switchShowNoteDate.isChecked
+        preferences.edit().putBoolean(PREF_IS_SHOW_NOTE_DATE, isShow).apply()
     }
 
     private fun saveNoteDefaultColor() {
@@ -100,6 +98,12 @@ class SettingsFragment : Fragment() {
     private fun prepareView() {
         setStartDestination()
         setNoteDefaultColor()
+        setShowNoteDate()
+    }
+
+    private fun setShowNoteDate() {
+        val isShow = preferences.getBoolean(PREF_IS_SHOW_NOTE_DATE, false)
+        binding.switchShowNoteDate.isChecked = isShow
     }
 
     private fun setNoteDefaultColor() {
@@ -118,9 +122,5 @@ class SettingsFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    companion object {
-        const val PREF_NOTE_DEFAULT_COLOR = "noteDefaultColorPreference"
     }
 }

@@ -29,6 +29,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:paddingStart="-6dp"
+            android:paddingEnd="-6dp"
             android:src="@drawable/ic_baseline_importance_high_24"
             android:tint="@color/warning_red"
             android:visibility="gone"
@@ -53,8 +55,8 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/img_notification"
-            android:layout_width="28dp"
-            android:layout_height="28dp"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             android:padding="4dp"
             android:src="@drawable/ic_baseline_notifications_24"
             android:visibility="gone"

@@ -4,7 +4,6 @@ import android.content.Context
 import android.graphics.Canvas
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
@@ -20,15 +19,18 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.coolightman.note.NoteApp
 import com.coolightman.note.R
 import com.coolightman.note.databinding.FragmentNotesBinding
+import com.coolightman.note.di.ViewModelFactory
 import com.coolightman.note.domain.entity.LayoutType
 import com.coolightman.note.domain.entity.Note
 import com.coolightman.note.domain.entity.SortNoteBy
 import com.coolightman.note.presentation.MainActivity
 import com.coolightman.note.presentation.adapter.NotesAdapter
 import com.coolightman.note.presentation.viewmodel.NotesViewModel
-import com.coolightman.note.di.ViewModelFactory
+import com.coolightman.note.util.PrefConstants.PREF_IS_SHOW_NOTE_DATE
+import com.coolightman.note.util.PrefConstants.PREF_LAYOUT_TYPE
+import com.coolightman.note.util.PrefConstants.PREF_SORT_NOTES
 import com.coolightman.note.util.makeSnackbarWithAnchor
-import com.google.android.material.snackbar.Snackbar
+import com.coolightman.note.util.setStartIconBounds
 import javax.inject.Inject
 
 class NotesFragment : Fragment() {
@@ -124,7 +126,6 @@ class NotesFragment : Fragment() {
     private fun setIsShowingDate() {
         val isShowingDate = getPrefIsShowDate()
         viewModel.showDate(isShowingDate)
-        binding.toolbar.menu.findItem(R.id.menu_show_date).isChecked = isShowingDate
     }
 
     private fun setSortNotes() {
@@ -132,7 +133,7 @@ class NotesFragment : Fragment() {
         viewModel.setSortBy(SortNoteBy.values()[sortNumber])
     }
 
-    private fun getPrefIsShowDate() = preferences.getBoolean(PREF_IS_SHOW_DATE, false)
+    private fun getPrefIsShowDate() = preferences.getBoolean(PREF_IS_SHOW_NOTE_DATE, false)
 
     override fun onDestroyView() {
         super.onDestroyView()
@@ -191,7 +192,6 @@ class NotesFragment : Fragment() {
 
     private fun enableButtons(isEnabled: Boolean) {
         binding.toolbar.menu.apply {
-            findItem(R.id.menu_show_date).isVisible = isEnabled
             findItem(R.id.menu_sort_note).isVisible = isEnabled
             findItem(R.id.menu_change_layout).isVisible = isEnabled
         }
@@ -206,10 +206,6 @@ class NotesFragment : Fragment() {
 
         binding.toolbar.setOnMenuItemClickListener {
             when (it.itemId) {
-                R.id.menu_show_date -> {
-                    changeDateShow(it)
-                    true
-                }
                 R.id.menu_sort_note -> {
                     showSortDialog()
                     true
@@ -236,12 +232,6 @@ class NotesFragment : Fragment() {
         findNavController().navigate(
             NotesFragmentDirections.actionNavigationNotesToSettingsFragment()
         )
-    }
-
-    private fun changeDateShow(it: MenuItem) {
-        it.isChecked = !it.isChecked
-        viewModel.showDate(it.isChecked)
-        saveShowDateChoice(it.isChecked)
     }
 
     private fun launchToNotesTrash() {
@@ -292,19 +282,7 @@ class NotesFragment : Fragment() {
                     R.drawable.ic_baseline_delete_sweep_24
                 )!!
 
-                val iconWidth = icon.intrinsicWidth
-                val iconHeight = icon.intrinsicHeight
-                val itemHeight = itemView.bottom - itemView.top
-
-                // Calculate position of icon
-                val scale = requireContext().resources.displayMetrics.density
-                val iconMargin = (ICON_MARGIN_DP * scale + 0.5f).toInt()
-                val iconTop = itemView.top + (itemHeight - iconHeight) / 2
-                val iconLeft = itemView.left + iconMargin
-                val iconRight = iconLeft + iconWidth
-                val iconBottom = iconTop + iconHeight
-
-                icon.setBounds(iconLeft, iconTop, iconRight, iconBottom)
+                icon.setStartIconBounds(itemView, requireContext())
                 icon.draw(c)
 
                 super.onChildDraw(
@@ -360,18 +338,11 @@ class NotesFragment : Fragment() {
         preferences.edit().putInt(PREF_SORT_NOTES, sortNoteBy.ordinal).apply()
     }
 
-    private fun saveShowDateChoice(checked: Boolean) {
-        preferences.edit().putBoolean(PREF_IS_SHOW_DATE, checked).apply()
-    }
-
     private fun saveLayoutChoice() {
         preferences.edit().putInt(PREF_LAYOUT_TYPE, layoutType.ordinal).apply()
     }
 
     companion object {
-        private const val PREF_SORT_NOTES = "sortNoteByPreference"
-        const val PREF_IS_SHOW_DATE = "isShowDatePreference"
-        private const val PREF_LAYOUT_TYPE = "layoutTypePreference"
         private const val ICON_MARGIN_DP = 12
         private const val RATIO_SHORTENING_SWIPE = 2
     }

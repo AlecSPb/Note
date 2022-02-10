@@ -16,12 +16,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.coolightman.note.NoteApp
 import com.coolightman.note.R
 import com.coolightman.note.databinding.FragmentNotesTrashBinding
+import com.coolightman.note.di.ViewModelFactory
 import com.coolightman.note.domain.entity.Note
 import com.coolightman.note.presentation.adapter.NotesTrashAdapter
 import com.coolightman.note.presentation.viewmodel.NotesTrashViewModel
-import com.coolightman.note.di.ViewModelFactory
 import com.coolightman.note.util.makeSnackbar
-import com.google.android.material.snackbar.Snackbar
+import com.coolightman.note.util.setStartIconBounds
+import com.coolightman.note.util.setEndIconBounds
 import javax.inject.Inject
 
 class NotesTrashFragment : Fragment() {
@@ -215,19 +216,7 @@ class NotesTrashFragment : Fragment() {
                     R.drawable.ic_baseline_delete_forever_36
                 )!!
 
-                val iconWidth = icon.intrinsicWidth
-                val iconHeight = icon.intrinsicHeight
-                val itemHeight = itemView.bottom - itemView.top
-
-                // Calculate position of icon
-                val scale = requireContext().resources.displayMetrics.density
-                val iconMargin = (ICON_MARGIN_DP * scale + 0.5f).toInt()
-                val iconTop = itemView.top + (itemHeight - iconHeight) / 2
-                val iconLeft = itemView.left + iconMargin
-                val iconRight = iconLeft + iconWidth
-                val iconBottom = iconTop + iconHeight
-
-                icon.setBounds(iconLeft, iconTop, iconRight, iconBottom)
+                icon.setStartIconBounds(itemView, requireContext())
                 icon.draw(c)
 
                 super.onChildDraw(
@@ -286,19 +275,7 @@ class NotesTrashFragment : Fragment() {
                     R.drawable.ic_baseline_restore_from_trash_36
                 )!!
 
-                val iconWidth = icon.intrinsicWidth
-                val iconHeight = icon.intrinsicHeight
-                val itemHeight = itemView.bottom - itemView.top
-
-                // Calculate position of icon
-                val scale = requireContext().resources.displayMetrics.density
-                val iconMargin = (ICON_MARGIN_DP * scale + 0.5f).toInt()
-                val iconTop = itemView.top + (itemHeight - iconHeight) / 2
-                val iconRight = itemView.right - iconMargin
-                val iconLeft = iconRight - iconWidth
-                val iconBottom = iconTop + iconHeight
-
-                icon.setBounds(iconLeft, iconTop, iconRight, iconBottom)
+                icon.setEndIconBounds(itemView, requireContext())
                 icon.draw(c)
 
                 super.onChildDraw(
