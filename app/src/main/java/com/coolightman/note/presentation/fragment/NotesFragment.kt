@@ -159,16 +159,20 @@ class NotesFragment : Fragment() {
         }
 
         viewModel.trashCount.observe(viewLifecycleOwner) {
-            val trashResult: Pair<String, Int> = when {
-                it == 0 -> " (${getString(R.string.empty)})" to R.drawable.ic_baseline_delete_outline_24
-                it != 0 -> " ($it)" to R.drawable.ic_baseline_delete_24
-                else -> throw RuntimeException("Wrong trash notes counter")
-            }
-            val trashTitle = getString(R.string.menu_trash_title) + trashResult.first
-            binding.toolbar.menu.findItem(R.id.menu_trash).apply {
-                title = trashTitle
-                setIcon(trashResult.second)
-            }
+            editTrashMenu(it)
+        }
+    }
+
+    private fun editTrashMenu(it: Int) {
+        val trashResult: Pair<String, Int> = when {
+            it == 0 -> " (${getString(R.string.empty)})" to R.drawable.ic_baseline_delete_outline_24
+            it != 0 -> " ($it)" to R.drawable.ic_baseline_delete_24
+            else -> throw RuntimeException("Wrong trash notes counter")
+        }
+        val trashTitle = getString(R.string.menu_trash_title) + trashResult.first
+        binding.toolbar.menu.findItem(R.id.menu_trash).apply {
+            title = trashTitle
+            setIcon(trashResult.second)
         }
     }
 
