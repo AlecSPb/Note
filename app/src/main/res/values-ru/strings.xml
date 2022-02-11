@@ -51,4 +51,9 @@
     <string name="et_task_date_hint">Сегодня</string>
     <string name="et_task_time_hint">Время..</string>
     <string name="snackbar_empty_description_t">Задача пуста</string>
+    <string name="task_deleted">Задача удалена</string>
+    <string name="menu_delete_inactive">Удалить выполненные</string>
+    <string name="delete_inactive_tasks_earning_text">Вы хотите удалить все выполненные задачи?</string>
+    <string name="bt_delete_text">Удалить</string>
+    <string name="snack_inactive_task_deleted">Все выполненные задачи удалены</string>
 </resources>

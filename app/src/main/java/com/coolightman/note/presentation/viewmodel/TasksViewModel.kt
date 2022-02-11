@@ -29,4 +29,16 @@ class TasksViewModel @Inject constructor(
             repository.switchActive(taskId)
         }
     }
+
+    fun deleteTask(taskId: Long) {
+        viewModelScope.launch(Dispatchers.IO + handler){
+            repository.deleteTask(taskId)
+        }
+    }
+
+    fun deleteAllInactive() {
+        viewModelScope.launch(Dispatchers.IO + handler){
+            repository.deleteAllInactive()
+        }
+    }
 }

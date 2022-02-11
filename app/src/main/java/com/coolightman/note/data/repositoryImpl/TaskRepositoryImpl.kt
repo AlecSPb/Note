@@ -51,4 +51,8 @@ class TaskRepositoryImpl @Inject constructor(
     override suspend fun getTask(taskId: Long): Task {
         return database.getTask(taskId).toEntity()
     }
+
+    override suspend fun deleteAllInactive() {
+        database.deleteAllInactive()
+    }
 }

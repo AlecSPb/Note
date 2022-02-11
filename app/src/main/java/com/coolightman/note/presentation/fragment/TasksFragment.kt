@@ -1,14 +1,17 @@
 package com.coolightman.note.presentation.fragment
 
 import android.content.Context
+import android.graphics.Canvas
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.coolightman.note.NoteApp
@@ -19,6 +22,7 @@ import com.coolightman.note.di.ViewModelFactory
 import com.coolightman.note.domain.entity.Task
 import com.coolightman.note.presentation.adapter.TasksAdapter
 import com.coolightman.note.util.makeSnackbarWithAnchor
+import com.coolightman.note.util.setStartIconBounds
 import javax.inject.Inject
 
 class TasksFragment : Fragment() {
@@ -67,6 +71,7 @@ class TasksFragment : Fragment() {
     }
 
     private fun setListeners() {
+        swipeTaskListener()
         binding.apply {
             btAddTasks.setOnClickListener {
                 launchToEditTask()
@@ -78,9 +83,29 @@ class TasksFragment : Fragment() {
                         launchToSettings()
                         true
                     }
+                    R.id.menu_delete_inactive ->{
+                        showDeleteInactiveWarning()
+                        true
+                    }
                     else -> false
                 }
             }
+        }
+    }
+
+    private fun showDeleteInactiveWarning() {
+        val dialog =
+            WarningDialogFragment(
+                getString(R.string.delete_inactive_tasks_earning_text),
+                getString(R.string.bt_delete_text)
+            ) { answer -> deleteAll(answer) }
+        dialog.show(childFragmentManager, "AllNotesDeleteWarningDialog")
+    }
+
+    private fun deleteAll(isConfirmed: Boolean) {
+        if (isConfirmed) {
+            viewModel.deleteAllInactive()
+            showSnackBar(getString(R.string.snack_inactive_task_deleted))
         }
     }
 
@@ -148,5 +173,68 @@ class TasksFragment : Fragment() {
         findNavController().navigate(
             TasksFragmentDirections.actionNavigationTasksToSettingsFragment()
         )
+    }
+
+    private fun swipeTaskListener() {
+        val callback = object :
+            ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.END) {
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder,
+            ): Boolean {
+                return false
+            }
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val position = viewHolder.bindingAdapterPosition
+                val task = tasksAdapter.currentList[position]
+                viewModel.deleteTask(task.taskId)
+                showSnackBar(getString(R.string.task_deleted))
+            }
+
+            override fun onChildDraw(
+                c: Canvas,
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                dX: Float,
+                dY: Float,
+                actionState: Int,
+                isCurrentlyActive: Boolean
+            ) {
+                val itemView = viewHolder.itemView
+
+                val isCanceled = dX == 0f && !isCurrentlyActive
+                if (isCanceled) {
+                    super.onChildDraw(
+                        c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive
+                    )
+                    return
+                }
+
+                val icon = ContextCompat.getDrawable(
+                    requireContext(),
+                    R.drawable.ic_baseline_delete_forever_36
+                )!!
+
+                icon.setStartIconBounds(itemView, requireContext())
+                icon.draw(c)
+
+                super.onChildDraw(
+                    c,
+                    recyclerView,
+                    viewHolder,
+                    dX / RATIO_SHORTENING_SWIPE,
+                    dY,
+                    actionState,
+                    isCurrentlyActive
+                )
+            }
+        }
+        ItemTouchHelper(callback).attachToRecyclerView(binding.rvTasksMain)
+    }
+
+    companion object {
+        private const val RATIO_SHORTENING_SWIPE = 2
     }
 }
