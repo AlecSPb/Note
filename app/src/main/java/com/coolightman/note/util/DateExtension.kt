@@ -9,6 +9,12 @@ fun Date?.toDateString(): String {
     return this?.let { format.format(this) }.orEmpty()
 }
 
+fun Date?.toTimeString(): String {
+    val defPattern = "HH:mm"
+    val format = SimpleDateFormat(defPattern, Locale.getDefault())
+    return this?.let { format.format(this) }.orEmpty()
+}
+
 fun Date?.toFullDateString(): String {
     val defPattern = "HH:mm | dd.MM.yy"
     val format = SimpleDateFormat(defPattern, Locale.getDefault())
