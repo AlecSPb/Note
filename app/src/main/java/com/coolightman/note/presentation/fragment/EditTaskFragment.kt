@@ -83,7 +83,6 @@ class EditTaskFragment : Fragment() {
         binding.apply {
             btSaveBottom.setOnClickListener {
                 saveTask()
-                launchToMainTasks()
             }
 
             toolbar.setNavigationOnClickListener {
@@ -138,6 +137,7 @@ class EditTaskFragment : Fragment() {
             val task: Task = scanTaskDate()
             createNotification(task)
             viewModel.saveTask(task)
+            launchToMainTasks()
         }
     }
 

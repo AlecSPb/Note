@@ -56,5 +56,5 @@
     <string name="delete_inactive_tasks_earning_text">Вы хотите удалить все выполненные задачи?</string>
     <string name="bt_delete_text">Удалить</string>
     <string name="snack_inactive_task_deleted">Все выполненные задачи удалены</string>
-    <string name="snack_wrong_notification_time">Неверное время уведомления</string>
+    <string name="snack_wrong_notification_time">Неверное время напоминания</string>
 </resources>
