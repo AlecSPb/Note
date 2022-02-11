@@ -347,7 +347,6 @@ class NotesFragment : Fragment() {
     }
 
     companion object {
-        private const val ICON_MARGIN_DP = 12
         private const val RATIO_SHORTENING_SWIPE = 2
     }
 }
