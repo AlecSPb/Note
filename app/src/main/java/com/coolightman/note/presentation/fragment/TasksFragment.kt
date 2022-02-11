@@ -115,6 +115,12 @@ class TasksFragment : Fragment() {
         )
     }
 
+    private fun launchToEditTask(taskId: Long) {
+        findNavController().navigate(
+            TasksFragmentDirections.actionNavigationTasksToEditTaskFragment(taskId)
+        )
+    }
+
     private fun setObservers() {
         viewModel.tasks.observe(viewLifecycleOwner){
             tasksAdapter.submitList(it)
@@ -152,7 +158,7 @@ class TasksFragment : Fragment() {
     }
 
     private fun onItemClick(taskId: Long) {
-        Toast.makeText(requireContext(), "$taskId", Toast.LENGTH_SHORT).show()
+        launchToEditTask(taskId)
     }
 
     private fun showSnackBar(message: String) {
