@@ -17,7 +17,6 @@ import com.coolightman.note.NoteApp
 import com.coolightman.note.R
 import com.coolightman.note.databinding.FragmentEditTaskBinding
 import com.coolightman.note.di.ViewModelFactory
-import com.coolightman.note.domain.entity.Note
 import com.coolightman.note.domain.entity.Task
 import com.coolightman.note.domain.entity.TaskColor
 import com.coolightman.note.presentation.MainActivity
@@ -28,6 +27,7 @@ import com.google.android.material.datepicker.DateValidatorPointForward
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
+import java.util.*
 import javax.inject.Inject
 
 class EditTaskFragment : Fragment() {
@@ -52,6 +52,7 @@ class EditTaskFragment : Fragment() {
 
     private val args by navArgs<EditTaskFragmentArgs>()
     private var taskId: Long = 0
+    private var task: Task? = null
     private lateinit var timePicker: MaterialTimePicker
     private lateinit var datePicker: MaterialDatePicker<Long>
 
@@ -73,6 +74,7 @@ class EditTaskFragment : Fragment() {
         taskId = args.taskId
 
         prepareTask()
+        if (taskId != 0L) fetchTask()
         showKeyboard()
         setListeners()
     }
@@ -81,6 +83,7 @@ class EditTaskFragment : Fragment() {
         binding.apply {
             btSaveBottom.setOnClickListener {
                 saveTask()
+                launchToMainTasks()
             }
 
             toolbar.setNavigationOnClickListener {
@@ -121,7 +124,7 @@ class EditTaskFragment : Fragment() {
         }
 
         datePicker.addOnPositiveButtonClickListener {
-            binding.tvTaskDate.text = datePicker.headerText
+            binding.tvTaskDate.text = Date(it).toDateString()
         }
 
         timePicker.addOnPositiveButtonClickListener {
@@ -131,16 +134,43 @@ class EditTaskFragment : Fragment() {
     }
 
     private fun saveTask() {
-        if (isTaskValid()) {
+        if (isTaskValid() && isDateValid()) {
             val task: Task = scanTaskDate()
+            createNotification(task)
             viewModel.saveTask(task)
-            launchToMainTasks()
+        }
+    }
+
+    private fun createNotification(task: Task) {
+        deletePreviousNotification(taskId)
+        if (isNotificationEnable()){
+            createNewNotification(task)
+        }
+    }
+
+    private fun createNewNotification(task: Task) {
+//      create notification
+    }
+
+    private fun deletePreviousNotification(taskId: Long) {
+//        delete notification
+    }
+
+    private fun isDateValid(): Boolean {
+        if (isNotificationEnable()) {
+            val nowMillis = System.currentTimeMillis()
+            val notifyDateMillis = getPickersDateMillis()
+            return compare(nowMillis, notifyDateMillis)
+        }
+        return true
+    }
+
+    private fun compare(nowMillis: Long, notifyDateMillis: Long): Boolean {
+        return if ((nowMillis + DATE_MILLIS_RESERVE) < notifyDateMillis) {
+            true
         } else {
-            binding.apply {
-                makeSnackbarWithAnchor(
-                    root, getString(R.string.snackbar_empty_description_t), btSaveBottom
-                )
-            }
+            showSnackBar(getString(R.string.snack_wrong_notification_time))
+            false
         }
     }
 
@@ -149,9 +179,10 @@ class EditTaskFragment : Fragment() {
             taskId = taskId,
             description = binding.etTaskDescription.text.toString().trim(),
             color = getTaskColor(),
-            dateRemind = 0,
+            dateRemind = getPickersDateMillis(),
             isImportant = binding.switchImportantTask.isChecked,
-            isReminding = false
+            isReminding = isNotificationEnable(),
+            isActive = task?.isActive ?: true
         )
     }
 
@@ -160,16 +191,52 @@ class EditTaskFragment : Fragment() {
     }
 
     private fun isTaskValid(): Boolean {
-        return binding.etTaskDescription.text.toString().trim().isNotEmpty()
+        return if (binding.etTaskDescription.text.toString().trim().isNotEmpty()) {
+            true
+        } else {
+            showSnackBar(getString(R.string.snackbar_empty_description_t))
+            false
+        }
     }
 
-    private fun getChosenDateMillis(): Long {
-        val dateMillis = datePicker.selection
-        dateMillis?.let {
-            val timeMillis = ((timePicker.hour * 60) + (timePicker.minute)) * 60 * 1000
-            return dateMillis + timeMillis - DATE_MILLIS_CORRECTION
+    private fun getPickersDateMillis(): Long {
+        if (isNotificationEnable()) {
+            try {
+                val dateMillis = datePicker.selection!!
+                val timeMillis = ((timePicker.hour * 60) + (timePicker.minute)) * 60 * 1000
+                return dateMillis + timeMillis - DATE_MILLIS_CORRECTION
+            } catch (e: Exception) {
+                task?.let {
+                    return if (it.dateRemind != 0L) {
+                        it.dateRemind
+                    } else 0
+                }
+            }
         }
         return 0
+    }
+
+    private fun isNotificationEnable() = binding.switchAddNotification.isChecked
+
+    private fun fetchTask() {
+        viewModel.fetchTask(taskId)
+        viewModel.task.observe(viewLifecycleOwner) {
+            binding.apply {
+                task = it
+                etTaskDescription.setText(it.description)
+                rgColors.setCheckedByIndex(it.color.ordinal)
+                switchImportantTask.isChecked = it.isImportant
+                switchAddNotification.isChecked = it.isReminding
+                setDate(this, it.dateRemind)
+            }
+        }
+    }
+
+    private fun setDate(binding: FragmentEditTaskBinding, dateRemind: Long) {
+        if (dateRemind != 0L) {
+            binding.tvTaskTime.text = Date(dateRemind).toTimeString()
+            binding.tvTaskDate.text = Date(dateRemind).toDateString()
+        }
     }
 
     private fun prepareTask() {
@@ -233,5 +300,6 @@ class EditTaskFragment : Fragment() {
 
     companion object {
         private const val DATE_MILLIS_CORRECTION = 3 * 60 * 60 * 1000
+        private const val DATE_MILLIS_RESERVE = 30 * 1000
     }
 }
