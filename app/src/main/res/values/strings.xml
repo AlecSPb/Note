@@ -61,4 +61,5 @@
     <string name="menu_delete_inactive">Delete all inactive</string>
     <string name="bt_delete_text">Delete</string>
     <string name="snack_inactive_task_deleted">All inactive tasks deleted</string>
+    <string name="snack_wrong_notification_time">Wrong notification time</string>
 </resources>
