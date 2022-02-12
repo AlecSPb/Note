@@ -20,9 +20,7 @@ class TasksViewModel @Inject constructor(
         Log.e("Coroutine_exception", throwable.stackTraceToString())
     }
 
-    val tasks: LiveData<List<Task>> = liveData {
-        emitSource(repository.getAllTasks())
-    }
+    val tasks: LiveData<List<Task>> = repository.getAllTasks()
 
     fun switchActive(taskId: Long){
         viewModelScope.launch(Dispatchers.IO + handler){

@@ -1,15 +1,12 @@
 package com.coolightman.note.data.repositoryImpl
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.Transformations
 import com.coolightman.note.data.database.dao.TaskDao
-import com.coolightman.note.data.database.dbModel.TaskDb
 import com.coolightman.note.data.mapper.toDb
 import com.coolightman.note.data.mapper.toEntity
 import com.coolightman.note.domain.entity.Task
 import com.coolightman.note.domain.repository.TaskRepository
-import com.coolightman.note.util.chainData
 import javax.inject.Inject
 
 class TaskRepositoryImpl @Inject constructor(
@@ -22,18 +19,7 @@ class TaskRepositoryImpl @Inject constructor(
     }
 
     override fun getAllTasks(): LiveData<List<Task>> {
-        val liveDataTasks1 = database.getAllActiveImportant()
-        val liveDataTasks2 = database.getAllActiveNotImportant()
-        val liveDataTasks3 = database.getAllNotActiveImportant()
-        val liveDataTasks4 = database.getAllNotActiveNotImportant()
-
-        val merger = MediatorLiveData<List<TaskDb>>().chainData(
-            liveDataTasks1,
-            liveDataTasks2,
-            liveDataTasks3,
-            liveDataTasks4
-        )
-        return Transformations.map(merger) { list ->
+        return Transformations.map(database.getAllTasks()) { list ->
             list.map { it.toEntity() }
         }
     }
