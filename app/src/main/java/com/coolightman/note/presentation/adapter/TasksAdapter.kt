@@ -33,7 +33,6 @@ class TasksAdapter(
                 ContextCompat.getColor(root.context, task.color.colorResId)
             )
             setImportance(imgImportance, task.isImportant)
-            setNotification(imgNotification, task.isReminding)
             setActive(this, task.isActive)
             imgCheck.setOnClickListener { checkClickListener(task.taskId) }
             root.setOnClickListener { clickListener(task.taskId) }
@@ -50,11 +49,6 @@ class TasksAdapter(
             image.setImageResource(R.drawable.ic_baseline_task_alt_24)
             view.paintFlags or STRIKE_THRU_TEXT_FLAG
         }
-    }
-
-    private fun setNotification(view: AppCompatImageView, reminding: Boolean) {
-        if (reminding) view.visibility = VISIBLE
-        else view.visibility = GONE
     }
 
     private fun setImportance(view: AppCompatImageView, important: Boolean) {

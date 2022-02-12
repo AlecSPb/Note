@@ -54,17 +54,6 @@
             tools:text="Some task description"
             tools:ignore="RtlSymmetry" />
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/img_notification"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:padding="4dp"
-            android:src="@drawable/ic_baseline_notifications_24"
-            android:visibility="gone"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:visibility="visible" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </com.google.android.material.card.MaterialCardView>

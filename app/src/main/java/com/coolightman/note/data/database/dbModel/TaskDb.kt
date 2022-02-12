@@ -13,9 +13,7 @@ data class TaskDb(
     val description: String,
     val color: TaskColor,
     val dateEdit: Date,
-    val dateRemind: Date,
     val isActive: Boolean = true,
     val isImportant: Boolean,
-    val isDeleted: Boolean = false,
-    val isReminding: Boolean
+    val isDeleted: Boolean = false
 )

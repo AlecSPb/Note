@@ -8,11 +8,9 @@ data class Task(
     val description: String,
     val color: TaskColor,
     val dateEdit: String = "",
-    val dateRemind: Long,
     val isActive: Boolean = true,
     val isImportant: Boolean,
-    val isDeleted: Boolean = false,
-    val isReminding: Boolean
+    val isDeleted: Boolean = false
 ) {
     companion object {
         val DIFF = object : DiffUtil.ItemCallback<Task>() {

@@ -21,13 +21,10 @@ import com.coolightman.note.domain.entity.Task
 import com.coolightman.note.domain.entity.TaskColor
 import com.coolightman.note.presentation.MainActivity
 import com.coolightman.note.presentation.viewmodel.EditTaskViewModel
-import com.coolightman.note.util.*
-import com.google.android.material.datepicker.CalendarConstraints
-import com.google.android.material.datepicker.DateValidatorPointForward
-import com.google.android.material.datepicker.MaterialDatePicker
-import com.google.android.material.timepicker.MaterialTimePicker
-import com.google.android.material.timepicker.TimeFormat
-import java.util.*
+import com.coolightman.note.util.PrefConstants
+import com.coolightman.note.util.getCheckedIndex
+import com.coolightman.note.util.makeSnackbarWithAnchor
+import com.coolightman.note.util.setCheckedByIndex
 import javax.inject.Inject
 
 class EditTaskFragment : Fragment() {
@@ -51,10 +48,8 @@ class EditTaskFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val args by navArgs<EditTaskFragmentArgs>()
-    private var taskId: Long = 0
     private var task: Task? = null
-    private lateinit var timePicker: MaterialTimePicker
-    private lateinit var datePicker: MaterialDatePicker<Long>
+    private var taskId: Long = 0
 
     override fun onAttach(context: Context) {
         component.inject(this)
@@ -89,88 +84,24 @@ class EditTaskFragment : Fragment() {
                 findNavController().popBackStack()
             }
 
-            rgColors.setOnCheckedChangeListener { group, checkedId ->
+            rgColors.setOnCheckedChangeListener { _, _ ->
                 setTaskColor()
             }
 
-            switchImportantTask.setOnCheckedChangeListener { button, checked ->
+            switchImportantTask.setOnCheckedChangeListener { _, checked ->
                 when {
                     checked -> imgImportance.visibility = VISIBLE
                     else -> imgImportance.visibility = GONE
                 }
             }
-
-            switchAddNotification.setOnCheckedChangeListener { button, checked ->
-                when {
-                    checked -> {
-                        imgNotification.visibility = VISIBLE
-                        layoutTaskDate.visibility = VISIBLE
-                    }
-                    else -> {
-                        imgNotification.visibility = GONE
-                        layoutTaskDate.visibility = GONE
-                    }
-                }
-            }
-
-            tvTaskDate.setOnClickListener {
-                datePicker.show(childFragmentManager, datePicker.toString())
-            }
-
-            tvTaskTime.setOnClickListener {
-                timePicker.show(childFragmentManager, timePicker.toString())
-            }
-        }
-
-        datePicker.addOnPositiveButtonClickListener {
-            binding.tvTaskDate.text = Date(it).toDateString()
-        }
-
-        timePicker.addOnPositiveButtonClickListener {
-            val time = String.format("%02d:%02d", timePicker.hour, timePicker.minute)
-            binding.tvTaskTime.text = time
         }
     }
 
     private fun saveTask() {
-        if (isTaskValid() && isDateValid()) {
+        if (isTaskValid()) {
             val task: Task = scanTaskDate()
-            createNotification(task)
             viewModel.saveTask(task)
             launchToMainTasks()
-        }
-    }
-
-    private fun createNotification(task: Task) {
-        deletePreviousNotification(taskId)
-        if (isNotificationEnable()){
-            createNewNotification(task)
-        }
-    }
-
-    private fun createNewNotification(task: Task) {
-//      create notification
-    }
-
-    private fun deletePreviousNotification(taskId: Long) {
-//        delete notification
-    }
-
-    private fun isDateValid(): Boolean {
-        if (isNotificationEnable()) {
-            val nowMillis = System.currentTimeMillis()
-            val notifyDateMillis = getPickersDateMillis()
-            return compare(nowMillis, notifyDateMillis)
-        }
-        return true
-    }
-
-    private fun compare(nowMillis: Long, notifyDateMillis: Long): Boolean {
-        return if ((nowMillis + DATE_MILLIS_RESERVE) < notifyDateMillis) {
-            true
-        } else {
-            showSnackBar(getString(R.string.snack_wrong_notification_time))
-            false
         }
     }
 
@@ -179,9 +110,7 @@ class EditTaskFragment : Fragment() {
             taskId = taskId,
             description = binding.etTaskDescription.text.toString().trim(),
             color = getTaskColor(),
-            dateRemind = getPickersDateMillis(),
             isImportant = binding.switchImportantTask.isChecked,
-            isReminding = isNotificationEnable(),
             isActive = task?.isActive ?: true
         )
     }
@@ -199,25 +128,6 @@ class EditTaskFragment : Fragment() {
         }
     }
 
-    private fun getPickersDateMillis(): Long {
-        if (isNotificationEnable()) {
-            try {
-                val dateMillis = datePicker.selection!!
-                val timeMillis = ((timePicker.hour * 60) + (timePicker.minute)) * 60 * 1000
-                return dateMillis + timeMillis - DATE_MILLIS_CORRECTION
-            } catch (e: Exception) {
-                task?.let {
-                    return if (it.dateRemind != 0L) {
-                        it.dateRemind
-                    } else 0
-                }
-            }
-        }
-        return 0
-    }
-
-    private fun isNotificationEnable() = binding.switchAddNotification.isChecked
-
     private fun fetchTask() {
         viewModel.fetchTask(taskId)
         viewModel.task.observe(viewLifecycleOwner) {
@@ -226,43 +136,12 @@ class EditTaskFragment : Fragment() {
                 etTaskDescription.setText(it.description)
                 rgColors.setCheckedByIndex(it.color.ordinal)
                 switchImportantTask.isChecked = it.isImportant
-                switchAddNotification.isChecked = it.isReminding
-                setDate(this, it.dateRemind)
             }
-        }
-    }
-
-    private fun setDate(binding: FragmentEditTaskBinding, dateRemind: Long) {
-        if (dateRemind != 0L) {
-            binding.tvTaskTime.text = Date(dateRemind).toTimeString()
-            binding.tvTaskDate.text = Date(dateRemind).toDateString()
         }
     }
 
     private fun prepareTask() {
         setDefaultTaskColor()
-        createDatePicker()
-        createTimePicker()
-    }
-
-    private fun createTimePicker() {
-        timePicker = MaterialTimePicker.Builder()
-            .setTimeFormat(TimeFormat.CLOCK_24H)
-            .setTitleText(getString(R.string.time_picker_text))
-            .build()
-    }
-
-    private fun createDatePicker() {
-        val constraintsBuilder =
-            CalendarConstraints.Builder()
-                .setValidator(DateValidatorPointForward.now())
-
-        datePicker =
-            MaterialDatePicker.Builder.datePicker()
-                .setTitleText(getString(R.string.date_picker_text))
-                .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
-                .setCalendarConstraints(constraintsBuilder.build())
-                .build()
     }
 
     private fun setDefaultTaskColor() {
@@ -296,10 +175,5 @@ class EditTaskFragment : Fragment() {
         binding.apply {
             makeSnackbarWithAnchor(root, message, btSaveBottom)
         }
-    }
-
-    companion object {
-        private const val DATE_MILLIS_CORRECTION = 3 * 60 * 60 * 1000
-        private const val DATE_MILLIS_RESERVE = 30 * 1000
     }
 }

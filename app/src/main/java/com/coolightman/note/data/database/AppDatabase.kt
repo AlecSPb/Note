@@ -11,7 +11,7 @@ import com.coolightman.note.data.database.dbModel.NoteDb
 import com.coolightman.note.data.database.dbModel.TaskDb
 
 @Database(
-    version = 5,
+    version = 6,
     entities = [
         NoteDb::class,
         TaskDb::class

@@ -10,11 +10,9 @@ fun TaskDb.toEntity(): Task = Task(
     description = this.description,
     color = this.color,
     dateEdit = this.dateEdit.toFullDateString(),
-    dateRemind = this.dateRemind.time,
     isActive = this.isActive,
     isImportant = this.isImportant,
-    isDeleted = this.isDeleted,
-    isReminding = this.isReminding
+    isDeleted = this.isDeleted
 )
 
 fun Task.toDb(): TaskDb = TaskDb(
@@ -22,9 +20,7 @@ fun Task.toDb(): TaskDb = TaskDb(
     description = this.description,
     color = this.color,
     dateEdit = Date(System.currentTimeMillis()),
-    dateRemind = Date(this.dateRemind),
     isActive = this.isActive,
     isImportant = this.isImportant,
-    isDeleted = this.isDeleted,
-    isReminding = this.isReminding
+    isDeleted = this.isDeleted
 )
