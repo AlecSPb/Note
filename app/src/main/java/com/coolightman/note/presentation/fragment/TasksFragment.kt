@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -17,10 +16,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.coolightman.note.NoteApp
 import com.coolightman.note.R
 import com.coolightman.note.databinding.FragmentTasksBinding
-import com.coolightman.note.presentation.viewmodel.TasksViewModel
 import com.coolightman.note.di.ViewModelFactory
 import com.coolightman.note.domain.entity.Task
 import com.coolightman.note.presentation.adapter.TasksAdapter
+import com.coolightman.note.presentation.viewmodel.TasksViewModel
 import com.coolightman.note.util.makeSnackbarWithAnchor
 import com.coolightman.note.util.setStartIconBounds
 import javax.inject.Inject
@@ -83,29 +82,9 @@ class TasksFragment : Fragment() {
                         launchToSettings()
                         true
                     }
-                    R.id.menu_delete_inactive ->{
-                        showDeleteInactiveWarning()
-                        true
-                    }
                     else -> false
                 }
             }
-        }
-    }
-
-    private fun showDeleteInactiveWarning() {
-        val dialog =
-            WarningDialogFragment(
-                getString(R.string.delete_inactive_tasks_earning_text),
-                getString(R.string.bt_delete_text)
-            ) { answer -> deleteAll(answer) }
-        dialog.show(childFragmentManager, "AllNotesDeleteWarningDialog")
-    }
-
-    private fun deleteAll(isConfirmed: Boolean) {
-        if (isConfirmed) {
-            viewModel.deleteAllInactive()
-            showSnackBar(getString(R.string.snack_inactive_task_deleted))
         }
     }
 
@@ -122,7 +101,7 @@ class TasksFragment : Fragment() {
     }
 
     private fun setObservers() {
-        viewModel.tasks.observe(viewLifecycleOwner){
+        viewModel.tasks.observe(viewLifecycleOwner) {
             tasksAdapter.submitList(it)
 
             editUi(it)
@@ -140,7 +119,7 @@ class TasksFragment : Fragment() {
     private fun createRecycler() {
         val recycler = binding.rvTasksMain
 
-        tasksAdapter = TasksAdapter (
+        tasksAdapter = TasksAdapter(
             { taskId -> onItemClick(taskId) },
             { taskId -> onCheckClick(taskId) }
         )
@@ -149,7 +128,8 @@ class TasksFragment : Fragment() {
 
         recycler.apply {
             adapter = tasksAdapter
-            layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+            layoutManager =
+                LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         }
     }
 
