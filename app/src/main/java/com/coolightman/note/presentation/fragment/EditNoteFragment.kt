@@ -93,7 +93,7 @@ class EditNoteFragment : Fragment() {
     }
 
     private fun setDefaultNoteColor() {
-        val colorIndex = preferences.getInt(PREF_NOTE_DEFAULT_COLOR, 6)
+        val colorIndex = preferences.getInt(PREF_NOTE_DEFAULT_COLOR, 5)
         val noteColor = NoteColor.values()[colorIndex]
         binding.rgColors.setCheckedByIndex(noteColor.ordinal)
         setTitleColor()

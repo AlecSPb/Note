@@ -29,6 +29,7 @@ import com.coolightman.note.presentation.viewmodel.NotesViewModel
 import com.coolightman.note.util.PrefConstants.PREF_IS_SHOW_NOTE_DATE
 import com.coolightman.note.util.PrefConstants.PREF_LAYOUT_TYPE
 import com.coolightman.note.util.PrefConstants.PREF_SORT_NOTES
+import com.coolightman.note.util.makeSnackbar
 import com.coolightman.note.util.makeSnackbarWithAnchor
 import com.coolightman.note.util.setStartIconBounds
 import javax.inject.Inject
@@ -304,9 +305,7 @@ class NotesFragment : Fragment() {
     }
 
     private fun showSnackBar(message: String) {
-        binding.apply {
-            makeSnackbarWithAnchor(root, message, btAddNotes)
-        }
+        makeSnackbar(binding.root, message)
     }
 
     private fun changeLayout() {

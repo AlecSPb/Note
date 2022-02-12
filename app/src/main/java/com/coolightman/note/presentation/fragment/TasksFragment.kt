@@ -20,6 +20,7 @@ import com.coolightman.note.di.ViewModelFactory
 import com.coolightman.note.domain.entity.Task
 import com.coolightman.note.presentation.adapter.TasksAdapter
 import com.coolightman.note.presentation.viewmodel.TasksViewModel
+import com.coolightman.note.util.makeSnackbar
 import com.coolightman.note.util.makeSnackbarWithAnchor
 import com.coolightman.note.util.setStartIconBounds
 import javax.inject.Inject
@@ -142,9 +143,7 @@ class TasksFragment : Fragment() {
     }
 
     private fun showSnackBar(message: String) {
-        binding.apply {
-            makeSnackbarWithAnchor(root, message, btAddTasks)
-        }
+        makeSnackbar(binding.root, message)
     }
 
     private fun hideSplash() {

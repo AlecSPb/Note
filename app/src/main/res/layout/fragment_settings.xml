@@ -92,69 +92,55 @@
                     android:id="@+id/rg_default_note_color"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:gravity="center"
                     android:orientation="horizontal"
                     android:padding="8dp">
 
                     <com.google.android.material.radiobutton.MaterialRadioButton
                         android:id="@+id/rb_color0"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="2dp"
-                        android:layout_weight="1"
                         android:background="@drawable/rounded_red_color_radio"
                         android:button="@null" />
 
                     <com.google.android.material.radiobutton.MaterialRadioButton
                         android:id="@+id/rb_color1"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="2dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/rounded_orange_color_radio"
-                        android:button="@null" />
-
-                    <com.google.android.material.radiobutton.MaterialRadioButton
-                        android:id="@+id/rb_color2"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="2dp"
-                        android:layout_weight="1"
                         android:background="@drawable/rounded_yellow_color_radio"
                         android:button="@null" />
 
                     <com.google.android.material.radiobutton.MaterialRadioButton
-                        android:id="@+id/rb_color3"
-                        android:layout_width="match_parent"
+                        android:id="@+id/rb_color2"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="2dp"
-                        android:layout_weight="1"
                         android:background="@drawable/rounded_green_color_radio"
                         android:button="@null" />
 
                     <com.google.android.material.radiobutton.MaterialRadioButton
-                        android:id="@+id/rb_color4"
-                        android:layout_width="match_parent"
+                        android:id="@+id/rb_color3"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="2dp"
-                        android:layout_weight="1"
                         android:background="@drawable/rounded_blue_color_radio"
                         android:button="@null" />
 
                     <com.google.android.material.radiobutton.MaterialRadioButton
-                        android:id="@+id/rb_color5"
-                        android:layout_width="match_parent"
+                        android:id="@+id/rb_color4"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="2dp"
-                        android:layout_weight="1"
                         android:background="@drawable/rounded_dark_blue_color_radio"
                         android:button="@null" />
 
                     <com.google.android.material.radiobutton.MaterialRadioButton
-                        android:id="@+id/rb_color6"
-                        android:layout_width="match_parent"
+                        android:id="@+id/rb_color5"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="2dp"
-                        android:layout_weight="1"
                         android:background="@drawable/rounded_gray_color_radio"
                         android:button="@null" />
 

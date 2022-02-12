@@ -4,7 +4,6 @@ import com.coolightman.note.R
 
 enum class NoteColor(val colorResId: Int) {
     RED(R.color.note_red),
-    ORANGE(R.color.note_orange),
     YELLOW(R.color.note_yellow),
     GREEN(R.color.note_green),
     BLUE(R.color.note_blue),

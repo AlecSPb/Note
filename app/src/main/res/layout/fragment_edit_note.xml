@@ -17,7 +17,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
-        app:title="@string/title_note"/>
+        app:title="@string/title_note" />
 
     <ScrollView
         android:id="@+id/scroll_edit_note"
@@ -113,69 +113,54 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:checkedButton="@id/rb_color6"
+                android:gravity="center"
                 android:orientation="horizontal">
 
                 <com.google.android.material.radiobutton.MaterialRadioButton
                     android:id="@+id/rb_color0"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="2dp"
-                    android:layout_weight="1"
                     android:background="@drawable/rounded_red_color_radio"
                     android:button="@null" />
 
                 <com.google.android.material.radiobutton.MaterialRadioButton
                     android:id="@+id/rb_color1"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="2dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/rounded_orange_color_radio"
-                    android:button="@null" />
-
-                <com.google.android.material.radiobutton.MaterialRadioButton
-                    android:id="@+id/rb_color2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="2dp"
-                    android:layout_weight="1"
                     android:background="@drawable/rounded_yellow_color_radio"
                     android:button="@null" />
 
                 <com.google.android.material.radiobutton.MaterialRadioButton
-                    android:id="@+id/rb_color3"
-                    android:layout_width="match_parent"
+                    android:id="@+id/rb_color2"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="2dp"
-                    android:layout_weight="1"
                     android:background="@drawable/rounded_green_color_radio"
                     android:button="@null" />
 
                 <com.google.android.material.radiobutton.MaterialRadioButton
-                    android:id="@+id/rb_color4"
-                    android:layout_width="match_parent"
+                    android:id="@+id/rb_color3"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="2dp"
-                    android:layout_weight="1"
                     android:background="@drawable/rounded_blue_color_radio"
                     android:button="@null" />
 
                 <com.google.android.material.radiobutton.MaterialRadioButton
-                    android:id="@+id/rb_color5"
-                    android:layout_width="match_parent"
+                    android:id="@+id/rb_color4"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="2dp"
-                    android:layout_weight="1"
                     android:background="@drawable/rounded_dark_blue_color_radio"
                     android:button="@null" />
 
                 <com.google.android.material.radiobutton.MaterialRadioButton
-                    android:id="@+id/rb_color6"
-                    android:layout_width="match_parent"
+                    android:id="@+id/rb_color5"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="2dp"
-                    android:layout_weight="1"
                     android:background="@drawable/rounded_gray_color_radio"
                     android:button="@null" />
 

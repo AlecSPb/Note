@@ -107,7 +107,7 @@ class SettingsFragment : Fragment() {
     }
 
     private fun setNoteDefaultColor() {
-        val colorIndex = preferences.getInt(PREF_NOTE_DEFAULT_COLOR, 6)
+        val colorIndex = preferences.getInt(PREF_NOTE_DEFAULT_COLOR, 5)
         val color = NoteColor.values()[colorIndex]
         binding.rgDefaultNoteColor.setCheckedByIndex(color.ordinal)
         setTitleColor()
