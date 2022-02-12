@@ -20,8 +20,7 @@ import com.coolightman.note.di.ViewModelFactory
 import com.coolightman.note.domain.entity.Task
 import com.coolightman.note.presentation.adapter.TasksAdapter
 import com.coolightman.note.presentation.viewmodel.TasksViewModel
-import com.coolightman.note.util.makeSnackbar
-import com.coolightman.note.util.makeSnackbarWithAnchor
+import com.coolightman.note.util.makeLongSnackbar
 import com.coolightman.note.util.setStartIconBounds
 import javax.inject.Inject
 
@@ -142,8 +141,11 @@ class TasksFragment : Fragment() {
         launchToEditTask(taskId)
     }
 
-    private fun showSnackBar(message: String) {
-        makeSnackbar(binding.root, message)
+    private fun showDeleteSnackBar(taskId: Long) {
+        val message = getString(R.string.task_deleted)
+        makeLongSnackbar(binding.root, message)
+            .setAction(getString(R.string.cancel_text)) { viewModel.cancelDeleteTask(taskId) }
+            .show()
     }
 
     private fun hideSplash() {
@@ -175,7 +177,7 @@ class TasksFragment : Fragment() {
                 val position = viewHolder.bindingAdapterPosition
                 val task = tasksAdapter.currentList[position]
                 viewModel.deleteTask(task.taskId)
-                showSnackBar(getString(R.string.task_deleted))
+                showDeleteSnackBar(task.taskId)
             }
 
             override fun onChildDraw(

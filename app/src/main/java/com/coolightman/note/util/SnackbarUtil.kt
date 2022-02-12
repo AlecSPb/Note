@@ -9,19 +9,23 @@ import com.google.android.material.snackbar.Snackbar
 private const val COLOR_BACKGROUND = R.color.snackbar_background
 private const val COLOR_TEXT = R.color.snackbar_text
 
-fun makeSnackbarWithAnchor(view: View, message: String, anchorView: View) {
-    Snackbar.make(view, message, 2000)
+fun makeSnackbarWithAnchor(view: View, message: String, anchorView: View): Snackbar {
+    return Snackbar.make(view, message, 2000)
         .setAnchorView(anchorView)
         .setBackgroundTint(ContextCompat.getColor(view.context, COLOR_BACKGROUND))
         .withTextColor(ContextCompat.getColor(view.context, COLOR_TEXT))
-        .show()
 }
 
-fun makeSnackbar(view: View, message: String) {
-    Snackbar.make(view, message, 2000)
+fun makeSnackbar(view: View, message: String): Snackbar {
+    return Snackbar.make(view, message, 2000)
         .setBackgroundTint(ContextCompat.getColor(view.context, COLOR_BACKGROUND))
         .withTextColor(ContextCompat.getColor(view.context, COLOR_TEXT))
-        .show()
+}
+
+fun makeLongSnackbar(view: View, message: String): Snackbar {
+    return Snackbar.make(view, message, 3000)
+        .setBackgroundTint(ContextCompat.getColor(view.context, COLOR_BACKGROUND))
+        .withTextColor(ContextCompat.getColor(view.context, COLOR_TEXT))
 }
 
 fun Snackbar.withTextColor(color: Int): Snackbar {

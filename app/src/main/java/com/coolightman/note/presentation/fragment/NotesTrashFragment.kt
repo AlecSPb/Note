@@ -171,7 +171,7 @@ class NotesTrashFragment : Fragment() {
     }
 
     private fun showSnackBar(message: String) {
-        makeSnackbar(binding.root, message)
+        makeSnackbar(binding.root, message).show()
     }
 
     private fun swipeNoteRightListener() {

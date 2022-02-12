@@ -3,13 +3,10 @@ package com.coolightman.note.presentation.viewmodel
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
 import com.coolightman.note.domain.entity.Task
 import com.coolightman.note.domain.repository.TaskRepository
-import kotlinx.coroutines.CoroutineExceptionHandler
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import javax.inject.Inject
 
 class TasksViewModel @Inject constructor(
@@ -21,22 +18,26 @@ class TasksViewModel @Inject constructor(
     }
 
     val tasks: LiveData<List<Task>> = repository.getAllTasks()
+    private var deleteTaskJob: Job? = null
 
-    fun switchActive(taskId: Long){
-        viewModelScope.launch(Dispatchers.IO + handler){
+    fun switchActive(taskId: Long) {
+        viewModelScope.launch(Dispatchers.IO + handler) {
             repository.switchActive(taskId)
         }
     }
 
     fun deleteTask(taskId: Long) {
-        viewModelScope.launch(Dispatchers.IO + handler){
+        deleteTaskJob = viewModelScope.launch(Dispatchers.IO + handler) {
+            repository.setTaskIsDeleted(taskId, true)
+            delay(5000)
             repository.deleteTask(taskId)
         }
     }
 
-    fun deleteAllInactive() {
-        viewModelScope.launch(Dispatchers.IO + handler){
-            repository.deleteAllInactive()
+    fun cancelDeleteTask(taskId: Long) {
+        viewModelScope.launch(Dispatchers.IO + handler) {
+            deleteTaskJob?.cancel()
+            repository.setTaskIsDeleted(taskId, false)
         }
     }
 }

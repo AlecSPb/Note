@@ -173,7 +173,7 @@ class EditTaskFragment : Fragment() {
 
     private fun showSnackBar(message: String) {
         binding.apply {
-            makeSnackbarWithAnchor(root, message, btSaveBottom)
+            makeSnackbarWithAnchor(root, message, btSaveBottom).show()
         }
     }
 }

@@ -145,7 +145,7 @@ class EditNoteFragment : Fragment() {
             binding.apply {
                 makeSnackbarWithAnchor(
                     root, getString(R.string.snackbar_empty_description), btSaveBottom
-                )
+                ).show()
             }
         }
     }

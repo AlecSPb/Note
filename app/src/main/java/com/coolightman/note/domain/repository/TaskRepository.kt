@@ -11,4 +11,5 @@ interface TaskRepository {
     suspend fun switchActive(taskId: Long)
     suspend fun getTask(taskId: Long): Task
     suspend fun deleteAllInactive()
+    suspend fun setTaskIsDeleted(taskId: Long, isDeleted: Boolean)
 }
