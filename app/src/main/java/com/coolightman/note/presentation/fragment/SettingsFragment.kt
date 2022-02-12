@@ -10,10 +10,12 @@ import androidx.navigation.fragment.findNavController
 import com.coolightman.note.databinding.FragmentSettingsBinding
 import com.coolightman.note.domain.entity.NoteColor
 import com.coolightman.note.domain.entity.StartDestination
+import com.coolightman.note.domain.entity.TaskColor
 import com.coolightman.note.presentation.MainActivity
 import com.coolightman.note.presentation.MainActivity.Companion.PREF_START_DESTINATION
 import com.coolightman.note.util.PrefConstants.PREF_IS_SHOW_NOTE_DATE
 import com.coolightman.note.util.PrefConstants.PREF_NOTE_DEFAULT_COLOR
+import com.coolightman.note.util.PrefConstants.PREF_TASK_DEFAULT_COLOR
 import com.coolightman.note.util.getCheckedIndex
 import com.coolightman.note.util.setCheckedByIndex
 
@@ -48,8 +50,13 @@ class SettingsFragment : Fragment() {
             }
 
             rgDefaultNoteColor.setOnCheckedChangeListener { radioGroup, i ->
-                setTitleColor()
+                setNoteTitleColor()
                 saveNoteDefaultColor()
+            }
+
+            rgDefaultTaskColor.setOnCheckedChangeListener { radioGroup, i ->
+                setTaskTitleColor()
+                saveTaskDefaultColor()
             }
 
             rgSettingsStart.setOnCheckedChangeListener { radioGroup, i ->
@@ -62,16 +69,28 @@ class SettingsFragment : Fragment() {
         }
     }
 
-    private fun setTitleColor() {
-        val color = getTitleColor()
+    private fun setNoteTitleColor() {
+        val noteColor = getNoteTitleColor()
         binding.tvDefaultNoteColor.setBackgroundColor(
-            ContextCompat.getColor(requireContext(), color.colorResId)
+            ContextCompat.getColor(requireContext(), noteColor.colorResId)
         )
     }
 
-    private fun getTitleColor(): NoteColor {
+    private fun setTaskTitleColor() {
+        val taskColor = getTaskTitleColor()
+        binding.tvDefaultTaskColor.setBackgroundColor(
+            ContextCompat.getColor(requireContext(), taskColor.colorResId)
+        )
+    }
+
+    private fun getNoteTitleColor(): NoteColor {
         val colorIndex = binding.rgDefaultNoteColor.getCheckedIndex()
         return NoteColor.values()[colorIndex]
+    }
+
+    private fun getTaskTitleColor(): TaskColor {
+        val colorIndex = binding.rgDefaultTaskColor.getCheckedIndex()
+        return TaskColor.values()[colorIndex]
     }
 
     private fun launchPreviousFragment() {
@@ -95,10 +114,24 @@ class SettingsFragment : Fragment() {
         preferences.edit().putInt(PREF_START_DESTINATION, destination.ordinal).apply()
     }
 
+    private fun saveTaskDefaultColor() {
+        val checkedIndex = binding.rgDefaultTaskColor.getCheckedIndex()
+        val color = TaskColor.values()[checkedIndex]
+        preferences.edit().putInt(PREF_TASK_DEFAULT_COLOR, color.ordinal).apply()
+    }
+
     private fun prepareView() {
         setStartDestination()
         setNoteDefaultColor()
         setShowNoteDate()
+        setTaskDefaultColor()
+    }
+
+    private fun setTaskDefaultColor() {
+        val colorIndex = preferences.getInt(PREF_TASK_DEFAULT_COLOR, 4)
+        val color = TaskColor.values()[colorIndex]
+        binding.rgDefaultTaskColor.setCheckedByIndex(color.ordinal)
+        setTaskTitleColor()
     }
 
     private fun setShowNoteDate() {
@@ -110,7 +143,7 @@ class SettingsFragment : Fragment() {
         val colorIndex = preferences.getInt(PREF_NOTE_DEFAULT_COLOR, 5)
         val color = NoteColor.values()[colorIndex]
         binding.rgDefaultNoteColor.setCheckedByIndex(color.ordinal)
-        setTitleColor()
+        setNoteTitleColor()
     }
 
     private fun setStartDestination() {
