@@ -20,39 +20,9 @@ class NoteRepositoryImpl @Inject constructor(
     }
 
     override fun getAllNotes(sortBy: SortNoteBy): LiveData<List<Note>> {
-        when (sortBy) {
-            SortNoteBy.COLOR -> {
-                return Transformations.map(database.getAllOrderByColor()) { list ->
-                    list.map { it.toEntity() }
-                }
-            }
-            SortNoteBy.COLOR_DESC -> {
-                return Transformations.map(database.getAllOrderByColorDesc()) { list ->
-                    list.map { it.toEntity() }
-                }
-            }
-            SortNoteBy.DATE -> {
-                return Transformations.map(database.getAllOrderByDate()) { list ->
-                    list.map { it.toEntity() }
-                }
-            }
-            SortNoteBy.DATE_DESC -> {
-                return Transformations.map(database.getAllOrderByDateDesc()) { list ->
-                    list.map { it.toEntity() }
-                }
-            }
-            SortNoteBy.DATE_EDIT -> {
-                return Transformations.map(database.getAllOrderByEditDate()) { list ->
-                    list.map { it.toEntity() }
-                }
-            }
-            SortNoteBy.DATE_EDIT_DESC -> {
-                return Transformations.map(database.getAllOrderByEditDateDesc()) { list ->
-                    list.map { it.toEntity() }
-                }
-            }
+        return Transformations.map(database.getAllOrderBy(sortBy.ordinal)) { list ->
+            list.map { it.toEntity() }
         }
-
     }
 
     override fun getTrashNotes(): LiveData<List<Note>> {

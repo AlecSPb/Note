@@ -22,23 +22,16 @@ interface NoteDao {
     @Query("SELECT * FROM notedb WHERE isDeleted = 0")
     suspend fun getAll(): List<NoteDb>
 
-    @Query("SELECT * FROM notedb WHERE isDeleted = 0 ORDER BY color")
-    fun getAllOrderByColor(): LiveData<List<NoteDb>>
-
-    @Query("SELECT * FROM notedb WHERE isDeleted = 0 ORDER BY color DESC")
-    fun getAllOrderByColorDesc(): LiveData<List<NoteDb>>
-
-    @Query("SELECT * FROM notedb WHERE isDeleted = 0 ORDER BY dateEdit")
-    fun getAllOrderByEditDate(): LiveData<List<NoteDb>>
-
-    @Query("SELECT * FROM notedb WHERE isDeleted = 0 ORDER BY dateEdit desc")
-    fun getAllOrderByEditDateDesc(): LiveData<List<NoteDb>>
-
-    @Query("SELECT * FROM notedb WHERE isDeleted = 0 ORDER BY noteId")
-    fun getAllOrderByDate(): LiveData<List<NoteDb>>
-
-    @Query("SELECT * FROM notedb WHERE isDeleted = 0 ORDER BY noteId desc")
-    fun getAllOrderByDateDesc(): LiveData<List<NoteDb>>
+    @Query(
+        "SELECT * FROM notedb WHERE isDeleted = 0 ORDER BY " +
+                "CASE WHEN :sortType = 0 THEN color END ASC, " +
+                "CASE WHEN :sortType = 1 THEN color END DESC, " +
+                "CASE WHEN :sortType = 2 THEN dateEdit END ASC, " +
+                "CASE WHEN :sortType = 3 THEN dateEdit END DESC, " +
+                "CASE WHEN :sortType = 4 THEN noteId END ASC, " +
+                "CASE WHEN :sortType = 5 THEN noteId END DESC"
+    )
+    fun getAllOrderBy(sortType: Int): LiveData<List<NoteDb>>
 
     @Query("SELECT * FROM notedb WHERE isDeleted = 1 ORDER BY dateEdit desc")
     fun getTrash(): LiveData<List<NoteDb>>
