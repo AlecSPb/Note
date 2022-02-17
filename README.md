@@ -39,7 +39,7 @@ Additionally, for task, we can choose importance.
 ### Setting screen
 Here we can choose task or note default creation color. And choose main screen by default
 
-<img src="https://user-images.githubusercontent.com/43218153/153716639-ce7d7979-ae4d-4205-a98d-64bd66cc9c4d.jpg" alt="drawing" width="270"/>
+<img src="https://user-images.githubusercontent.com/43218153/154512943-9010107f-fd88-4cb6-8c4c-34024e8b8d36.jpg" alt="drawing" width="270"/>
 
 ### Notes Trash screen
 This is where deleted notes are stored. A warning is shown when clearing or restoring all
