@@ -43,10 +43,10 @@
     <string name="delete_inactive_tasks_earning_text">Do you want to delete all inactive tasks?</string>
     <string name="restore_all_note_earning_text">Do you want to restore all notes?</string>
     <string name="menu_settings_title">Settings</string>
-    <string name="tv_start_page_setting_title">Choose start page:</string>
+    <string name="tv_start_page_setting_title">Start page:</string>
     <string name="bt_agree_restore_all_text">Restore</string>
     <string name="bt_agree_delete_all_text">Empty</string>
-    <string name="tv_default_note_color_text">Choose note color by default:</string>
+    <string name="tv_default_note_color_text">Note color by default:</string>
     <string name="settings_saved_text">Settings saved</string>
     <string name="tv_note_date_setting_title">Show notes date</string>
     <string name="title_task">Task</string>
@@ -62,5 +62,5 @@
     <string name="bt_delete_text">Delete</string>
     <string name="snack_inactive_task_deleted">All inactive tasks deleted</string>
     <string name="snack_wrong_notification_time">Wrong notification time</string>
-    <string name="tv_default_task_color_text">Choose task color by default:</string>
+    <string name="tv_default_task_color_text">Task color by default:</string>
 </resources>

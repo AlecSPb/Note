@@ -36,10 +36,10 @@
     <string name="delete_all_note_earning_text">Вы хотите очистить корзину?</string>
     <string name="restore_all_note_earning_text">Вы хотите восстановить все заметки?</string>
     <string name="menu_settings_title">Настройки</string>
-    <string name="tv_start_page_setting_title">Выберите стартовую страницу:</string>
+    <string name="tv_start_page_setting_title">Стартовая страница:</string>
     <string name="bt_agree_restore_all_text">Восстановить</string>
     <string name="bt_agree_delete_all_text">Очистить</string>
-    <string name="tv_default_note_color_text">Выберите цвет заметки по-умолчанию:</string>
+    <string name="tv_default_note_color_text">Цвет заметки по-умолчанию:</string>
     <string name="settings_saved_text">Настройки сохранены</string>
     <string name="tv_note_date_setting_title">Показывать дату заметок</string>
     <string name="title_task">Задача</string>
@@ -57,5 +57,5 @@
     <string name="bt_delete_text">Удалить</string>
     <string name="snack_inactive_task_deleted">Все выполненные задачи удалены</string>
     <string name="snack_wrong_notification_time">Неверное время напоминания</string>
-    <string name="tv_default_task_color_text">Выберите цвет задачи по-умолчанию:</string>
+    <string name="tv_default_task_color_text">Цвет задачи по-умолчанию:</string>
 </resources>
