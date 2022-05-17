@@ -22,6 +22,7 @@
             android:background="@color/dark_gray"
             android:minHeight="?attr/actionBarSize"
             android:theme="?attr/actionBarTheme"
+            app:menu="@menu/settings_toolbar_menu"
             app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
             app:title="@string/menu_settings_title" />
 
