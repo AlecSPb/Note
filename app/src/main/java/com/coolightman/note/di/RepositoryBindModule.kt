@@ -6,16 +6,15 @@ import com.coolightman.note.domain.repository.NoteRepository
 import com.coolightman.note.domain.repository.TaskRepository
 import dagger.Binds
 import dagger.Module
-import javax.inject.Singleton
 
 @Module
 interface RepositoryBindModule {
 
-    @Singleton
+    @ApplicationScope
     @Binds
     fun bindNoteRepository(impl: NoteRepositoryImpl): NoteRepository
 
-    @Singleton
+    @ApplicationScope
     @Binds
     fun bindTaskRepository(impl: TaskRepositoryImpl): TaskRepository
 }

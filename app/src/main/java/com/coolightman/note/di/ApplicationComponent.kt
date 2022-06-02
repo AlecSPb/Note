@@ -4,7 +4,6 @@ import android.content.Context
 import com.coolightman.note.presentation.fragment.*
 import dagger.BindsInstance
 import dagger.Component
-import javax.inject.Singleton
 
 
 @Component(
@@ -14,7 +13,7 @@ import javax.inject.Singleton
         DatabaseModule::class
     ]
 )
-@Singleton
+@ApplicationScope
 interface ApplicationComponent {
 
     fun inject(notesFragment: NotesFragment)

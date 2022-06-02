@@ -4,20 +4,16 @@ import android.content.Context
 import com.coolightman.note.data.database.AppDatabase
 import dagger.Module
 import dagger.Provides
-import javax.inject.Singleton
 
 @Module
 class DatabaseModule {
 
-    @Singleton
     @Provides
     fun provideMovieDatabase(context: Context) = AppDatabase.getMovieDatabase(context)
 
-    @Singleton
     @Provides
     fun provideNoteDao(db: AppDatabase) = db.noteDao()
 
-    @Singleton
     @Provides
     fun provideTaskDao(db: AppDatabase) = db.taskDao()
 
