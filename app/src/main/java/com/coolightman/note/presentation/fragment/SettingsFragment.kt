@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.coolightman.note.R
 import com.coolightman.note.databinding.FragmentSettingsBinding
 import com.coolightman.note.domain.entity.NoteColor
 import com.coolightman.note.domain.entity.StartDestination
@@ -17,6 +18,7 @@ import com.coolightman.note.util.PrefConstants.PREF_IS_SHOW_NOTE_DATE
 import com.coolightman.note.util.PrefConstants.PREF_NOTE_DEFAULT_COLOR
 import com.coolightman.note.util.PrefConstants.PREF_TASK_DEFAULT_COLOR
 import com.coolightman.note.util.getCheckedIndex
+import com.coolightman.note.util.makeSnackbar
 import com.coolightman.note.util.setCheckedByIndex
 
 class SettingsFragment : Fragment() {
@@ -46,7 +48,21 @@ class SettingsFragment : Fragment() {
     private fun setListeners() {
         binding.apply {
             toolbar.setNavigationOnClickListener {
-                launchPreviousFragment()
+                findNavController().popBackStack()
+            }
+
+            toolbar.setOnMenuItemClickListener {
+                when (it.itemId) {
+                    R.id.menu_import -> {
+                        importAppData()
+                        true
+                    }
+                    R.id.menu_export -> {
+                        exportAppData()
+                        true
+                    }
+                    else -> false
+                }
             }
 
             rgDefaultNoteColor.setOnCheckedChangeListener { radioGroup, i ->
@@ -67,6 +83,14 @@ class SettingsFragment : Fragment() {
                 saveIsShowNoteDate()
             }
         }
+    }
+
+    private fun exportAppData() {
+        makeSnackbar(binding.root, "Try to export app data")
+    }
+
+    private fun importAppData() {
+        makeSnackbar(binding.root, "Try to import app data")
     }
 
     private fun setNoteTitleColor() {
@@ -91,10 +115,6 @@ class SettingsFragment : Fragment() {
     private fun getTaskTitleColor(): TaskColor {
         val colorIndex = binding.rgDefaultTaskColor.getCheckedIndex()
         return TaskColor.values()[colorIndex]
-    }
-
-    private fun launchPreviousFragment() {
-        findNavController().popBackStack()
     }
 
     private fun saveIsShowNoteDate() {
