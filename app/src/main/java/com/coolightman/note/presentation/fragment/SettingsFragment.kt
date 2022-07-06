@@ -109,10 +109,12 @@ class SettingsFragment : Fragment() {
 
     private fun exportAppData() {
         Toast.makeText(requireActivity(), "Try to export app data", Toast.LENGTH_SHORT).show()
+        viewModel.exportData()
     }
 
     private fun importAppData() {
         Toast.makeText(requireActivity(), "Try to import app data", Toast.LENGTH_SHORT).show()
+        viewModel.importData()
     }
 
     private fun setNoteTitleColor() {

@@ -2,6 +2,7 @@ package com.coolightman.note.data.repositoryImpl
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
+import com.coolightman.note.data.converter.toJson
 import com.coolightman.note.data.database.dao.TaskDao
 import com.coolightman.note.data.mapper.toDb
 import com.coolightman.note.data.mapper.toEntity
@@ -49,7 +50,8 @@ class TaskRepositoryImpl @Inject constructor(
     }
 
     override suspend fun exportTasks() {
-        TODO("Not yet implemented")
+        val tasksDb = database.getAll()
+        val taskJson = tasksDb.toJson()
     }
 
     override suspend fun importTasks() {

@@ -2,7 +2,6 @@ package com.coolightman.note.data.mapper
 
 import com.coolightman.note.data.database.dbModel.NoteDb
 import com.coolightman.note.domain.entity.Note
-import com.coolightman.note.util.toDateString
 import com.coolightman.note.util.toFullDateString
 import java.util.*
 

@@ -2,6 +2,7 @@ package com.coolightman.note.data.repositoryImpl
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
+import com.coolightman.note.data.converter.toJson
 import com.coolightman.note.data.database.dao.NoteDao
 import com.coolightman.note.data.mapper.toDb
 import com.coolightman.note.data.mapper.toEntity
@@ -77,7 +78,8 @@ class NoteRepositoryImpl @Inject constructor(
     }
 
     override suspend fun exportNotes() {
-        TODO("Not yet implemented")
+        val notesDb = database.getAll()
+        val noteJson = notesDb.toJson()
     }
 
     override suspend fun importNotes() {

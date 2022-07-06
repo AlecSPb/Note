@@ -5,6 +5,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy.REPLACE
 import androidx.room.Query
+import com.coolightman.note.data.database.dbModel.NoteDb
 import com.coolightman.note.data.database.dbModel.TaskDb
 
 @Dao
@@ -18,6 +19,9 @@ interface TaskDao {
 
     @Query("SELECT * FROM taskdb WHERE taskId = :taskId")
     suspend fun getTask(taskId: Long): TaskDb
+
+    @Query("SELECT * FROM taskdb")
+    suspend fun getAll(): List<TaskDb>
 
     @Query("SELECT * FROM taskdb WHERE isDeleted = 0 ORDER BY isActive DESC, isImportant DESC, taskId")
     fun getAllTasks(): LiveData<List<TaskDb>>
