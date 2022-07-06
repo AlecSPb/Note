@@ -1,7 +1,10 @@
 package com.coolightman.note.data.repositoryImpl
 
+import android.content.Context
+import android.os.Environment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
+import com.coolightman.note.data.converter.convertJsonToNotes
 import com.coolightman.note.data.converter.toJson
 import com.coolightman.note.data.database.dao.NoteDao
 import com.coolightman.note.data.mapper.toDb
@@ -9,10 +12,16 @@ import com.coolightman.note.data.mapper.toEntity
 import com.coolightman.note.domain.entity.Note
 import com.coolightman.note.domain.entity.SortNoteBy
 import com.coolightman.note.domain.repository.NoteRepository
+import com.coolightman.note.util.SavedFileNameConstant.SAVE_FILES_LOCATION
+import com.coolightman.note.util.SavedFileNameConstant.SAVE_FILE_NAME_NOTES
+import java.io.File
+import java.io.FileInputStream
+import java.io.IOException
 import javax.inject.Inject
 
 class NoteRepositoryImpl @Inject constructor(
-    private val database: NoteDao
+    private val database: NoteDao,
+    private val context: Context
 ) : NoteRepository {
 
     override suspend fun insertNote(note: Note) {
@@ -44,7 +53,7 @@ class NoteRepositoryImpl @Inject constructor(
         val changedList = database.getAll().map { noteDb ->
             noteDb.copy(isShowingDate = showDate)
         }
-        database.insertList(changedList)
+        database.insertImportList(changedList)
     }
 
     override suspend fun sendToTrashBasket(noteId: Long) {
@@ -80,9 +89,34 @@ class NoteRepositoryImpl @Inject constructor(
     override suspend fun exportNotes() {
         val notesDb = database.getAll()
         val noteJson = notesDb.toJson()
+        writeNotesInFile(noteJson)
     }
 
+    private fun writeNotesInFile(noteJson: String) {
+        val path = getPath()
+        if (!path.exists()) {
+            path.mkdir()
+        }
+        val file = File(path, SAVE_FILE_NAME_NOTES)
+        file.writeText(noteJson)
+    }
+
+    private fun getPath() = File(
+        Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),
+        SAVE_FILES_LOCATION
+    )
+
     override suspend fun importNotes() {
-        TODO("Not yet implemented")
+        val json = getJsonFromFolder()
+        val notesDb = convertJsonToNotes(json)
+        database.insertList(notesDb)
+    }
+
+    private fun getJsonFromFolder(): String {
+        val file = File(getPath(), SAVE_FILE_NAME_NOTES)
+        if (file.exists()) {
+            return FileInputStream(file).bufferedReader().use { it.readText() }
+        }
+        throw IOException("File with notes is not exist!")
     }
 }
