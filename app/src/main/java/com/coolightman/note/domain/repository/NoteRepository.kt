@@ -18,4 +18,6 @@ interface NoteRepository {
     suspend fun restoreAllFromTrash()
     suspend fun deletePermanent(noteId: Long)
     suspend fun restoreFromTrash(noteId: Long)
+    suspend fun exportNotes()
+    suspend fun importNotes()
 }

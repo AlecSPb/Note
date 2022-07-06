@@ -12,4 +12,6 @@ interface TaskRepository {
     suspend fun getTask(taskId: Long): Task
     suspend fun deleteAllInactive()
     suspend fun setTaskIsDeleted(taskId: Long, isDeleted: Boolean)
+    suspend fun exportTasks()
+    suspend fun importTasks()
 }

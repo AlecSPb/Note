@@ -1,5 +1,6 @@
 package com.coolightman.note.presentation.fragment
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,28 +8,48 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.coolightman.note.NoteApp
 import com.coolightman.note.R
 import com.coolightman.note.databinding.FragmentSettingsBinding
+import com.coolightman.note.di.ViewModelFactory
 import com.coolightman.note.domain.entity.NoteColor
 import com.coolightman.note.domain.entity.StartDestination
 import com.coolightman.note.domain.entity.TaskColor
 import com.coolightman.note.presentation.MainActivity
 import com.coolightman.note.presentation.MainActivity.Companion.PREF_START_DESTINATION
+import com.coolightman.note.presentation.viewmodel.SettingsViewModel
 import com.coolightman.note.util.PrefConstants.PREF_IS_SHOW_NOTE_DATE
 import com.coolightman.note.util.PrefConstants.PREF_NOTE_DEFAULT_COLOR
 import com.coolightman.note.util.PrefConstants.PREF_TASK_DEFAULT_COLOR
 import com.coolightman.note.util.getCheckedIndex
-import com.coolightman.note.util.makeSnackbar
 import com.coolightman.note.util.setCheckedByIndex
+import javax.inject.Inject
 
 class SettingsFragment : Fragment() {
+
+    private val component by lazy {
+        (requireActivity().application as NoteApp).component
+    }
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
+
+    private val viewModel by lazy {
+        ViewModelProvider(this, viewModelFactory)[SettingsViewModel::class.java]
+    }
 
     private var _binding: FragmentSettingsBinding? = null
     private val binding get() = _binding!!
 
     private val preferences by lazy {
         (requireActivity() as MainActivity).preferences
+    }
+
+    override fun onAttach(context: Context) {
+        component.inject(this)
+        super.onAttach(context)
     }
 
     override fun onCreateView(

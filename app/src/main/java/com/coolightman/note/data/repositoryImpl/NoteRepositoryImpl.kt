@@ -75,4 +75,12 @@ class NoteRepositoryImpl @Inject constructor(
         val restoredNote = note.copy(isDeleted = false)
         database.insert(restoredNote)
     }
+
+    override suspend fun exportNotes() {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun importNotes() {
+        TODO("Not yet implemented")
+    }
 }

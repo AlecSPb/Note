@@ -33,4 +33,9 @@ interface ViewModelModule {
     @ViewModelKey(EditTaskViewModel::class)
     @Binds
     fun bindEditTaskViewModel(viewModel: EditTaskViewModel): ViewModel
+
+    @IntoMap
+    @ViewModelKey(SettingsViewModel::class)
+    @Binds
+    fun bindSettingsViewModel(viewModel: SettingsViewModel): ViewModel
 }

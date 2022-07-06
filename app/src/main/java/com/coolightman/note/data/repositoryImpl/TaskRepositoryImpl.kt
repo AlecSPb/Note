@@ -47,4 +47,12 @@ class TaskRepositoryImpl @Inject constructor(
     override suspend fun deleteAllInactive() {
         database.deleteAllInactive()
     }
+
+    override suspend fun exportTasks() {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun importTasks() {
+        TODO("Not yet implemented")
+    }
 }

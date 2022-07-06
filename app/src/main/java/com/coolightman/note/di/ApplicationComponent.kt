@@ -23,6 +23,8 @@ interface ApplicationComponent {
     fun inject(tasksFragment: TasksFragment)
     fun inject(editTaskFragment: EditTaskFragment)
 
+    fun inject(settingsFragment: SettingsFragment)
+
     @Component.Factory
     interface ApplicationComponentFactory {
 
