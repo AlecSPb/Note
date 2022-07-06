@@ -1,6 +1,8 @@
 package com.coolightman.note.data.repositoryImpl
 
+import android.app.DownloadManager
 import android.content.Context
+import android.content.Context.DOWNLOAD_SERVICE
 import android.os.Environment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
@@ -88,17 +90,36 @@ class NoteRepositoryImpl @Inject constructor(
 
     override suspend fun exportNotes() {
         val notesDb = database.getAll()
-        val noteJson = notesDb.toJson()
-        writeNotesInFile(noteJson)
+        val notesJson = notesDb.toJson()
+        writeNotesInFile(notesJson)
     }
 
-    private fun writeNotesInFile(noteJson: String) {
+    private fun writeNotesInFile(notesJson: String) {
         val path = getPath()
         if (!path.exists()) {
             path.mkdir()
         }
         val file = File(path, SAVE_FILE_NAME_NOTES)
-        file.writeText(noteJson)
+
+        if (file.exists()) {
+            file.delete()
+        }
+        file.appendText(notesJson)
+
+        writeFileToFolder(file)
+    }
+
+    private fun writeFileToFolder(file: File) {
+        val dm = context.getSystemService(DOWNLOAD_SERVICE) as DownloadManager
+        dm.addCompletedDownload(
+            file.name,
+            file.name,
+            true,
+            "text/plain",
+            file.absolutePath,
+            file.length(),
+            true
+        )
     }
 
     private fun getPath() = File(

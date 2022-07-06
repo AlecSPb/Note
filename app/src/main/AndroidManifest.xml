@@ -1,15 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.coolightman.note">
 
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGEE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="28"
+        tools:ignore="ScopedStorage" />
 
     <application
+        android:name=".NoteApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:name=".NoteApp"
-        android:roundIcon="@mipmap/ic_launcher_round"
         android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
+        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Note">
         <activity
