@@ -20,11 +20,8 @@ class NotesViewModel @Inject constructor(
 
     private val _sortNoteBy = MutableLiveData<SortNoteBy>()
 
-    val notes: LiveData<List<Note>> = liveData {
-        val sortedNotes = Transformations.switchMap(_sortNoteBy) {
-            repository.getAllNotes(it)
-        }
-        emitSource(sortedNotes)
+    val notes: LiveData<List<Note>> = Transformations.switchMap(_sortNoteBy) {
+        repository.getAllNotes(it).asLiveData()
     }
 
     val trashCount: LiveData<Int> = repository.getTrashCount()

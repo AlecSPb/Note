@@ -7,6 +7,7 @@ import androidx.room.OnConflictStrategy.IGNORE
 import androidx.room.OnConflictStrategy.REPLACE
 import androidx.room.Query
 import com.coolightman.note.data.database.dbModel.NoteDb
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface NoteDao {
@@ -35,7 +36,7 @@ interface NoteDao {
                 "CASE WHEN :sortType = 4 THEN noteId END ASC, " +
                 "CASE WHEN :sortType = 5 THEN noteId END DESC"
     )
-    fun getAllOrderBy(sortType: Int): LiveData<List<NoteDb>>
+    fun getAllOrderBy(sortType: Int): Flow<List<NoteDb>>
 
     @Query("SELECT * FROM notedb WHERE isDeleted = 1 ORDER BY dateEdit desc")
     fun getTrash(): LiveData<List<NoteDb>>

@@ -16,6 +16,8 @@ import com.coolightman.note.domain.entity.SortNoteBy
 import com.coolightman.note.domain.repository.NoteRepository
 import com.coolightman.note.util.SavedFileNameConstant.SAVE_FILES_LOCATION
 import com.coolightman.note.util.SavedFileNameConstant.SAVE_FILE_NAME_NOTES
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import java.io.File
 import java.io.FileInputStream
 import java.io.IOException
@@ -31,8 +33,8 @@ class NoteRepositoryImpl @Inject constructor(
         database.insert(noteDb)
     }
 
-    override fun getAllNotes(sortBy: SortNoteBy): LiveData<List<Note>> {
-        return Transformations.map(database.getAllOrderBy(sortBy.ordinal)) { list ->
+    override fun getAllNotes(sortBy: SortNoteBy): Flow<List<Note>> {
+        return database.getAllOrderBy(sortBy.ordinal).map { list ->
             list.map { it.toEntity() }
         }
     }
