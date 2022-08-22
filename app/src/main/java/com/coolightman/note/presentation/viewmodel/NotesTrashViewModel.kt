@@ -1,10 +1,7 @@
 package com.coolightman.note.presentation.viewmodel
 
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.liveData
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.coolightman.note.domain.entity.Note
 import com.coolightman.note.domain.repository.NoteRepository
 import kotlinx.coroutines.CoroutineExceptionHandler
@@ -20,31 +17,30 @@ class NotesTrashViewModel @Inject constructor(
         Log.e("Coroutine_exception", throwable.stackTraceToString())
     }
 
-    val trash: LiveData<List<Note>> = liveData {
-        val trashNotes = repository.getTrashNotes()
-        emitSource(trashNotes)
-    }
+    private val ioContext = Dispatchers.IO + handler
+
+    val trash: LiveData<List<Note>> = repository.getTrashNotes().asLiveData()
 
     fun deleteAllPermanent() {
-        viewModelScope.launch(Dispatchers.IO + handler) {
+        viewModelScope.launch(ioContext) {
             repository.deleteAllPermanent()
         }
     }
 
     fun deletePermanent(noteId: Long) {
-        viewModelScope.launch(Dispatchers.IO + handler) {
+        viewModelScope.launch(ioContext) {
             repository.deletePermanent(noteId)
         }
     }
 
     fun restoreAll() {
-        viewModelScope.launch(Dispatchers.IO + handler) {
+        viewModelScope.launch(ioContext) {
             repository.restoreAllFromTrash()
         }
     }
 
     fun restoreFromTrash(noteId: Long) {
-        viewModelScope.launch(Dispatchers.IO + handler) {
+        viewModelScope.launch(ioContext) {
             repository.restoreFromTrash(noteId)
         }
     }
