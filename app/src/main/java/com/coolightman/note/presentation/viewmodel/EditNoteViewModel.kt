@@ -20,17 +20,19 @@ class EditNoteViewModel @Inject constructor(
         Log.e("Coroutine_exception", throwable.stackTraceToString())
     }
 
+    private val ioContext = Dispatchers.IO + handler
+
     private val _note = MutableLiveData<Note>()
     val note: LiveData<Note> = _note
 
     fun fetchNote(noteId: Long) {
-        viewModelScope.launch(Dispatchers.IO + handler) {
+        viewModelScope.launch(ioContext) {
             _note.postValue(repository.getNote(noteId))
         }
     }
 
     fun saveNote(note: Note) {
-        viewModelScope.launch(Dispatchers.IO + handler) {
+        viewModelScope.launch(ioContext) {
             repository.insertNote(note)
         }
     }

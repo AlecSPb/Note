@@ -21,17 +21,19 @@ class EditTaskViewModel @Inject constructor(
         Log.e("Coroutine_exception", throwable.stackTraceToString())
     }
 
+    private val ioContext = Dispatchers.IO + handler
+
     private val _task = MutableLiveData<Task>()
     val task: LiveData<Task> = _task
 
     fun fetchTask(taskId: Long) {
-        viewModelScope.launch(Dispatchers.IO + handler) {
+        viewModelScope.launch(ioContext) {
             _task.postValue(repository.getTask(taskId))
         }
     }
 
     fun saveTask(task: Task) {
-        viewModelScope.launch(Dispatchers.IO + handler) {
+        viewModelScope.launch(ioContext) {
             repository.insertTask(task)
         }
     }

@@ -19,15 +19,17 @@ class SettingsViewModel @Inject constructor(
         Log.e("Coroutine_exception", throwable.stackTraceToString())
     }
 
+    private val ioContext = Dispatchers.IO + handler
+
     fun exportData() {
-        viewModelScope.launch(Dispatchers.IO + handler) {
+        viewModelScope.launch(ioContext) {
             noteRepository.exportNotes()
             taskRepository.exportTasks()
         }
     }
 
     fun importData() {
-        viewModelScope.launch(Dispatchers.IO + handler) {
+        viewModelScope.launch(ioContext) {
             noteRepository.importNotes()
             taskRepository.importTasks()
         }
