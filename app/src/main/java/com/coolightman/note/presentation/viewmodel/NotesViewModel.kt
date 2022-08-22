@@ -18,26 +18,28 @@ class NotesViewModel @Inject constructor(
         Log.e("Coroutine_exception", throwable.stackTraceToString())
     }
 
+    private val ioContext = Dispatchers.IO + handler
+
     private val _sortNoteBy = MutableLiveData<SortNoteBy>()
 
     val notes: LiveData<List<Note>> = Transformations.switchMap(_sortNoteBy) {
         repository.getAllNotes(it).asLiveData()
     }
 
-    val trashCount: LiveData<Int> = repository.getTrashCount()
+    val trashCount: LiveData<Int> = repository.getTrashCount().asLiveData()
 
     fun setSortBy(sortBy: SortNoteBy) {
         _sortNoteBy.postValue(sortBy)
     }
 
     fun showDate(showDate: Boolean) {
-        viewModelScope.launch(Dispatchers.IO + handler) {
+        viewModelScope.launch(ioContext) {
             repository.showDate(showDate)
         }
     }
 
     fun sendToTrashBasket(noteId: Long) {
-        viewModelScope.launch(Dispatchers.IO + handler) {
+        viewModelScope.launch(ioContext) {
             repository.sendToTrashBasket(noteId)
         }
     }

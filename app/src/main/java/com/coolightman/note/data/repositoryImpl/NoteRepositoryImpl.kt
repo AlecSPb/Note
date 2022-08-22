@@ -39,8 +39,8 @@ class NoteRepositoryImpl @Inject constructor(
         }
     }
 
-    override fun getTrashNotes(): LiveData<List<Note>> {
-        return Transformations.map(database.getTrash()) { list ->
+    override fun getTrashNotes(): Flow<List<Note>> {
+        return database.getTrash().map { list ->
             list.map { it.toEntity() }
         }
     }
@@ -66,7 +66,7 @@ class NoteRepositoryImpl @Inject constructor(
         database.insert(trashedNote)
     }
 
-    override fun getTrashCount(): LiveData<Int> = database.countTrash()
+    override fun getTrashCount(): Flow<Int> = database.countTrash()
 
     override suspend fun deleteAllPermanent() {
         database.deleteAllTrashPermanent()

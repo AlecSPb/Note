@@ -39,13 +39,13 @@ interface NoteDao {
     fun getAllOrderBy(sortType: Int): Flow<List<NoteDb>>
 
     @Query("SELECT * FROM notedb WHERE isDeleted = 1 ORDER BY dateEdit desc")
-    fun getTrash(): LiveData<List<NoteDb>>
+    fun getTrash(): Flow<List<NoteDb>>
 
     @Query("SELECT * FROM notedb WHERE isDeleted = 1")
     fun getTrashList(): List<NoteDb>
 
     @Query("SELECT COUNT(noteId) FROM notedb WHERE isDeleted = 1")
-    fun countTrash(): LiveData<Int>
+    fun countTrash(): Flow<Int>
 
     @Query("SELECT COUNT(noteId) FROM notedb WHERE isDeleted = 0")
     fun countNotes(): LiveData<Int>
