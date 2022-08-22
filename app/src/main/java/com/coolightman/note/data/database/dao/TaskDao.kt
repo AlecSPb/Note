@@ -7,6 +7,7 @@ import androidx.room.OnConflictStrategy.REPLACE
 import androidx.room.Query
 import com.coolightman.note.data.database.dbModel.NoteDb
 import com.coolightman.note.data.database.dbModel.TaskDb
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface TaskDao {
@@ -24,7 +25,7 @@ interface TaskDao {
     suspend fun getAll(): List<TaskDb>
 
     @Query("SELECT * FROM taskdb WHERE isDeleted = 0 ORDER BY isActive DESC, isImportant DESC, taskId")
-    fun getAllTasks(): LiveData<List<TaskDb>>
+    fun getAllTasks(): Flow<List<TaskDb>>
 
     @Query("SELECT COUNT(taskId) FROM taskdb")
     fun countNotes(): LiveData<Int>

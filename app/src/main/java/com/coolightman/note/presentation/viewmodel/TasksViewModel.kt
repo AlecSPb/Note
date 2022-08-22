@@ -3,6 +3,7 @@ package com.coolightman.note.presentation.viewmodel
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.coolightman.note.domain.entity.Task
 import com.coolightman.note.domain.repository.TaskRepository
@@ -17,17 +18,19 @@ class TasksViewModel @Inject constructor(
         Log.e("Coroutine_exception", throwable.stackTraceToString())
     }
 
-    val tasks: LiveData<List<Task>> = repository.getAllTasks()
+    private val ioContext = Dispatchers.IO + handler
+
+    val tasks: LiveData<List<Task>> = repository.getAllTasks().asLiveData()
     private var deleteTaskJob: Job? = null
 
     fun switchActive(taskId: Long) {
-        viewModelScope.launch(Dispatchers.IO + handler) {
+        viewModelScope.launch(ioContext) {
             repository.switchActive(taskId)
         }
     }
 
     fun deleteTask(taskId: Long) {
-        deleteTaskJob = viewModelScope.launch(Dispatchers.IO + handler) {
+        deleteTaskJob = viewModelScope.launch(ioContext) {
             repository.setTaskIsDeleted(taskId, true)
             delay(5000)
             repository.deleteTask(taskId)
@@ -35,7 +38,7 @@ class TasksViewModel @Inject constructor(
     }
 
     fun cancelDeleteTask(taskId: Long) {
-        viewModelScope.launch(Dispatchers.IO + handler) {
+        viewModelScope.launch(ioContext) {
             deleteTaskJob?.cancel()
             repository.setTaskIsDeleted(taskId, false)
         }

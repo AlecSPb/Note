@@ -1,13 +1,13 @@
 package com.coolightman.note.data.repositoryImpl
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.Transformations
 import com.coolightman.note.data.converter.toJson
 import com.coolightman.note.data.database.dao.TaskDao
 import com.coolightman.note.data.mapper.toDb
 import com.coolightman.note.data.mapper.toEntity
 import com.coolightman.note.domain.entity.Task
 import com.coolightman.note.domain.repository.TaskRepository
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class TaskRepositoryImpl @Inject constructor(
@@ -19,8 +19,8 @@ class TaskRepositoryImpl @Inject constructor(
         database.insert(taskDb)
     }
 
-    override fun getAllTasks(): LiveData<List<Task>> {
-        return Transformations.map(database.getAllTasks()) { list ->
+    override fun getAllTasks(): Flow<List<Task>> {
+        return database.getAllTasks().map { list ->
             list.map { it.toEntity() }
         }
     }
