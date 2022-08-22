@@ -1,6 +1,5 @@
 package com.coolightman.note.domain.repository
 
-import androidx.lifecycle.LiveData
 import com.coolightman.note.domain.entity.Note
 import com.coolightman.note.domain.entity.SortNoteBy
 import kotlinx.coroutines.flow.Flow
