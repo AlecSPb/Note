@@ -4,8 +4,6 @@ import android.app.DownloadManager
 import android.content.Context
 import android.content.Context.DOWNLOAD_SERVICE
 import android.os.Environment
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.Transformations
 import com.coolightman.note.data.converter.convertJsonToNotes
 import com.coolightman.note.data.converter.toJson
 import com.coolightman.note.data.database.dao.NoteDao

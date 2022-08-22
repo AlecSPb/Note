@@ -18,7 +18,7 @@ interface NoteDao {
     @Insert(onConflict = REPLACE)
     suspend fun insertList(list: List<NoteDb>)
 
-    @Insert(onConflict = IGNORE)
+    @Insert(onConflict = REPLACE)
     suspend fun insertImportList(list: List<NoteDb>)
 
     @Query("SELECT * FROM notedb WHERE noteId = :noteId")

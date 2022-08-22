@@ -35,9 +35,9 @@ class NotesAdapter(private val clickListener: (Long) -> Unit) :
     private fun NoteItemBinding.setDate(note: Note) {
         val dateText = getDateText(note, this.root.context)
         tvDate.text = dateText
-        when {
-            note.isShowingDate -> tvDate.visibility = VISIBLE
-            !note.isShowingDate -> tvDate.visibility = GONE
+        when (note.isShowingDate) {
+            true -> tvDate.visibility = VISIBLE
+            else -> tvDate.visibility = GONE
         }
     }
 
