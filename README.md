@@ -4,7 +4,7 @@ This application allows you to store your notes and tasks.
 
 ## Tech Stack
 
-Kotlin, MVVM, Clean Architecture, Android Architecture Components, Room, Dagger, Coroutine, Navigation
+Kotlin, MVVM+LiveData, Clean Architecture, Android Architecture Components, Room, Dagger, Coroutine+Flow, Navigation
 
 ## App screenshots
 
